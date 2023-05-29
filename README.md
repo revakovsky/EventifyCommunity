@@ -3,9 +3,9 @@ Eventify Community - is an application that allows anyone to create and attend e
 
 ---
 
-_Key features include:_
+*Key features include:*
 
-- - *Create Events*: Anyone can easily create and organize their own events by providing information about the place, date, time and description of the event.
+- *Create Events*: Anyone can easily create and organize their own events by providing information about the place, date, time and description of the event.
 - *Participant Registration*: Anyone can view the available events and register for them right through the app.
 - *Networking*: The app provides a convenient platform for participants to communicate with each other. Users can view profiles of other members, share contacts and make connections. In this way, the application allows you to create your own network of valuable contacts.
 - *Profile Descriptions*: each user has the opportunity to provide a description of themselves, including information about their skills, knowledge, links to social networks and web pages, demonstrating how they can be useful to other members.

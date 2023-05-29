@@ -1,4 +1,4 @@
-# EventifyVibe
+# Eventify Community
 Eventify Community - is an application that allows anyone to create and attend events that anyone can attend and register. The application is a convenient platform that brings people together based on common interests and preferences, allowing them to meet, exchange contacts and share information about themselves.
 
 ---

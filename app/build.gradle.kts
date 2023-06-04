@@ -4,25 +4,32 @@ plugins {
 }
 
 android {
-    namespace = "com.revakovskyi.eventifycommunity"
-    compileSdk = 33
+    namespace = Config.namespace
+    compileSdk = Config.compileSdk
 
     defaultConfig {
-        applicationId = "com.revakovskyi.eventifycommunity"
-        minSdk = 26
-        targetSdk = 33
-        versionCode = 1
-        versionName = "1.0"
+        applicationId = Config.applicationId
+        minSdk = Config.minSdk
+        targetSdk = Config.targetSdk
+        versionCode = Config.versionCode
+        versionName = Config.versionName
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = Config.testInstrumentationRunner
         vectorDrawables {
             useSupportLibrary = true
         }
     }
 
     buildTypes {
+        debug {
+            isMinifyEnabled = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -51,21 +58,22 @@ android {
 
 dependencies {
 
-    implementation(libs.core.ktx)
-    implementation(libs.lifecycle.runtime.ktx)
-    implementation(libs.activity.compose)
-    implementation(platform(libs.compose.bom))
-    implementation(libs.ui)
-    implementation(libs.ui.graphics)
-    implementation(libs.ui.tooling.preview)
-    implementation(libs.material3)
+    implementation(Dependencies.Android.coreKtx)
+    implementation(Dependencies.Android.activityCompose)
+    implementation(platform(Dependencies.Android.activityComposeBom))
+    implementation(Dependencies.Android.composeUi)
+    implementation(Dependencies.Android.composeUiGraphics)
+    implementation(Dependencies.Android.composeMaterial3)
 
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.test.ext.junit)
-    androidTestImplementation(libs.espresso.core)
-    androidTestImplementation(platform(libs.compose.bom))
-    androidTestImplementation(libs.ui.test.junit4)
-    debugImplementation(libs.ui.tooling)
-    debugImplementation(libs.ui.test.manifest)
-    
+    implementation(Dependencies.Lifecycle.lifecycleRuntimeKtx)
+
+    testImplementation(Dependencies.Tests.jUnit)
+    androidTestImplementation(Dependencies.Tests.extJUnit)
+    androidTestImplementation(Dependencies.Tests.espressoCore)
+    androidTestImplementation(platform(Dependencies.Android.activityComposeBom))
+    androidTestImplementation(Dependencies.Tests.uiTestJunit4)
+    debugImplementation(Dependencies.Tests.composeUiTooling)
+    implementation(Dependencies.Tests.composeUiToolingPreview)
+    debugImplementation(Dependencies.Tests.uiTestManifest)
+
 }

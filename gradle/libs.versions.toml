@@ -57,9 +57,9 @@ ver_SwipeRefreshLayout      = "1.1.0"
 
 [plugins]
 
-androidApplication  = { id = "com.android.application", version.ref = "ver_AndroidApplication" }
-kotlinAndroid       = { id = "org.jetbrains.kotlin.android", version.ref = "ver_KotlinAndroid" }
-kotlinKsp           = { id = "com.google.devtools.ksp", version.ref = "ver_KotlinKsp" }
+android-application  = { id = "com.android.application", version.ref = "ver_AndroidApplication" }
+kotlin-android       = { id = "org.jetbrains.kotlin.android", version.ref = "ver_KotlinAndroid" }
+kotlin-ksp           = { id = "com.google.devtools.ksp", version.ref = "ver_KotlinKsp" }
 
 # --------------------------------------------------------------------------------------------------
 
@@ -67,56 +67,54 @@ kotlinKsp           = { id = "com.google.devtools.ksp", version.ref = "ver_Kotli
 [libraries]
 
 # Android
-core-ktx                    = { group = "androidx.core", name = "core-ktx", version.ref = "ver_CoreKtx" }
-activity-compose            = { group = "androidx.activity", name = "activity-compose", version.ref = "ver_ActivityCompose" }
-compose-bom                 = { group = "androidx.compose", name = "compose-bom", version.ref = "ver_ComposeBom" }
-
-# UI
-ui                          = { group = "androidx.compose.ui", name = "ui" }
-ui-graphics                 = { group = "androidx.compose.ui", name = "ui-graphics" }
-material3                   = { group = "androidx.compose.material3", name = "material3" }
-ui-tooling-preview          = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+android-CoreKtx            = { group = "androidx.core", name = "core-ktx", version.ref = "ver_CoreKtx" }
+android-ActivityCompose    = { group = "androidx.activity", name = "activity-compose", version.ref = "ver_ActivityCompose" }
+android-ComposeBom         = { group = "androidx.compose", name = "compose-bom", version.ref = "ver_ComposeBom" }
 
 # Compose
-coilCompose                 = { group = "io.coil-kt", name = "coil-compose", version.ref = "ver_Coil" }
-navigationCompose           = { group = "androidx.navigation", name = "navigation-compose", version.ref = "ver_NavigationCompose" }
+compose-ui                 = { group = "androidx.compose.ui", name = "ui" }
+compose-uiGraphics         = { group = "androidx.compose.ui", name = "ui-graphics" }
+compose-material3          = { group = "androidx.compose.material3", name = "material3" }
+compose-uiToolingPreview   = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+compose-coilCompose        = { group = "io.coil-kt", name = "coil-compose", version.ref = "ver_Coil" }
+compose-navigationCompose  = { group = "androidx.navigation", name = "navigation-compose", version.ref = "ver_NavigationCompose" }
 
 # Tests
-junit                       = { group = "junit", name = "junit", version.ref = "ver_JUnit" }
-androidx-test-ext-junit     = { group = "androidx.test.ext", name = "junit", version.ref = "ver_AndroidxTestExtJUnit" }
-espresso-core               = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "ver_EspressoCore" }
-ui-tooling                  = { group = "androidx.compose.ui", name = "ui-tooling" }
-ui-test-manifest            = { group = "androidx.compose.ui", name = "ui-test-manifest" }
-ui-test-junit4              = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+tests-junit                = { group = "junit", name = "junit", version.ref = "ver_JUnit" }
+tests-androidxExtJunit     = { group = "androidx.test.ext", name = "junit", version.ref = "ver_AndroidxTestExtJUnit" }
+tests-espressoCore         = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "ver_EspressoCore" }
+tests-uiTooling            = { group = "androidx.compose.ui", name = "ui-tooling" }
+tests-uiTestManifest       = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+tests-uiTestJunit4         = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 
 # Lifecycle
-lifecycle-runtime-ktx       = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "ver_LifecycleRuntimeKtx" }
-lifecycle-viewModel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "ver_LifecycleViewmodel" }
+lifecycle-runtimeKtx       = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "ver_LifecycleRuntimeKtx" }
+lifecycle-viewModelCompose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "ver_LifecycleViewmodel" }
 
 # Kotlinx
-coroutines                  = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "var_CoroutinesAndroid" }
+coroutines                 = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "var_CoroutinesAndroid" }
 
 # Dagger2
-dagger2                     = { module = "com.google.dagger:dagger-android", version.ref = "ver_Dagger2" }
-dagger2-support             = { module = "com.google.dagger:dagger-android-support", version.ref = "ver_Dagger2" }
-dagger2-processor           = { module = "com.google.dagger:dagger-android-processor", version.ref = "ver_Dagger2" }
-dagger2-compiler            = { module = "com.google.dagger:dagger-compiler", version.ref = "ver_Dagger2" }
+dagger2-android            = { module = "com.google.dagger:dagger-android", version.ref = "ver_Dagger2" }
+dagger2-support            = { module = "com.google.dagger:dagger-android-support", version.ref = "ver_Dagger2" }
+dagger2-processor          = { module = "com.google.dagger:dagger-android-processor", version.ref = "ver_Dagger2" }
+dagger2-compiler           = { module = "com.google.dagger:dagger-compiler", version.ref = "ver_Dagger2" }
 
 # Room
-roomRuntime                 = { module = "androidx.room:room-runtime", version.ref = "ver_Room" }
-roomKtx                     = { module = "androidx.room:room-ktx", version.ref = "ver_Room" }
-roomCompiler                = { module = "androidx.room:room-compiler", version.ref = "ver_Room" }
+room-runtime               = { module = "androidx.room:room-runtime", version.ref = "ver_Room" }
+room-ktx                   = { module = "androidx.room:room-ktx", version.ref = "ver_Room" }
+room-compiler              = { module = "androidx.room:room-compiler", version.ref = "ver_Room" }
 
 # Networking
-okHttpBom                   = { module = "com.squareup.okhttp3:okhttp-bom", version.ref = "ver_OkHttpBom" }
-okHttp                      = { module = "com.squareup.okhttp3:okhttp" }
-okHttpLoggingInterceptor    = { module = "com.squareup.okhttp3:logging-interceptor" }
-retrofit2                   = { module = "com.squareup.retrofit2:retrofit", version.ref = "ver_Retrofit2" }
-retrofitConverterGson       = { module = "com.squareup.retrofit2:converter-gson", version.ref = "ver_Retrofit2" }
-gson                        = { module = "com.google.code.gson:gson", version.ref = "ver_Gson" }
+network-okHttpBom          = { module = "com.squareup.okhttp3:okhttp-bom", version.ref = "ver_OkHttpBom" }
+network-okHttp             = { module = "com.squareup.okhttp3:okhttp" }
+network-loggingInterceptor = { module = "com.squareup.okhttp3:logging-interceptor" }
+network-retrofit2          = { module = "com.squareup.retrofit2:retrofit", version.ref = "ver_Retrofit2" }
+network-converterGson      = { module = "com.squareup.retrofit2:converter-gson", version.ref = "ver_Retrofit2" }
+network-gson               = { module = "com.google.code.gson:gson", version.ref = "ver_Gson" }
 
 # SwipeRefresh
-swipeRefreshLayout          = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "ver_SwipeRefreshLayout" }
+swipeRefreshLayout         = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "ver_SwipeRefreshLayout" }
 
 # --------------------------------------------------------------------------------------------------
 
@@ -124,35 +122,41 @@ swipeRefreshLayout          = { module = "androidx.swiperefreshlayout:swiperefre
 [bundles]
 
 composeUi = [
-    "ui",
-    "ui-graphics",
-    "material3",
-    "ui-tooling-preview"
+    "compose-ui",
+    "compose-uiGraphics",
+    "compose-material3",
+    "compose-uiToolingPreview"
+]
+
+tests = [
+    "tests-androidxExtJunit",
+    "tests-espressoCore",
+    "tests-uiTestJunit4"
 ]
 
 lifecycle = [
-    "lifecycle-runtime-ktx",
-    "lifecycle-viewModel-compose"
+    "lifecycle-runtimeKtx",
+    "lifecycle-viewModelCompose"
 ]
 
 dagger2 = [
-    "dagger2",
+    "dagger2-android",
     "dagger2-support"
 ]
 
 okHttp = [
-    "okHttpBom",
-    "okHttp",
-    "okHttpLoggingInterceptor"
+    "network-okHttpBom",
+    "network-okHttp",
+    "network-loggingInterceptor"
 ]
 
 retrofit2 = [
-    "retrofit2",
-    "retrofitConverterGson",
-    "gson"
+    "network-retrofit2",
+    "network-converterGson",
+    "network-gson"
 ]
 
 room = [
-    "roomRuntime",
-    "roomKtx"
+    "room-runtime",
+    "room-ktx"
 ]

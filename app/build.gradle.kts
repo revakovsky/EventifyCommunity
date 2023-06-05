@@ -1,7 +1,7 @@
 plugins {
-    alias(libs.plugins.androidApplication)
-    alias(libs.plugins.kotlinAndroid)
-    alias(libs.plugins.kotlinKsp)
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.ksp)
     kotlin("kapt")
 }
 
@@ -60,19 +60,17 @@ android {
 
 dependencies {
 
-    implementation(libs.core.ktx)
-    implementation(libs.activity.compose)
-    implementation(platform(libs.compose.bom))
+    implementation(libs.android.coreKtx)
+    implementation(libs.android.activityCompose)
+    implementation(platform(libs.android.composeBom))
 
     implementation(libs.bundles.composeUi)
 
-    androidTestImplementation(platform(libs.compose.bom))
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.test.ext.junit)
-    androidTestImplementation(libs.espresso.core)
-    androidTestImplementation(libs.ui.test.junit4)
-    debugImplementation(libs.ui.tooling)
-    debugImplementation(libs.ui.test.manifest)
+    androidTestImplementation(platform(libs.android.composeBom))
+    androidTestImplementation(libs.bundles.tests)
+    testImplementation(libs.tests.junit)
+    debugImplementation(libs.tests.uiTooling)
+    debugImplementation(libs.tests.uiTestManifest)
 
     implementation(libs.bundles.lifecycle)
 
@@ -83,7 +81,7 @@ dependencies {
     annotationProcessor(libs.dagger2.processor)
 
     implementation(libs.bundles.room)
-    ksp(libs.roomCompiler)
-    annotationProcessor(libs.roomCompiler)
+    ksp(libs.room.compiler)
+    annotationProcessor(libs.room.compiler)
 
 }

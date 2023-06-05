@@ -1,20 +1,22 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.kotlinKsp)
+    kotlin("kapt")
 }
 
 android {
-    namespace = Config.namespace
-    compileSdk = Config.compileSdk
+    namespace = libs.versions.nameSpace.get()
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = Config.applicationId
-        minSdk = Config.minSdk
-        targetSdk = Config.targetSdk
-        versionCode = Config.versionCode
-        versionName = Config.versionName
+        applicationId = libs.versions.nameSpace.get()
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
+        versionCode = libs.versions.versionCode.get().toInt()
+        versionName = libs.versions.versionName.get()
 
-        testInstrumentationRunner = Config.testInstrumentationRunner
+        testInstrumentationRunner = libs.versions.testInstrumentationRunner.get()
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -41,13 +43,13 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = libs.versions.jvmTarget.get()
     }
     buildFeatures {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.3"
+        kotlinCompilerExtensionVersion = libs.versions.kotlinCompilerExtension.get()
     }
     packaging {
         resources {
@@ -58,22 +60,30 @@ android {
 
 dependencies {
 
-    implementation(Dependencies.Android.coreKtx)
-    implementation(Dependencies.Android.activityCompose)
-    implementation(platform(Dependencies.Android.activityComposeBom))
-    implementation(Dependencies.Android.composeUi)
-    implementation(Dependencies.Android.composeUiGraphics)
-    implementation(Dependencies.Android.composeMaterial3)
+    implementation(libs.core.ktx)
+    implementation(libs.activity.compose)
+    implementation(platform(libs.compose.bom))
 
-    implementation(Dependencies.Lifecycle.lifecycleRuntimeKtx)
+    implementation(libs.bundles.composeUi)
 
-    testImplementation(Dependencies.Tests.jUnit)
-    androidTestImplementation(Dependencies.Tests.extJUnit)
-    androidTestImplementation(Dependencies.Tests.espressoCore)
-    androidTestImplementation(platform(Dependencies.Android.activityComposeBom))
-    androidTestImplementation(Dependencies.Tests.uiTestJunit4)
-    debugImplementation(Dependencies.Tests.composeUiTooling)
-    implementation(Dependencies.Tests.composeUiToolingPreview)
-    debugImplementation(Dependencies.Tests.uiTestManifest)
+    androidTestImplementation(platform(libs.compose.bom))
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.espresso.core)
+    androidTestImplementation(libs.ui.test.junit4)
+    debugImplementation(libs.ui.tooling)
+    debugImplementation(libs.ui.test.manifest)
+
+    implementation(libs.bundles.lifecycle)
+
+    implementation(libs.coroutines)
+
+    implementation(libs.bundles.dagger2)
+    kapt(libs.dagger2.compiler)
+    annotationProcessor(libs.dagger2.processor)
+
+    implementation(libs.bundles.room)
+    ksp(libs.roomCompiler)
+    annotationProcessor(libs.roomCompiler)
 
 }

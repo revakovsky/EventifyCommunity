@@ -36,7 +36,7 @@ ver_LifecycleRuntimeKtx     = "2.6.1"
 ver_LifecycleViewmodel      = "2.6.1"
 
 # Kotlinx
-var_CoroutinesAndroid       = "1.6.4"
+var_CoroutinesAndroid       = "1.7.1"
 
 # Dagger2
 ver_Dagger2                 = "2.46.1"

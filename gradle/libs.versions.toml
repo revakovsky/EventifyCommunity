@@ -2,8 +2,6 @@
 
 # Config
 compileSdk                  = "33"
-name-app                    = "com.revakovskyi.eventifycommunity"
-name-authorization          = "com.revakovskyi.authorization"
 minSdk                      = "26"
 targetSdk                   = "33"
 versionCode                 = "1"
@@ -12,6 +10,11 @@ versionName                 = "1.0"
 testInstrumentationRunner   = "androidx.test.runner.AndroidJUnitRunner"
 kotlinCompilerExtension     = "1.4.3"
 jvmTarget                   = "1.8"
+
+# Module names
+name-app                    = "com.revakovskyi.eventifycommunity"
+name-authorization          = "com.revakovskyi.authorization"
+name-network                = "com.revakovskyi.network"
 
 # Plugins
 ver_AndroidApplication      = "8.2.0-alpha06"

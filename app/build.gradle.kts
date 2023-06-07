@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = libs.versions.nameSpace.get()
+    namespace = libs.versions.name.app.get()
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = libs.versions.nameSpace.get()
+        applicationId = libs.versions.name.app.get()
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = libs.versions.versionCode.get().toInt()

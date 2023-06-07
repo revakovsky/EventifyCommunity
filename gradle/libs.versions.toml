@@ -2,7 +2,8 @@
 
 # Config
 compileSdk                  = "33"
-nameSpace                   = "com.revakovskyi.eventifycommunity"
+name-app                    = "com.revakovskyi.eventifycommunity"
+name-authorization          = "com.revakovskyi.authorization"
 minSdk                      = "26"
 targetSdk                   = "33"
 versionCode                 = "1"
@@ -21,6 +22,8 @@ ver_KotlinKsp               = "1.8.0-1.0.9"
 ver_CoreKtx                 = "1.10.1"
 ver_ActivityCompose         = "1.7.2"
 ver_ComposeBom              = "2023.05.01"
+ver_Appcompat               = "1.6.1"
+ver_Material                = "1.9.0"
 
 # Compose
 ver_Coil                    = "2.4.0"
@@ -60,6 +63,7 @@ ver_SwipeRefreshLayout      = "1.1.0"
 android-application  = { id = "com.android.application", version.ref = "ver_AndroidApplication" }
 kotlin-android       = { id = "org.jetbrains.kotlin.android", version.ref = "ver_KotlinAndroid" }
 kotlin-ksp           = { id = "com.google.devtools.ksp", version.ref = "ver_KotlinKsp" }
+android-library      = { id = "com.android.library", version.ref = "ver_AndroidApplication" }
 
 # --------------------------------------------------------------------------------------------------
 
@@ -67,9 +71,11 @@ kotlin-ksp           = { id = "com.google.devtools.ksp", version.ref = "ver_Kotl
 [libraries]
 
 # Android
-android-CoreKtx            = { group = "androidx.core", name = "core-ktx", version.ref = "ver_CoreKtx" }
-android-ActivityCompose    = { group = "androidx.activity", name = "activity-compose", version.ref = "ver_ActivityCompose" }
-android-ComposeBom         = { group = "androidx.compose", name = "compose-bom", version.ref = "ver_ComposeBom" }
+android-coreKtx            = { group = "androidx.core", name = "core-ktx", version.ref = "ver_CoreKtx" }
+android-activityCompose    = { group = "androidx.activity", name = "activity-compose", version.ref = "ver_ActivityCompose" }
+android-composeBom         = { group = "androidx.compose", name = "compose-bom", version.ref = "ver_ComposeBom" }
+android-appcompat          = { group = "androidx.appcompat", name = "appcompat", version.ref = "ver_Appcompat" }
+android-material           = { group = "com.google.android.material", name = "material", version.ref = "ver_Material" }
 
 # Compose
 compose-ui                 = { group = "androidx.compose.ui", name = "ui" }

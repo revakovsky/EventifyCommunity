@@ -19,3 +19,6 @@ rootProject.name = "Eventify Community"
 include(":app")
 include(":authorization")
 include(":network")
+include(":localDb")
+include(":profile")
+include(":core")

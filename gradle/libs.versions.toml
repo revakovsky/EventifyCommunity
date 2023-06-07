@@ -15,6 +15,9 @@ jvmTarget                   = "1.8"
 name-app                    = "com.revakovskyi.eventifycommunity"
 name-authorization          = "com.revakovskyi.authorization"
 name-network                = "com.revakovskyi.network"
+name-localdb                = "com.revakovskyi.localdb"
+name-profile                = "com.revakovskyi.profile"
+name-core                   = "com.revakovskyi.core"
 
 # Plugins
 ver_AndroidApplication      = "8.2.0-alpha06"

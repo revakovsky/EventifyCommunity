@@ -102,6 +102,7 @@ tests-uiTestJunit4         = { group = "androidx.compose.ui", name = "ui-test-ju
 # Lifecycle
 lifecycle-runtimeKtx       = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "ver_LifecycleRuntimeKtx" }
 lifecycle-viewModelCompose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "ver_LifecycleViewmodel" }
+lifecycle-runtimeCompose   = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "ver_LifecycleViewmodel" }
 
 # Kotlinx
 coroutines                 = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "var_CoroutinesAndroid" }
@@ -148,7 +149,8 @@ tests = [
 
 lifecycle = [
     "lifecycle-runtimeKtx",
-    "lifecycle-viewModelCompose"
+    "lifecycle-viewModelCompose",
+    "lifecycle-runtimeCompose"
 ]
 
 dagger2 = [

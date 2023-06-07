@@ -60,6 +60,12 @@ android {
 
 dependencies {
 
+    implementation(project(path = ":authorization"))
+    implementation(project(path = ":network"))
+    implementation(project(path = ":localDb"))
+    implementation(project(path = ":profile"))
+    implementation(project(path = ":core"))
+
     implementation(libs.android.coreKtx)
     implementation(libs.android.activityCompose)
     implementation(platform(libs.android.composeBom))
@@ -80,8 +86,6 @@ dependencies {
     kapt(libs.dagger2.compiler)
     annotationProcessor(libs.dagger2.processor)
 
-    implementation(libs.bundles.room)
-    ksp(libs.room.compiler)
-    annotationProcessor(libs.room.compiler)
+    implementation(libs.compose.navigationCompose)
 
 }

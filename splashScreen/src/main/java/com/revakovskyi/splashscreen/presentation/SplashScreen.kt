@@ -1,4 +1,4 @@
-package com.revakovskyi.eventifycommunity.presentation
+package com.revakovskyi.splashscreen.presentation
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,7 +10,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.revakovskyi.eventifycommunity.navGraph.Screens
 
 @Composable
 fun SplashScreen(
@@ -22,7 +21,7 @@ fun SplashScreen(
         contentAlignment = Alignment.Center
     ) {
         Button(
-            onClick = { navController.navigate(Screens.AuthScreen.route) },
+            onClick = { navController.navigate("Screens.AuthScreen.route") },   // TODO: change route
         ) {
             Text(text = "To Auth Screen")
         }

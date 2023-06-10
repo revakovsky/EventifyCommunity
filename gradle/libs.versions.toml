@@ -13,6 +13,7 @@ jvmTarget                   = "1.8"
 
 # Module names
 name-app                    = "com.revakovskyi.eventifycommunity"
+name-splashscreen           = "com.revakovskyi.splashscreen"
 name-authorization          = "com.revakovskyi.authorization"
 name-network                = "com.revakovskyi.network"
 name-localdb                = "com.revakovskyi.localdb"

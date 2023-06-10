@@ -11,7 +11,6 @@ android {
         minSdk = libs.versions.minSdk.get().toInt()
 
         testInstrumentationRunner = libs.versions.testInstrumentationRunner.get()
-        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -44,5 +43,7 @@ dependencies {
     implementation(libs.android.coreKtx)
     implementation(libs.android.appcompat)
     implementation(libs.android.material)
+
+    implementation(libs.compose.navigationCompose)
 
 }

@@ -61,6 +61,7 @@ android {
 dependencies {
 
     implementation(project(path = ":authorization"))
+    implementation(project(path = ":splashScreen"))
     implementation(project(path = ":network"))
     implementation(project(path = ":localDb"))
     implementation(project(path = ":profile"))
@@ -68,8 +69,8 @@ dependencies {
 
     implementation(libs.android.coreKtx)
     implementation(libs.android.activityCompose)
-    implementation(platform(libs.android.composeBom))
 
+    implementation(platform(libs.android.composeBom))
     implementation(libs.bundles.composeUi)
 
     androidTestImplementation(platform(libs.android.composeBom))

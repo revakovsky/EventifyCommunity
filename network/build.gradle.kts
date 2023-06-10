@@ -11,7 +11,6 @@ android {
         minSdk = libs.versions.minSdk.get().toInt()
 
         testInstrumentationRunner = libs.versions.testInstrumentationRunner.get()
-        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {

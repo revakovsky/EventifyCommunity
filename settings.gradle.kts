@@ -17,6 +17,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "Eventify Community"
 include(":app")
+include(":splashScreen")
 include(":authorization")
 include(":network")
 include(":localDb")

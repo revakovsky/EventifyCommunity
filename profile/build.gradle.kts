@@ -36,6 +36,12 @@ android {
     kotlinOptions {
         jvmTarget = libs.versions.jvmTarget.get()
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.kotlinCompilerExtension.get()
+    }
+    buildFeatures {
+        compose = true
+    }
 }
 
 dependencies {
@@ -46,8 +52,9 @@ dependencies {
     implementation(libs.android.appcompat)
     implementation(libs.android.material)
 
-    implementation(platform(libs.android.composeBom))
+    implementation(platform(libs.compose.bom))
     implementation(libs.bundles.composeUi)
+    debugImplementation(libs.tests.uiTooling)
 
     implementation(libs.compose.navigationCompose)
 

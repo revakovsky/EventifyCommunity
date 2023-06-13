@@ -16,7 +16,9 @@
         <activity
             android:name=".presentation.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.EventifyCommunity">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.EventifyCommunity"
+            tools:ignore="LockedOrientationActivity">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

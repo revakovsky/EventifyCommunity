@@ -27,14 +27,14 @@ ver_KotlinKsp               = "1.8.0-1.0.9"
 
 # Android
 ver_CoreKtx                 = "1.10.1"
-ver_ActivityCompose         = "1.7.2"
-ver_ComposeBom              = "2023.05.01"
 ver_Appcompat               = "1.6.1"
 ver_Material                = "1.9.0"
 
 # Compose
+ver_ActivityCompose         = "1.7.2"
+ver_ComposeBom              = "2023.06.00"
+ver_NavigationCompose       = "2.6.0"
 ver_Coil                    = "2.4.0"
-ver_NavigationCompose       = "2.5.3"
 
 # Tests
 ver_JUnit                   = "4.13.2"
@@ -79,18 +79,18 @@ android-library      = { id = "com.android.library", version.ref = "ver_AndroidA
 
 # Android
 android-coreKtx            = { group = "androidx.core", name = "core-ktx", version.ref = "ver_CoreKtx" }
-android-activityCompose    = { group = "androidx.activity", name = "activity-compose", version.ref = "ver_ActivityCompose" }
-android-composeBom         = { group = "androidx.compose", name = "compose-bom", version.ref = "ver_ComposeBom" }
 android-appcompat          = { group = "androidx.appcompat", name = "appcompat", version.ref = "ver_Appcompat" }
 android-material           = { group = "com.google.android.material", name = "material", version.ref = "ver_Material" }
 
 # Compose
+compose-activityCompose    = { group = "androidx.activity", name = "activity-compose", version.ref = "ver_ActivityCompose" }
+compose-bom         = { group = "androidx.compose", name = "compose-bom", version.ref = "ver_ComposeBom" }
 compose-ui                 = { group = "androidx.compose.ui", name = "ui" }
 compose-uiGraphics         = { group = "androidx.compose.ui", name = "ui-graphics" }
 compose-material3          = { group = "androidx.compose.material3", name = "material3" }
 compose-uiToolingPreview   = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
-compose-coilCompose        = { group = "io.coil-kt", name = "coil-compose", version.ref = "ver_Coil" }
 compose-navigationCompose  = { group = "androidx.navigation", name = "navigation-compose", version.ref = "ver_NavigationCompose" }
+compose-coilCompose        = { group = "io.coil-kt", name = "coil-compose", version.ref = "ver_Coil" }
 
 # Tests
 tests-junit                = { group = "junit", name = "junit", version.ref = "ver_JUnit" }

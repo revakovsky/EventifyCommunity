@@ -1,4 +1,4 @@
-package com.revakovskyi.splashscreen.presentation
+package com.revakovskyi.profile.presentation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,7 +17,7 @@ import androidx.navigation.compose.rememberNavController
 import com.revakovskyi.core.navigation.MainRoutes
 
 @Composable
-fun SplashScreen(
+fun ProfileScreen(
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
@@ -26,20 +26,20 @@ fun SplashScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Splash screen")
+        Text(text = "Profile screen")
 
         Spacer(modifier = modifier.height(50.dp))
 
         Button(
-            onClick = { navController.navigate(MainRoutes.AUTH_ROUT) },
+            onClick = { navController.navigate(MainRoutes.SPLASH_ROUT) },
         ) {
-            Text(text = "To Auth Screen")
+            Text(text = "Back To Splash Screen")
         }
     }
 }
 
 @Composable
 @Preview(showSystemUi = true, showBackground = true)
-fun ShowSplashScreen() {
-    SplashScreen(navController = rememberNavController())
+fun ShowProfileScreen() {
+    ProfileScreen(navController = rememberNavController())
 }

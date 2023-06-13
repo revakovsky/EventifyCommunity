@@ -68,12 +68,12 @@ dependencies {
     implementation(project(path = ":core"))
 
     implementation(libs.android.coreKtx)
-    implementation(libs.android.activityCompose)
+    implementation(libs.compose.activityCompose)
 
-    implementation(platform(libs.android.composeBom))
+    implementation(platform(libs.compose.bom))
     implementation(libs.bundles.composeUi)
 
-    androidTestImplementation(platform(libs.android.composeBom))
+    androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.bundles.tests)
     testImplementation(libs.tests.junit)
     debugImplementation(libs.tests.uiTooling)

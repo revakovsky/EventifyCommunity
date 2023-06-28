@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.ksp)
+    alias(libs.plugins.hilt)
     kotlin("kapt")
 }
 
@@ -60,33 +61,43 @@ android {
 
 dependencies {
 
-    implementation(project(path = ":authorization"))
-    implementation(project(path = ":splashScreen"))
+    // Modules
+    implementation(project(path = ":featureSplash"))
+    implementation(project(path = ":featureAuth"))
+    implementation(project(path = ":featureProfile"))
+    implementation(project(path = ":core"))
+    implementation(project(path = ":data"))
     implementation(project(path = ":network"))
     implementation(project(path = ":localDb"))
-    implementation(project(path = ":profile"))
-    implementation(project(path = ":core"))
 
+    // Android
     implementation(libs.android.coreKtx)
     implementation(libs.compose.activityCompose)
 
+    // Compose
     implementation(platform(libs.compose.bom))
     implementation(libs.bundles.composeUi)
+    implementation(libs.compose.navigationCompose)
 
+    // Testing
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.bundles.tests)
     testImplementation(libs.tests.junit)
     debugImplementation(libs.tests.uiTooling)
     debugImplementation(libs.tests.uiTestManifest)
 
+    // Lifecycle
     implementation(libs.bundles.lifecycle)
 
+    // Coroutine
     implementation(libs.coroutines)
 
-    implementation(libs.bundles.dagger2)
-    kapt(libs.dagger2.compiler)
-    annotationProcessor(libs.dagger2.processor)
+    // Hilt
+    implementation(libs.bundles.hilt)
+    kapt(libs.hilt.compiler)
 
-    implementation(libs.compose.navigationCompose)
+}
 
+kapt {
+    correctErrorTypes = true
 }

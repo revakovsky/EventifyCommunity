@@ -16,10 +16,15 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Eventify Community"
+
 include(":app")
-include(":splashScreen")
-include(":authorization")
+include(":featureSplash")
+include(":featureAuth")
+include(":featureProfile")
+
+include(":domain")
+include(":core")
+
+include(":data")
 include(":network")
 include(":localDb")
-include(":profile")
-include(":core")

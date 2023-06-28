@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = libs.versions.name.network.get()
+    namespace = libs.versions.name.featureAuth.get()
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
@@ -36,17 +36,29 @@ android {
     kotlinOptions {
         jvmTarget = libs.versions.jvmTarget.get()
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.kotlinCompilerExtension.get()
+    }
+    buildFeatures {
+        compose = true
+    }
 }
 
 dependencies {
+
+    // Modules
+    implementation(project(path = ":domain"))
+    implementation(project(path = ":core"))
 
     // Android
     implementation(libs.android.coreKtx)
     implementation(libs.android.appcompat)
     implementation(libs.android.material)
 
-    // Network
-    implementation(libs.bundles.okHttp)
-    implementation(libs.bundles.retrofit2)
+    // Compose
+    implementation(platform(libs.compose.bom))
+    implementation(libs.bundles.composeUi)
+    debugImplementation(libs.tests.uiTooling)
+    implementation(libs.compose.navigationCompose)
 
 }

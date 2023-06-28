@@ -13,15 +13,17 @@ jvmTarget                   = "1.8"
 
 # Module names
 name-app                    = "com.revakovskyi.eventifycommunity"
-name-splashscreen           = "com.revakovskyi.splashscreen"
-name-authorization          = "com.revakovskyi.authorization"
+name-featureSplash          = "com.revakovskyi.featuresplash"
+name-featureAuth            = "com.revakovskyi.featureauth"
+name-featureProfile         = "com.revakovskyi.featureprofile"
+name-core                   = "com.revakovskyi.core"
+name-data                   = "com.revakovskyi.data"
 name-network                = "com.revakovskyi.network"
 name-localdb                = "com.revakovskyi.localdb"
-name-profile                = "com.revakovskyi.profile"
-name-core                   = "com.revakovskyi.core"
 
 # Plugins
 ver_AndroidApplication      = "8.2.0-alpha06"
+ver_KotlinJvm               = "1.8.10"
 ver_KotlinAndroid           = "1.8.10"
 ver_KotlinKsp               = "1.8.0-1.0.9"
 
@@ -32,7 +34,7 @@ ver_Material                = "1.9.0"
 
 # Compose
 ver_ActivityCompose         = "1.7.2"
-ver_ComposeBom              = "2023.06.00"
+ver_ComposeBom              = "2023.06.01"
 ver_NavigationCompose       = "2.6.0"
 ver_Coil                    = "2.4.0"
 
@@ -48,11 +50,13 @@ ver_LifecycleViewmodel      = "2.6.1"
 # Kotlinx
 var_CoroutinesAndroid       = "1.7.1"
 
-# Dagger2
-ver_Dagger2                 = "2.46.1"
+# Hilt
+ver_Hilt                    = "2.46.1"
+ver_HiltComposeNavigation   = "1.1.0-alpha01"
+ver_Inject                  = "1"
 
 # Room
-ver_Room                    = "2.5.1"
+ver_Room                    = "2.5.2"
 
 # Networking
 ver_OkHttpBom               = "4.11.0"
@@ -68,9 +72,11 @@ ver_SwipeRefreshLayout      = "1.1.0"
 [plugins]
 
 android-application  = { id = "com.android.application", version.ref = "ver_AndroidApplication" }
+android-library      = { id = "com.android.library", version.ref = "ver_AndroidApplication" }
 kotlin-android       = { id = "org.jetbrains.kotlin.android", version.ref = "ver_KotlinAndroid" }
 kotlin-ksp           = { id = "com.google.devtools.ksp", version.ref = "ver_KotlinKsp" }
-android-library      = { id = "com.android.library", version.ref = "ver_AndroidApplication" }
+kotlin-jvm           = { id = "org.jetbrains.kotlin.jvm", version.ref = "ver_KotlinJvm" }
+hilt                 = { id = "com.google.dagger.hilt.android", version.ref = "ver_Hilt" }
 
 # --------------------------------------------------------------------------------------------------
 
@@ -84,7 +90,7 @@ android-material           = { group = "com.google.android.material", name = "ma
 
 # Compose
 compose-activityCompose    = { group = "androidx.activity", name = "activity-compose", version.ref = "ver_ActivityCompose" }
-compose-bom         = { group = "androidx.compose", name = "compose-bom", version.ref = "ver_ComposeBom" }
+compose-bom                = { group = "androidx.compose", name = "compose-bom", version.ref = "ver_ComposeBom" }
 compose-ui                 = { group = "androidx.compose.ui", name = "ui" }
 compose-uiGraphics         = { group = "androidx.compose.ui", name = "ui-graphics" }
 compose-material3          = { group = "androidx.compose.material3", name = "material3" }
@@ -108,11 +114,11 @@ lifecycle-runtimeCompose   = { group = "androidx.lifecycle", name = "lifecycle-r
 # Kotlinx
 coroutines                 = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "var_CoroutinesAndroid" }
 
-# Dagger2
-dagger2-android            = { module = "com.google.dagger:dagger-android", version.ref = "ver_Dagger2" }
-dagger2-support            = { module = "com.google.dagger:dagger-android-support", version.ref = "ver_Dagger2" }
-dagger2-processor          = { module = "com.google.dagger:dagger-android-processor", version.ref = "ver_Dagger2" }
-dagger2-compiler           = { module = "com.google.dagger:dagger-compiler", version.ref = "ver_Dagger2" }
+# Hilt
+hilt                       = { group = "com.google.dagger", name = "hilt-android", version.ref = "ver_Hilt" }
+hilt-compiler              = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "ver_Hilt" }
+hilt-composeNavigation     = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "ver_HiltComposeNavigation" }
+hilt-inject                = { group = "javax.inject", name = "javax.inject", version.ref = "ver_Inject" }
 
 # Room
 room-runtime               = { module = "androidx.room:room-runtime", version.ref = "ver_Room" }
@@ -154,9 +160,9 @@ lifecycle = [
     "lifecycle-runtimeCompose"
 ]
 
-dagger2 = [
-    "dagger2-android",
-    "dagger2-support"
+hilt = [
+    "hilt",
+    "hilt-composeNavigation"
 ]
 
 okHttp = [

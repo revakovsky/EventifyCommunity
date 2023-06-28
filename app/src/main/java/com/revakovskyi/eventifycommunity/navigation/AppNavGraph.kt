@@ -16,17 +16,17 @@ fun AppNavGraph() {
         startDestination = MainRoutes.SPLASH_ROUT
     ) {
         registerNewRoute(
-            navigationRoute = DependencyProvider.splashNavigationRoute(),
+            navigationRoute = /* TODO */,
             navHostController = navController
         )
 
         registerNewRoute(
-            navigationRoute = DependencyProvider.authNavigationRoute(),
+            navigationRoute = /* TODO */,
             navHostController = navController
         )
 
         registerNewRoute(
-            navigationRoute = DependencyProvider.profileNavigationRoute(),
+            navigationRoute = /* TODO */,
             navHostController = navController
         )
 

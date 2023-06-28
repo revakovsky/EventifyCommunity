@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = libs.versions.name.network.get()
+    namespace = libs.versions.name.data.get()
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
@@ -40,13 +40,14 @@ android {
 
 dependencies {
 
+    // Modules
+    implementation(project(path = ":domain"))
+    implementation(project(path = ":network"))
+    implementation(project(path = ":localDb"))
+
     // Android
     implementation(libs.android.coreKtx)
     implementation(libs.android.appcompat)
     implementation(libs.android.material)
-
-    // Network
-    implementation(libs.bundles.okHttp)
-    implementation(libs.bundles.retrofit2)
 
 }

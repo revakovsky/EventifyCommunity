@@ -6,8 +6,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.revakovskyi.featureauth.presentation.AuthScreen
 import com.revakovskyi.core.navigation.MainRoutes
+import javax.inject.Inject
 
-class AuthNavigationRouteImpl : AuthNavigationRoute {
+internal class AuthNavigationRouteImpl @Inject constructor() : AuthNavigationRoute {
 
     override val firstsScreenRoute: String
         get() = Screens.AuthScreen.route

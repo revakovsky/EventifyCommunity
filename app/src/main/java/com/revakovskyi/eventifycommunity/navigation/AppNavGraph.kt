@@ -5,9 +5,16 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.revakovskyi.core.navigation.MainRoutes
 import com.revakovskyi.core.navigation.registerNewRoute
+import com.revakovskyi.featureauth.navigation.AuthNavigationRoute
+import com.revakovskyi.featureprofile.navigation.ProfileNavigationRoute
+import com.revakovskyi.featuresplash.navigation.SplashNavigationRoute
 
 @Composable
-fun AppNavGraph() {
+internal fun AppNavGraph(
+    splashNavigationRoute: SplashNavigationRoute,
+    authNavigationRoute: AuthNavigationRoute,
+    profileNavigationRoute: ProfileNavigationRoute
+) {
 
     val navController = rememberNavController()
 
@@ -16,17 +23,17 @@ fun AppNavGraph() {
         startDestination = MainRoutes.SPLASH_ROUT
     ) {
         registerNewRoute(
-            navigationRoute = /* TODO */,
+            navigationRoute = splashNavigationRoute,
             navHostController = navController
         )
 
         registerNewRoute(
-            navigationRoute = /* TODO */,
+            navigationRoute = authNavigationRoute,
             navHostController = navController
         )
 
         registerNewRoute(
-            navigationRoute = /* TODO */,
+            navigationRoute = profileNavigationRoute,
             navHostController = navController
         )
 

@@ -17,7 +17,7 @@ import androidx.navigation.compose.rememberNavController
 import com.revakovskyi.core.navigation.MainRoutes
 
 @Composable
-fun AuthScreen(
+internal fun AuthScreen(
     navController: NavController,
     modifier: Modifier = Modifier
 ) {

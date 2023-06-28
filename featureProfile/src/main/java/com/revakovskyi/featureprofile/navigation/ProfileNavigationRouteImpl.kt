@@ -6,8 +6,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.revakovskyi.core.navigation.MainRoutes
 import com.revakovskyi.featureprofile.presentation.ProfileScreen
+import javax.inject.Inject
 
-class ProfileNavigationRouteImpl : ProfileNavigationRoute {
+internal class ProfileNavigationRouteImpl @Inject constructor() : ProfileNavigationRoute {
 
     override val firstsScreenRoute: String
         get() = Screens.ProfileScreen.route

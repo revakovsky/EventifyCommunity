@@ -6,8 +6,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.revakovskyi.core.navigation.MainRoutes
 import com.revakovskyi.featuresplash.presentation.SplashScreen
+import javax.inject.Inject
 
-class SplashNavigationRouteImpl : SplashNavigationRoute {
+internal class SplashNavigationRouteImpl @Inject constructor() : SplashNavigationRoute {
 
     override val firstsScreenRoute: String
         get() = Screens.SplashScreen.route

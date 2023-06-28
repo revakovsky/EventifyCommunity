@@ -17,7 +17,7 @@ import androidx.navigation.compose.rememberNavController
 import com.revakovskyi.core.navigation.MainRoutes
 
 @Composable
-fun ProfileScreen(
+internal fun ProfileScreen(
     navController: NavController,
     modifier: Modifier = Modifier
 ) {

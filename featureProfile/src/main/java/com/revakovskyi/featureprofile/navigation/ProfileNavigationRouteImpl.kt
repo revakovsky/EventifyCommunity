@@ -10,6 +10,9 @@ import javax.inject.Inject
 
 internal class ProfileNavigationRouteImpl @Inject constructor() : ProfileNavigationRoute {
 
+    override val profileArgumentsText: String
+        get() = MainRoutes.profileArgumentsText
+
     override val firstsScreenRoute: String
         get() = Screens.ProfileScreen.route
 
@@ -25,9 +28,14 @@ internal class ProfileNavigationRouteImpl @Inject constructor() : ProfileNavigat
             startDestination = firstsScreenRoute,
             route = navigationRouteName
         ) {
+
             composable(route = firstsScreenRoute) {
-                ProfileScreen(navController = navHostController)
+                ProfileScreen(
+                    navController = navHostController,
+                    text = profileArgumentsText
+                )
             }
+
         }
     }
 

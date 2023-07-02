@@ -18,8 +18,9 @@ import com.revakovskyi.core.navigation.MainRoutes
 
 @Composable
 internal fun ProfileScreen(
+    modifier: Modifier = Modifier,
     navController: NavController,
-    modifier: Modifier = Modifier
+    text: String? = ""
 ) {
     Column(
         modifier = modifier.fillMaxSize(),
@@ -30,11 +31,32 @@ internal fun ProfileScreen(
 
         Spacer(modifier = modifier.height(50.dp))
 
+        text?.let {
+            if (text.isNotEmpty()) Text(text = "The text from the AuthScreen is: \n$it")
+            else Text(text = "Nothing was passed")
+        }
+
+        Spacer(modifier = modifier.height(50.dp))
+
         Button(
-            onClick = { navController.navigate(MainRoutes.SPLASH_ROUT) },
+            onClick = { navController.popBackStack() },
+        ) {
+            Text(text = "Back")
+        }
+
+        Spacer(modifier = modifier.height(50.dp))
+
+        Button(
+            onClick = {
+                navController.popBackStack(
+                    route = MainRoutes.AUTH_ROUT,
+                    inclusive = true
+                )
+            },
         ) {
             Text(text = "Back To Splash Screen")
         }
+
     }
 }
 

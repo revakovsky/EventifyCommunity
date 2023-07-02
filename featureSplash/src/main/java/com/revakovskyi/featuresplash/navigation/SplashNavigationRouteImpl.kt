@@ -25,9 +25,11 @@ internal class SplashNavigationRouteImpl @Inject constructor() : SplashNavigatio
             startDestination = firstsScreenRoute,
             route = navigationRouteName
         ) {
+
             composable(route = firstsScreenRoute) {
                 SplashScreen(navController = navHostController)
             }
+
         }
     }
 

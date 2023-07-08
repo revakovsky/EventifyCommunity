@@ -1,17 +1,30 @@
 package com.revakovskyi.core.navigation
 
-object MainRoutes {
+sealed class MainRoutes(
+    val route: String,
+    val arguments: (String) -> String = { "" }
+) {
 
-    const val AUTH_ROUT = "AUTH_ROUT"
-    const val SPLASH_ROUT = "SPLASH_ROUT"
+    object SplashScreenRoute : MainRoutes(SPLASH_ROUT)
+
+    object AuthScreenRoute : MainRoutes(AUTH_ROUT)
+
+    object ProfileScreenRoute : MainRoutes(
+        PROFILE_ROUT,
+        arguments = { passedText ->
+            provideArgumentsForTheProfileRoute = passedText
+            PROFILE_ROUT
+        }
+    )
 
 
-    const val PROFILE_ROUT = "PROFILE_ROUT"
-    var profileArgumentsText: String = ""
-        private set
-    fun goToProfileRoute(text: String = ""): String {
-        profileArgumentsText = text
-        return PROFILE_ROUT
+    companion object {
+        private const val SPLASH_ROUT = "SPLASH_ROUT"
+        private const val AUTH_ROUT = "AUTH_ROUT"
+
+        private const val PROFILE_ROUT = "PROFILE_ROUT"
+        var provideArgumentsForTheProfileRoute: String = ""
+            internal set
     }
 
 }

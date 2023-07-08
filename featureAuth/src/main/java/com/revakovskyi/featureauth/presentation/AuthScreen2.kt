@@ -30,14 +30,14 @@ internal fun AuthScreen2(
     ) {
         Text(text = "Auth screen 2")
 
-        Spacer(modifier = modifier.height(50.dp))
+        Spacer(modifier = Modifier.height(50.dp))
 
         text?.let {
             if (text.isNotEmpty()) Text(text = "The text from the AuthScreen is: \n$it")
             else Text(text = "Nothing was passed")
         }
 
-        Spacer(modifier = modifier.height(50.dp))
+        Spacer(modifier = Modifier.height(50.dp))
 
         Button(
             onClick = { navController.popBackStack() },
@@ -45,12 +45,12 @@ internal fun AuthScreen2(
             Text(text = "Back")
         }
 
-        Spacer(modifier = modifier.height(50.dp))
+        Spacer(modifier = Modifier.height(50.dp))
 
         Button(
             onClick = {
                 navController.popBackStack(
-                    route = MainRoutes.AUTH_ROUT,
+                    route = MainRoutes.AuthScreenRoute.route,
                     inclusive = true
                 )
             },

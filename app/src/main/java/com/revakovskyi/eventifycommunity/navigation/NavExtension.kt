@@ -1,4 +1,4 @@
-package com.revakovskyi.core.extensions
+package com.revakovskyi.eventifycommunity.navigation
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController

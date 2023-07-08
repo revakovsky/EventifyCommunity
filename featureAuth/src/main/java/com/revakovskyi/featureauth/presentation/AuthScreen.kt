@@ -39,28 +39,28 @@ internal fun AuthScreen(
     ) {
         Text(text = "Auth screen")
 
-        Spacer(modifier = modifier.height(50.dp))
+        Spacer(modifier = Modifier.height(50.dp))
 
         TextField(
             value = text,
             onValueChange = { text = it },
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 32.dp)
         )
 
-        Spacer(modifier = modifier.height(50.dp))
+        Spacer(modifier = Modifier.height(50.dp))
 
         Button(
-            onClick = { navController.navigate(MainRoutes.goToProfileRoute(text = text)) },
+            onClick = { navController.navigate(MainRoutes.ProfileScreenRoute.arguments(text)) },
         ) {
             Text(text = "To Profile Screen")
         }
 
-        Spacer(modifier = modifier.height(50.dp))
+        Spacer(modifier = Modifier.height(50.dp))
 
         Button(
-            onClick = { navController.navigate(Screens.AuthScreen2.passText(text = text)) },
+            onClick = { navController.navigate(Screens.AuthScreen2.arguments(text)) },
         ) {
             Text(text = "To Auth Screen 2")
         }

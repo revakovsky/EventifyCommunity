@@ -28,10 +28,10 @@ internal fun SplashScreen(
     ) {
         Text(text = "Splash screen")
 
-        Spacer(modifier = modifier.height(50.dp))
+        Spacer(modifier = Modifier.height(50.dp))
 
         Button(
-            onClick = { navController.navigate(MainRoutes.AUTH_ROUT) },
+            onClick = { navController.navigate(MainRoutes.AuthScreenRoute.route) },
         ) {
             Text(text = "To Auth Screen")
         }

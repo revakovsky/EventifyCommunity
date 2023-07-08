@@ -74,6 +74,3 @@ val darkInversePrimary = Color(0xFF724C9F)
 val darkSurfaceTint = Color(0xFFDAB9FF)
 val darkOutlineVariant = Color(0xFF4A454E)
 val darkScrim = Color(0xFF000000)
-
-
-val seed = Color(0xFF49434E)

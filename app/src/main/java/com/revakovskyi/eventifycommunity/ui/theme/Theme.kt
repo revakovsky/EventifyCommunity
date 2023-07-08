@@ -93,7 +93,7 @@ fun EventifyCommunityTheme(
         if (!useDarkTheme) LightColors
         else DarkColors
 
-    CompositionLocalProvider() {
+    CompositionLocalProvider {
         MaterialTheme(
             colorScheme = colors,
             content = content

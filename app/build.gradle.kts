@@ -1,28 +1,38 @@
 plugins {
-    alias(libs.plugins.androidApplication)
-    alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.ksp)
+    alias(libs.plugins.hilt)
+    kotlin("kapt")
 }
 
 android {
-    namespace = "com.revakovskyi.eventifycommunity"
-    compileSdk = 33
+    namespace = libs.versions.name.app.get()
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.revakovskyi.eventifycommunity"
-        minSdk = 26
-        targetSdk = 33
-        versionCode = 1
-        versionName = "1.0"
+        applicationId = libs.versions.name.app.get()
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
+        versionCode = libs.versions.versionCode.get().toInt()
+        versionName = libs.versions.versionName.get()
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = libs.versions.testInstrumentationRunner.get()
         vectorDrawables {
             useSupportLibrary = true
         }
     }
 
     buildTypes {
+        debug {
+            isMinifyEnabled = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -34,13 +44,13 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = libs.versions.jvmTarget.get()
     }
     buildFeatures {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.3"
+        kotlinCompilerExtensionVersion = libs.versions.kotlinCompilerExtension.get()
     }
     packaging {
         resources {
@@ -51,21 +61,43 @@ android {
 
 dependencies {
 
-    implementation(libs.core.ktx)
-    implementation(libs.lifecycle.runtime.ktx)
-    implementation(libs.activity.compose)
-    implementation(platform(libs.compose.bom))
-    implementation(libs.ui)
-    implementation(libs.ui.graphics)
-    implementation(libs.ui.tooling.preview)
-    implementation(libs.material3)
+    // Modules
+    implementation(project(path = ":featureSplash"))
+    implementation(project(path = ":featureAuth"))
+    implementation(project(path = ":featureProfile"))
+    implementation(project(path = ":core"))
+    implementation(project(path = ":data"))
+    implementation(project(path = ":network"))
+    implementation(project(path = ":localDb"))
 
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.test.ext.junit)
-    androidTestImplementation(libs.espresso.core)
+    // Android
+    implementation(libs.android.coreKtx)
+    implementation(libs.compose.activityCompose)
+
+    // Compose
+    implementation(platform(libs.compose.bom))
+    implementation(libs.bundles.composeUi)
+    implementation(libs.compose.navigationCompose)
+
+    // Testing
     androidTestImplementation(platform(libs.compose.bom))
-    androidTestImplementation(libs.ui.test.junit4)
-    debugImplementation(libs.ui.tooling)
-    debugImplementation(libs.ui.test.manifest)
-    
+    androidTestImplementation(libs.bundles.tests)
+    testImplementation(libs.tests.junit)
+    debugImplementation(libs.tests.uiTooling)
+    debugImplementation(libs.tests.uiTestManifest)
+
+    // Lifecycle
+    implementation(libs.bundles.lifecycle)
+
+    // Coroutine
+    implementation(libs.coroutines)
+
+    // Hilt
+    implementation(libs.bundles.hilt)
+    kapt(libs.hilt.compiler)
+
+}
+
+kapt {
+    correctErrorTypes = true
 }

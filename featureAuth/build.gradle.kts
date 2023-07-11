@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.hilt)
+    id("com.google.gms.google-services")
     kotlin("kapt")
 }
 
@@ -66,6 +67,9 @@ dependencies {
     // Hilt
     implementation(libs.bundles.hilt)
     kapt(libs.hilt.compiler)
+
+    // Firebase Auth
+    implementation(libs.firebase.auth)
 
 }
 

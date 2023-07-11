@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "148082866006",
+    "project_id": "eventify-community",
+    "storage_bucket": "eventify-community.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:148082866006:android:edf962b4e992dfd02948f7",
+        "android_client_info": {
+          "package_name": "com.revakovskyi.featureauth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "148082866006-41rhg49i91eqp1aqu87o8ohjtc1l1g9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcTnAMAvFq7SDhFMXYNBUX-Op9zGE9akU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "148082866006-41rhg49i91eqp1aqu87o8ohjtc1l1g9h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

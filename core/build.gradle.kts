@@ -50,6 +50,9 @@ dependencies {
     implementation(libs.android.appcompat)
     implementation(libs.android.material)
 
+    // Compose
     implementation(libs.compose.navigationCompose)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.bundles.composeUi)
 
 }

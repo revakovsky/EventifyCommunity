@@ -1,4 +1,4 @@
-package com.revakovskyi.eventifycommunity.ui.theme
+package com.revakovskyi.core.presentation.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
@@ -6,7 +6,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import com.revakovskyi.eventifycommunity.R
+import com.revakovskyi.core.R
 
 val Nunito = FontFamily(
     Font(R.font.nunito_light, weight = FontWeight.W300),
@@ -24,7 +24,7 @@ val Nunito = FontFamily(
     Font(R.font.nunito_extrabolditalic, weight = FontWeight.W800),
 )
 
-val Typography = Typography(
+val AppTypography = Typography(
 
     bodyLarge = TextStyle(
         fontFamily = Nunito,

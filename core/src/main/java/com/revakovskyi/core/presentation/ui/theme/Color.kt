@@ -1,4 +1,4 @@
-package com.revakovskyi.eventifycommunity.ui.theme
+package com.revakovskyi.core.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
@@ -22,8 +22,8 @@ val lightErrorContainer = Color(0xFFFFDAD6)
 val lightOnError = Color(0xFFFFFFFF)
 val lightOnErrorContainer = Color(0xFF410002)
 
-val lightBackground = Color(0xFFF8FDFF)
-val lightOnBackground = Color(0xFF001F25)
+val lightBackground = Color(0xFFF7F6F0)
+val lightOnBackground = Color(0xFF26282C)
 
 val lightSurface = Color(0xFFF8FDFF)
 val lightOnSurface = Color(0xFF001F25)
@@ -59,8 +59,8 @@ val darkErrorContainer = Color(0xFF93000A)
 val darkOnError = Color(0xFF690005)
 val darkOnErrorContainer = Color(0xFFFFDAD6)
 
-val darkBackground = Color(0xFF001F25)
-val darkOnBackground = Color(0xFFA6EEFF)
+val darkBackground = Color(0xFF26282C)
+val darkOnBackground = Color(0xFFF7F6F0)
 
 val darkSurface = Color(0xFF001F25)
 val darkOnSurface = Color(0xFFA6EEFF)

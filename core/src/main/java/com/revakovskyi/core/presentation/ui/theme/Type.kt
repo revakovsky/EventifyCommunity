@@ -26,20 +26,28 @@ val Nunito = FontFamily(
 
 val AppTypography = Typography(
 
+    titleLarge = TextStyle(
+        fontFamily = Nunito,
+        fontWeight = FontWeight.ExtraBold,
+        fontSize = 32.sp,
+        lineHeight = 28.sp,
+        letterSpacing = 0.sp
+    ),
+
     bodyLarge = TextStyle(
+        fontFamily = Nunito,
+        fontWeight = FontWeight.Normal,
+        fontSize = 24.sp,
+        lineHeight = 24.sp,
+        letterSpacing = 0.5.sp
+    ),
+
+    bodyMedium = TextStyle(
         fontFamily = Nunito,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.5.sp
-    ),
-
-    titleLarge = TextStyle(
-        fontFamily = Nunito,
-        fontWeight = FontWeight.W500,
-        fontSize = 22.sp,
-        lineHeight = 28.sp,
-        letterSpacing = 0.sp
     ),
 
     labelSmall = TextStyle(
@@ -49,4 +57,5 @@ val AppTypography = Typography(
         lineHeight = 16.sp,
         letterSpacing = 0.5.sp
     )
+
 )

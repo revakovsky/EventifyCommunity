@@ -8,6 +8,7 @@ internal sealed class Screens(
 ) {
 
     object SingInScreen : Screens("sing_in_screen")
+
     object AuthScreen : Screens("auth_screen")
     object AuthScreen2 : Screens(
         "auth_screen2?$AUTH2_ARGUMENT_KEY={${AUTH2_ARGUMENT_KEY}}",

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="logo_icon">"Logo icon"</string>
+    <string name="welcome">Welcome</string>
+    <string name="please_sing_in_to_continue">Please, Sing In to continue</string>
+    <string name="phone_or_email">Phone or Email</string>
+    <string name="login_example">+380.. or mailbox@mail.com</string>
+
+</resources>

@@ -8,7 +8,7 @@ import androidx.compose.ui.text.TextStyle
 import com.revakovskyi.core.presentation.ui.theme.AppTypography
 
 @Composable
-fun AppTextRegular(
+fun TextRegular(
     text: String,
     style: TextStyle = AppTypography.bodyMedium,
     textColor: Color = MaterialTheme.colorScheme.onBackground,

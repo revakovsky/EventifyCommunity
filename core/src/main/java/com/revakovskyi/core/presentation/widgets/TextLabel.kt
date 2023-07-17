@@ -8,7 +8,7 @@ import androidx.compose.ui.text.TextStyle
 import com.revakovskyi.core.presentation.ui.theme.AppTypography
 
 @Composable
-fun AppTextLabel(
+fun TextLabel(
     text: String,
     style: TextStyle = AppTypography.labelSmall,
     textColor: Color = MaterialTheme.colorScheme.onBackground,

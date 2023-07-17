@@ -50,6 +50,7 @@ fun AppOutlinedEditTextField(
     visualTransformation: VisualTransformation = VisualTransformation.None,
     imeAction: ImeAction = ImeAction.Next,
     keyboardType: KeyboardType = KeyboardType.Email,
+    autoCorrect: Boolean = true,
     singleLine: Boolean = true,
     maxLines: Int = if (singleLine) 1 else Int.MAX_VALUE,
     shape: Shape = AppShapes.medium,
@@ -85,7 +86,7 @@ fun AppOutlinedEditTextField(
         keyboardOptions = KeyboardOptions(
             imeAction = imeAction,
             keyboardType = keyboardType,
-            autoCorrect = true,
+            autoCorrect = autoCorrect,
             capitalization = KeyboardCapitalization.None
         ),
         keyboardActions = KeyboardActions(onDone = { controller?.hide() }),

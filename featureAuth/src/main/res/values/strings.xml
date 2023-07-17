@@ -6,5 +6,13 @@
     <string name="please_sing_in_to_continue">Please, Sing In to continue</string>
     <string name="phone_or_email">Phone or Email</string>
     <string name="login_example">+380.. or mailbox@mail.com</string>
+    <string name="person_icon">Person icon</string>
+    <string name="password">Password</string>
+    <string name="correct">Correct</string>
+    <string name="incorrect">Incorrect</string>
+    <string name="password_example">********</string>
+    <string name="password_icon">Password icon</string>
+    <string name="entered_password_invisible">Entered Password invisible</string>
+    <string name="entered_password_visible">Entered Password visible</string>
 
 </resources>

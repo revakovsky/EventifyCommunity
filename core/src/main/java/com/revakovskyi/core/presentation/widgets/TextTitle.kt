@@ -9,7 +9,7 @@ import androidx.compose.ui.text.TextStyle
 import com.revakovskyi.core.presentation.ui.theme.AppTypography
 
 @Composable
-fun AppTextTitle(
+fun TextTitle(
     modifier: Modifier = Modifier,
     text: String,
     style: TextStyle = AppTypography.titleLarge,

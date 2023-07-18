@@ -24,9 +24,9 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import com.revakovskyi.core.presentation.ui.theme.AppShapes
 import com.revakovskyi.core.presentation.ui.theme.AppTypography
+import com.revakovskyi.core.presentation.ui.theme.dimens
 import kotlinx.coroutines.launch
 
 @OptIn(
@@ -39,10 +39,10 @@ fun AppOutlinedEditTextField(
     onValueChange: (String) -> Unit,
     label: @Composable (() -> Unit)? = null,
     placeholder: @Composable (() -> Unit)? = null,
-    maxWidth: Dp = 400.dp,
+    maxWidth: Dp = MaterialTheme.dimens.fieldMaxWidth,
     enabled: Boolean = true,
     readOnly: Boolean = false,
-    textStyle: TextStyle = AppTypography.bodyMedium.copy(color = MaterialTheme.colorScheme.onBackground),
+    textStyle: TextStyle = AppTypography.bodySmall.copy(color = MaterialTheme.colorScheme.onBackground),
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
     supportingText: @Composable (() -> Unit)? = null,
@@ -66,7 +66,7 @@ fun AppOutlinedEditTextField(
         placeholder = placeholder,
         modifier = modifier
             .widthIn(maxWidth)
-            .padding(horizontal = 16.dp)
+            .padding(horizontal = MaterialTheme.dimens.medium)
             .bringIntoViewRequester(bringIntoViewRequester)
             .onFocusEvent { focusState ->
                 if (focusState.isFocused) {

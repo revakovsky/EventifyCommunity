@@ -6,9 +6,11 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -18,20 +20,27 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.revakovskyi.core.presentation.ui.DivicePreviews
 import com.revakovskyi.core.presentation.ui.theme.AppTypography
+import com.revakovskyi.core.presentation.ui.theme.dimens
 import com.revakovskyi.core.presentation.widgets.AppOutlinedEditTextField
+import com.revakovskyi.core.presentation.widgets.ButtonRegular
 import com.revakovskyi.core.presentation.widgets.OutlinedHintText
+import com.revakovskyi.core.presentation.widgets.TextClickable
 import com.revakovskyi.core.presentation.widgets.TextRegular
 import com.revakovskyi.core.presentation.widgets.TextTitle
+import com.revakovskyi.core.presentation.widgets.TextWithHorizontalBar
 import com.revakovskyi.featureauth.R
 
 @Composable
@@ -51,20 +60,26 @@ fun SingInScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp)
+                .padding(MaterialTheme.dimens.medium)
         ) {
 
             Image(
                 painter = painterResource(id = R.drawable.logo_icon_no_bg),
                 contentDescription = stringResource(id = R.string.logo_icon),
+                contentScale = ContentScale.Inside,
+                modifier = Modifier
+                    .weight(1f, fill = false)
+                    .aspectRatio(1.1f)
+                    .padding(top = MaterialTheme.dimens.medium)
             )
 
             TextTitle(
-                modifier = Modifier.padding(top = 64.dp),
+                modifier = Modifier.padding(top = MaterialTheme.dimens.large),
                 text = stringResource(R.string.welcome)
             )
 
             TextRegular(
+                modifier = Modifier.padding(MaterialTheme.dimens.medium),
                 text = stringResource(R.string.please_sing_in_to_continue),
                 style = AppTypography.bodyLarge
             )
@@ -78,6 +93,46 @@ fun SingInScreen(
                 LoginInputField()
 
                 PasswordInputField()
+
+                TextClickable(
+                    text = stringResource(R.string.forgot_password),
+                    onClick = { /*TODO: open the appropriate screen*/ },
+                )
+
+                ButtonRegular(
+                    buttonText = stringResource(R.string.sign_in),
+                    onClick = { /*TODO: process click*/ }
+                )
+
+                TextWithHorizontalBar(
+                    text = stringResource(R.string.or_sign_in_using),
+                    modifier = Modifier.padding(top = MaterialTheme.dimens.large)
+                )
+
+                Image(
+                    painter = painterResource(id = R.drawable.google_icon),
+                    contentDescription = stringResource(R.string.google),
+                    modifier = Modifier
+                        .size(64.dp)
+                        .padding(top = MaterialTheme.dimens.large)
+                        .clickable { /*TODO: open Google Sign In*/ }
+                )
+
+                TextRegular(
+                    text = stringResource(R.string.don_t_have_an_account),
+                    style = MaterialTheme.typography.bodySmall,
+                    modifier = Modifier.padding(top = MaterialTheme.dimens.large)
+                )
+
+                TextClickable(
+                    text = stringResource(R.string.sing_up),
+                    onClick = { /*TODO: open Sign Up screen*/ },
+                    textStyle = MaterialTheme.typography.bodySmall.copy(
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center
+                    ),
+                    modifier = Modifier.padding(bottom = MaterialTheme.dimens.small)
+                )
 
             }
 
@@ -143,7 +198,7 @@ private fun PasswordInputField() {
     var isPasswordInvisible by remember { mutableStateOf(true) }
 
     AppOutlinedEditTextField(
-        modifier = Modifier.padding(top = 16.dp),
+        modifier = Modifier.padding(top = MaterialTheme.dimens.medium),
         value = password,
         onValueChange = { password = it },
         label = { OutlinedHintText(text = stringResource(R.string.password)) },

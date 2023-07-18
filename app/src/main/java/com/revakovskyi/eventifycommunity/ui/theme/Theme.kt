@@ -8,6 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import com.revakovskyi.core.presentation.ui.theme.AppShapes
 import com.revakovskyi.core.presentation.ui.theme.AppTypography
+import com.revakovskyi.core.presentation.ui.theme.Dimens
+import com.revakovskyi.core.presentation.ui.theme.LocalDimens
 import com.revakovskyi.core.presentation.ui.theme.darkBackground
 import com.revakovskyi.core.presentation.ui.theme.darkError
 import com.revakovskyi.core.presentation.ui.theme.darkErrorContainer
@@ -153,7 +155,9 @@ fun EventifyCommunityTheme(
         if (!useDarkTheme) LightColors
         else DarkColors
 
-    CompositionLocalProvider {
+    CompositionLocalProvider(
+        LocalDimens provides Dimens()
+    ) {
         MaterialTheme(
             colorScheme = colors,
             shapes = AppShapes,

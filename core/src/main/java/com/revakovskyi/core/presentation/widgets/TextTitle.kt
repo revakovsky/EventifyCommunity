@@ -12,7 +12,7 @@ import com.revakovskyi.core.presentation.ui.theme.AppTypography
 fun TextTitle(
     modifier: Modifier = Modifier,
     text: String,
-    style: TextStyle = AppTypography.titleLarge,
+    style: TextStyle = AppTypography.titleMedium,
     textColor: Color = MaterialTheme.colorScheme.primary,
 ) {
 

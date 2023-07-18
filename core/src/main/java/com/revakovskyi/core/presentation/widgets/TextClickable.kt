@@ -10,8 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import com.revakovskyi.core.presentation.ui.theme.AppTypography
 import com.revakovskyi.core.presentation.ui.theme.dimens
 
 @Composable
@@ -19,12 +19,10 @@ fun TextClickable(
     modifier: Modifier = Modifier,
     text: String,
     onClick: () -> Unit,
-    textAlign: TextAlign = TextAlign.End,
+    textStyle: TextStyle = MaterialTheme.typography.bodySmall,
+    textAlign: TextAlign = TextAlign.Center,
     textColor: Color = MaterialTheme.colorScheme.onBackground,
-    textStyle: TextStyle = AppTypography.labelLarge.copy(
-        textAlign = textAlign,
-        color = textColor
-    ),
+    fontWeight: FontWeight = FontWeight.Normal,
 ) {
 
     ClickableText(
@@ -37,7 +35,11 @@ fun TextClickable(
                 top = MaterialTheme.dimens.small,
                 end = MaterialTheme.dimens.medium
             ),
-        style = textStyle,
+        style = textStyle.copy(
+            fontWeight = fontWeight,
+            textAlign = textAlign,
+            color = textColor
+        ),
     )
 
 }

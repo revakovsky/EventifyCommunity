@@ -8,7 +8,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import com.revakovskyi.core.presentation.ui.theme.AppTypography
 import com.revakovskyi.core.presentation.ui.theme.dimens
 
 @Composable
@@ -37,7 +36,7 @@ fun ButtonRegular(
     ) {
         TextRegular(
             text = buttonText,
-            style = AppTypography.bodyMedium.copy(
+            style = MaterialTheme.typography.bodyMedium.copy(
                 fontWeight = FontWeight.Bold
             )
         )

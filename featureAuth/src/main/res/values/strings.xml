@@ -3,7 +3,7 @@
 
     <string name="logo_icon">"Logo icon"</string>
     <string name="welcome">Welcome</string>
-    <string name="please_sing_in_to_continue">Please, Sing In to continue</string>
+    <string name="please_sign_in_to_continue">Please, Sign In to continue</string>
     <string name="phone_or_email">Phone or Email</string>
     <string name="login_example">+380.. or mailbox@mail.com</string>
     <string name="person_icon">Person icon</string>
@@ -18,7 +18,7 @@
     <string name="google">Google</string>
     <string name="or_sign_in_using">Or Sign In using</string>
     <string name="sign_in">Sign In</string>
-    <string name="sing_up">Sing Up</string>
+    <string name="sign_up">Sign Up</string>
     <string name="don_t_have_an_account">Don\'t have an account?</string>
 
 </resources>

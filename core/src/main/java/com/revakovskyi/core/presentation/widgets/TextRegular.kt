@@ -6,13 +6,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
-import com.revakovskyi.core.presentation.ui.theme.AppTypography
 
 @Composable
 fun TextRegular(
     modifier: Modifier = Modifier,
     text: String,
-    style: TextStyle = AppTypography.bodyMedium,
+    style: TextStyle = MaterialTheme.typography.bodySmall,
     textColor: Color = MaterialTheme.colorScheme.onBackground,
 ) {
 

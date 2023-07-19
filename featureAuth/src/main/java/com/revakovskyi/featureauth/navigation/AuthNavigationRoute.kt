@@ -10,7 +10,8 @@ import com.revakovskyi.core.navigation.MainRoutes
 import com.revakovskyi.core.navigation.NavigationRoute
 import com.revakovskyi.featureauth.presentation.AuthScreen
 import com.revakovskyi.featureauth.presentation.AuthScreen2
-import com.revakovskyi.featureauth.presentation.screens.SingInScreen
+import com.revakovskyi.featureauth.presentation.screens.SignInScreen
+import com.revakovskyi.featureauth.presentation.screens.SignUpScreen
 import javax.inject.Inject
 
 interface AuthNavigationRoute : NavigationRoute
@@ -27,7 +28,7 @@ internal class AuthNavigationRouteImpl @Inject constructor() : AuthNavigationRou
 
     override fun registerRoute(
         navGraphBuilder: NavGraphBuilder,
-        navHostController: NavHostController
+        navHostController: NavHostController,
     ) {
         navGraphBuilder.navigation(
             startDestination = firstsScreenRoute,
@@ -35,7 +36,11 @@ internal class AuthNavigationRouteImpl @Inject constructor() : AuthNavigationRou
         ) {
 
             composable(route = firstsScreenRoute) {
-                SingInScreen(navController = navHostController)
+                SignInScreen(navController = navHostController)
+            }
+
+            composable(route = Screens.SingUpScreen.route) {
+                SignUpScreen(navController = navHostController)
             }
 
             composable(route = Screens.AuthScreen.route) {

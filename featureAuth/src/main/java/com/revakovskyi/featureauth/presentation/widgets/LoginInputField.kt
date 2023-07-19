@@ -56,7 +56,7 @@ fun LoginInputField() {
         isError = !isLoginCorrect,
         supportingText = {
             if (!isLoginCorrect) {
-                OutlinedHintText(text = "Login is incorrect!")
+                OutlinedHintText(text = stringResource(R.string.login_is_incorrect))
             }
         },
     )

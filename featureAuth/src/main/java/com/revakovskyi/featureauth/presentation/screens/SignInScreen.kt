@@ -33,11 +33,12 @@ import com.revakovskyi.core.presentation.widgets.TextRegular
 import com.revakovskyi.core.presentation.widgets.TextTitle
 import com.revakovskyi.core.presentation.widgets.TextWithHorizontalBar
 import com.revakovskyi.featureauth.R
+import com.revakovskyi.featureauth.navigation.Screens
 import com.revakovskyi.featureauth.presentation.widgets.LoginInputField
 import com.revakovskyi.featureauth.presentation.widgets.PasswordInputField
 
 @Composable
-fun SingInScreen(
+fun SignInScreen(
     modifier: Modifier = Modifier,
     navController: NavController,
 ) {
@@ -121,7 +122,7 @@ fun SingInScreen(
 
                 TextClickable(
                     text = stringResource(R.string.sign_up),
-                    onClick = { /*TODO: open Sign Up screen*/ },
+                    onClick = { navController.navigate(Screens.SingUpScreen.route) },
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(bottom = MaterialTheme.dimens.small)
                 )
@@ -136,6 +137,6 @@ fun SingInScreen(
 
 @Composable
 @DivicePreviews
-fun ShowSingInScreen() {
-    SingInScreen(navController = rememberNavController())
+fun ShowSignInScreen() {
+    SignInScreen(navController = rememberNavController())
 }

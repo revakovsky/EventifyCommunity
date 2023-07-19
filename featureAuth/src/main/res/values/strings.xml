@@ -20,5 +20,11 @@
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
     <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="login_is_incorrect">Login is incorrect!</string>
+    <string name="name">Name</string>
+    <string name="enter_your_name">Enter your name..</string>
+    <string name="the_input_text_is_incorrect">The input text is incorrect!</string>
+    <string name="enter_your_surname">Enter your surname..</string>
+    <string name="surname">Surname</string>
 
 </resources>

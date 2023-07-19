@@ -37,6 +37,7 @@ import com.revakovskyi.featureauth.navigation.Screens
 import com.revakovskyi.featureauth.presentation.widgets.LoginInputField
 import com.revakovskyi.featureauth.presentation.widgets.PasswordInputField
 
+@Suppress("LongMethod")
 @Composable
 fun SignInScreen(
     modifier: Modifier = Modifier,

@@ -72,11 +72,16 @@ ver_FrebaseAuth             = "22.0.0"
 
 [plugins]
 
+# Android
 android-application  = { id = "com.android.application", version.ref = "ver_AndroidApplication" }
 android-library      = { id = "com.android.library", version.ref = "ver_AndroidApplication" }
+
+# Kotlin
 kotlin-android       = { id = "org.jetbrains.kotlin.android", version.ref = "ver_KotlinAndroid" }
 kotlin-ksp           = { id = "com.google.devtools.ksp", version.ref = "ver_KotlinKsp" }
 kotlin-jvm           = { id = "org.jetbrains.kotlin.jvm", version.ref = "ver_KotlinJvm" }
+
+# Hilt
 hilt                 = { id = "com.google.dagger.hilt.android", version.ref = "ver_Hilt" }
 
 # --------------------------------------------------------------------------------------------------

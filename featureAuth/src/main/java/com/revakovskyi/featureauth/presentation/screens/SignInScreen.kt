@@ -37,7 +37,7 @@ import com.revakovskyi.featureauth.navigation.Screens
 import com.revakovskyi.featureauth.presentation.widgets.LoginInputField
 import com.revakovskyi.featureauth.presentation.widgets.PasswordInputField
 
-@Suppress("LongMethod", "FunctionNaming", "MagicNumber", "NewLineAtEndOfFile")
+@Suppress("LongMethod", "FunctionNaming", "MagicNumber")
 @Composable
 fun SignInScreen(
     modifier: Modifier = Modifier,
@@ -136,7 +136,7 @@ fun SignInScreen(
 
 }
 
-@Suppress("LongMethod", "FunctionNaming", "MagicNumber", "NewLineAtEndOfFile")
+@Suppress("LongMethod", "FunctionNaming", "MagicNumber")
 @Composable
 @DivicePreviews
 fun ShowSignInScreen() {

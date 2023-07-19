@@ -23,6 +23,7 @@ import com.revakovskyi.core.presentation.widgets.TextTitle
 import com.revakovskyi.featureauth.R
 import com.revakovskyi.featureauth.presentation.widgets.NameInputField
 
+@Suppress("LongMethod", "FunctionNaming", "MagicNumber", "NewLineAtEndOfFile")
 @Composable
 fun SignUpScreen(
     modifier: Modifier = Modifier,
@@ -78,6 +79,7 @@ fun SignUpScreen(
 
 }
 
+@Suppress("LongMethod", "FunctionNaming", "MagicNumber", "NewLineAtEndOfFile")
 @Composable
 @DivicePreviews
 fun ShowSingUpScreen() {

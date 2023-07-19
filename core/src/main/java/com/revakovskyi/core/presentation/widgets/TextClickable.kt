@@ -24,6 +24,7 @@ import com.revakovskyi.core.presentation.ui.theme.dimens
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+@Suppress("LongParameterList")
 @Composable
 fun TextClickable(
     modifier: Modifier = Modifier,

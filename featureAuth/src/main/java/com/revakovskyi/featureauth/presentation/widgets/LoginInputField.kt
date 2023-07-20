@@ -23,11 +23,15 @@ fun LoginInputField() {
         onValueChange = { inputText ->
             login = inputText
 
+            // TODO: create verification and put it into the domain
             if (login.startsWith('0')) {
                 isLoginCorrect = false
+                loginTipVisibility = true
             }
 
-            if (login.isNotEmpty()) loginTipVisibility = true
+            if (login.isNotEmpty() && (login.contains('@') || login.contains("+380"))) {
+                loginTipVisibility = true
+            }
 
             if (inputText.isEmpty()) {
                 isLoginCorrect = true
@@ -38,7 +42,7 @@ fun LoginInputField() {
         placeholder = { OutlinedHintText(text = stringResource(R.string.login_example)) },
         leadingIcon = {
             Icon(
-                painter = painterResource(id = R.drawable.person),
+                painter = painterResource(id = R.drawable.login),
                 contentDescription = stringResource(R.string.person_icon)
             )
         },

@@ -26,5 +26,11 @@
     <string name="the_input_text_is_incorrect">The input text is incorrect!</string>
     <string name="enter_your_surname">Enter your surname..</string>
     <string name="surname">Surname</string>
+    <string name="create_your_account">Create your Account</string>
+    <string name="example_mail">example@mail.com</string>
+    <string name="email">Email</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="confirm_terms_of_use">By registering, you are agreeing to our Terms of Use and Privacy Policy</string>
+    <string name="already_have_an_account">Already have an account?</string>
 
 </resources>

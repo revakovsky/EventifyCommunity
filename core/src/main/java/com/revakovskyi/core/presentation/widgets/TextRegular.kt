@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 
 @Composable
 fun TextRegular(
@@ -13,12 +14,13 @@ fun TextRegular(
     text: String,
     style: TextStyle = MaterialTheme.typography.bodySmall,
     textColor: Color = MaterialTheme.colorScheme.onBackground,
+    textAlign: TextAlign = TextAlign.Start,
 ) {
 
     Text(
         modifier = modifier,
         text = text,
-        style = style,
+        style = style.copy(textAlign = textAlign),
         color = textColor,
     )
 

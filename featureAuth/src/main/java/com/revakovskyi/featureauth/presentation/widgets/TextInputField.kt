@@ -1,8 +1,6 @@
 package com.revakovskyi.featureauth.presentation.widgets
 
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -12,13 +10,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import com.revakovskyi.core.presentation.ui.theme.dimens
 import com.revakovskyi.core.presentation.widgets.AppOutlinedEditTextField
 import com.revakovskyi.core.presentation.widgets.OutlinedHintText
 import com.revakovskyi.featureauth.R
 
 @Composable
-fun NameInputField(
+fun TextInputField(
     label: String = stringResource(R.string.name),
     placeholder: String = stringResource(R.string.enter_your_name),
     icon: Painter = painterResource(id = R.drawable.person),
@@ -28,7 +25,7 @@ fun NameInputField(
     var isNameCorrect by remember { mutableStateOf(true) }
 
     AppOutlinedEditTextField(
-        modifier = Modifier.padding(top = MaterialTheme.dimens.medium),
+        modifier = Modifier,
         value = name,
         onValueChange = { inputText ->
             name = inputText

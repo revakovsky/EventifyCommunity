@@ -124,7 +124,7 @@ fun SignInScreen(
                     text = stringResource(R.string.sign_up),
                     onClick = { navController.navigate(Screens.SingUpScreen.route) },
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(bottom = MaterialTheme.dimens.small)
+                    modifier = Modifier.padding(bottom = MaterialTheme.dimens.medium)
                 )
 
             }

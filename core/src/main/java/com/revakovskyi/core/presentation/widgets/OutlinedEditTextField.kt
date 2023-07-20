@@ -104,6 +104,8 @@ fun AppOutlinedEditTextField(
 
             focusedLeadingIconColor = MaterialTheme.colorScheme.primary,
             unfocusedLeadingIconColor = MaterialTheme.colorScheme.outline,
+
+            focusedTrailingIconColor = MaterialTheme.colorScheme.tertiary,
         ),
     )
 

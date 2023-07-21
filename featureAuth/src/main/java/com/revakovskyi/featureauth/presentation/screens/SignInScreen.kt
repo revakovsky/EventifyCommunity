@@ -14,6 +14,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -42,6 +46,7 @@ fun SignInScreen(
     modifier: Modifier = Modifier,
     navController: NavController,
 ) {
+    var emailOrPhone by remember { mutableStateOf("") }
 
     Box(
         modifier = modifier
@@ -67,10 +72,7 @@ fun SignInScreen(
                     .padding(top = MaterialTheme.dimens.medium)
             )
 
-            TextTitle(
-                modifier = Modifier.padding(top = MaterialTheme.dimens.large),
-                text = stringResource(R.string.welcome)
-            )
+            TextTitle(text = stringResource(R.string.welcome))
 
             TextRegular(
                 modifier = Modifier.padding(MaterialTheme.dimens.medium),
@@ -84,7 +86,9 @@ fun SignInScreen(
                 modifier = Modifier.fillMaxWidth()
             ) {
 
-                LoginInputField()
+                LoginInputField(
+                    enteredText = { text -> emailOrPhone = text }
+                )
 
                 PasswordInputField()
 

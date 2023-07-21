@@ -1,5 +1,6 @@
 package com.revakovskyi.core.presentation.widgets
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -7,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import com.revakovskyi.core.presentation.ui.theme.AppTypography
+import com.revakovskyi.core.presentation.ui.theme.dimens
 
 @Composable
 fun TextTitle(
@@ -17,7 +19,7 @@ fun TextTitle(
 ) {
 
     Text(
-        modifier = modifier,
+        modifier = modifier.padding(top = MaterialTheme.dimens.large),
         text = text,
         style = style,
         color = textColor

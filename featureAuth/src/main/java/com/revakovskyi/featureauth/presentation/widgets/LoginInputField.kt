@@ -13,7 +13,10 @@ import com.revakovskyi.core.presentation.widgets.OutlinedHintText
 import com.revakovskyi.featureauth.R
 
 @Composable
-fun LoginInputField() {
+fun LoginInputField(
+    icon: Int = R.drawable.login,
+    enteredText: (String) -> Unit,
+) {
     var login by remember { mutableStateOf("") }
     var loginTipVisibility by remember { mutableStateOf(false) }
     var isLoginCorrect by remember { mutableStateOf(true) }
@@ -22,6 +25,7 @@ fun LoginInputField() {
         value = login,
         onValueChange = { inputText ->
             login = inputText
+            enteredText(login)
 
             // TODO: create verification and put it into the domain
             if (login.startsWith('0')) {
@@ -42,7 +46,7 @@ fun LoginInputField() {
         placeholder = { OutlinedHintText(text = stringResource(R.string.login_example)) },
         leadingIcon = {
             Icon(
-                painter = painterResource(id = R.drawable.login),
+                painter = painterResource(id = icon),
                 contentDescription = stringResource(R.string.person_icon)
             )
         },

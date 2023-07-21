@@ -16,6 +16,10 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -36,6 +40,8 @@ import com.revakovskyi.core.presentation.widgets.TextRegular
 import com.revakovskyi.core.presentation.widgets.TextTitle
 import com.revakovskyi.core.presentation.widgets.TextWithHorizontalBar
 import com.revakovskyi.featureauth.R
+import com.revakovskyi.featureauth.navigation.Screens
+import com.revakovskyi.featureauth.presentation.widgets.LoginInputField
 import com.revakovskyi.featureauth.presentation.widgets.PasswordInputField
 import com.revakovskyi.featureauth.presentation.widgets.TextInputField
 
@@ -45,6 +51,7 @@ fun SignUpScreen(
     navController: NavController,
 ) {
     val scrollState = rememberScrollState()
+    var emailOrPhone by remember { mutableStateOf("") }
 
     Box(
         modifier = modifier
@@ -63,10 +70,7 @@ fun SignUpScreen(
                 .padding(MaterialTheme.dimens.medium)
         ) {
 
-            TextTitle(
-                modifier = Modifier.padding(top = MaterialTheme.dimens.large),
-                text = stringResource(R.string.sign_up)
-            )
+            TextTitle(text = stringResource(R.string.sign_up))
 
             TextRegular(
                 modifier = Modifier.padding(vertical = MaterialTheme.dimens.large),
@@ -88,10 +92,9 @@ fun SignUpScreen(
                     icon = painterResource(id = R.drawable.double_person)
                 )
 
-                TextInputField(
-                    label = stringResource(R.string.email),
-                    placeholder = stringResource(R.string.example_mail),
-                    icon = painterResource(id = R.drawable.email)
+                LoginInputField(
+                    icon = R.drawable.email,
+                    enteredText = { text -> emailOrPhone = text }
                 )
 
                 PasswordInputField(imeAction = ImeAction.Next)
@@ -112,7 +115,11 @@ fun SignUpScreen(
 
                 ButtonRegular(
                     buttonText = stringResource(R.string.sign_up),
-                    onClick = { /*TODO: process click*/ }
+                    onClick = {
+                        navController.navigate(
+                            Screens.PhoneVerificationScreen.arguments(emailOrPhone)
+                        )
+                    }
                 )
 
                 TextWithHorizontalBar(

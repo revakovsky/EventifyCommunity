@@ -10,6 +10,7 @@ import com.revakovskyi.core.navigation.MainRoutes
 import com.revakovskyi.core.navigation.NavigationRoute
 import com.revakovskyi.featureauth.presentation.AuthScreen
 import com.revakovskyi.featureauth.presentation.AuthScreen2
+import com.revakovskyi.featureauth.presentation.screens.PhoneVerificationScreen
 import com.revakovskyi.featureauth.presentation.screens.SignInScreen
 import com.revakovskyi.featureauth.presentation.screens.SignUpScreen
 import javax.inject.Inject
@@ -45,6 +46,18 @@ internal class AuthNavigationRouteImpl @Inject constructor() : AuthNavigationRou
 
             composable(route = Screens.AuthScreen.route) {
                 AuthScreen(navController = navHostController)
+            }
+
+            composable(
+                route = Screens.PhoneVerificationScreen.route,
+                arguments = listOf(
+                    navArgument(PHONE_NUMBER_ARGUMENT_KEY) { type = NavType.StringType }
+                )
+            ) {
+                PhoneVerificationScreen(
+                    navController = navHostController,
+                    phoneNumber = it.arguments?.getString(PHONE_NUMBER_ARGUMENT_KEY)
+                )
             }
 
             composable(

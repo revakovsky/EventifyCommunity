@@ -5,6 +5,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import com.revakovskyi.core.R
 
@@ -38,8 +39,9 @@ val AppTypography = Typography(
         fontFamily = Nunito,
         fontWeight = FontWeight.ExtraBold,
         fontSize = 48.sp,
-        lineHeight = 28.sp,
-        letterSpacing = 0.sp
+        lineHeight = 48.sp,
+        letterSpacing = 0.sp,
+        textAlign = TextAlign.Center
     ),
 
     titleSmall = TextStyle(
@@ -47,15 +49,16 @@ val AppTypography = Typography(
         fontWeight = FontWeight.ExtraBold,
         fontSize = 32.sp,
         lineHeight = 28.sp,
-        letterSpacing = 0.sp
+        letterSpacing = 0.sp,
+        textAlign = TextAlign.Center
     ),
 
     bodyLarge = TextStyle(
         fontFamily = Nunito,
         fontWeight = FontWeight.Normal,
         fontSize = 24.sp,
-        lineHeight = 24.sp,
-        letterSpacing = 0.5.sp
+        lineHeight = 32.sp,
+        letterSpacing = 0.5.sp,
     ),
 
     bodyMedium = TextStyle(

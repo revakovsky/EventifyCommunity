@@ -4,8 +4,8 @@
     <string name="logo_icon">"Logo icon"</string>
     <string name="welcome">Welcome</string>
     <string name="please_sign_in_to_continue">Please, Sign In to continue</string>
-    <string name="phone_or_email">Phone or Email</string>
-    <string name="login_example">+380.. or mailbox@mail.com</string>
+    <string name="phone_or_email">Email or Phone number</string>
+    <string name="login_example">mailbox@mail.com or +380..</string>
     <string name="person_icon">Person icon</string>
     <string name="password">Password</string>
     <string name="correct">Correct</string>
@@ -27,10 +27,10 @@
     <string name="enter_your_surname">Enter your surname..</string>
     <string name="surname">Surname</string>
     <string name="create_your_account">Create your Account</string>
-    <string name="example_mail">example@mail.com</string>
-    <string name="email">Email</string>
     <string name="confirm_password">Confirm password</string>
     <string name="confirm_terms_of_use">By registering, you are agreeing to our Terms of Use and Privacy Policy</string>
     <string name="already_have_an_account">Already have an account?</string>
+    <string name="verify_phone_number">Verify phone number</string>
+    <string name="the_code_was_sent_to_the_number">The code was sent to the number</string>
 
 </resources>

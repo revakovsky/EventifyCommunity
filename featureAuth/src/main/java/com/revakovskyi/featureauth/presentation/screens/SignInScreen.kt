@@ -72,7 +72,10 @@ fun SignInScreen(
                     .padding(top = MaterialTheme.dimens.medium)
             )
 
-            TextTitle(text = stringResource(R.string.welcome))
+            TextTitle(
+                modifier = Modifier.padding(top = MaterialTheme.dimens.large),
+                text = stringResource(R.string.welcome)
+            )
 
             TextRegular(
                 modifier = Modifier.padding(MaterialTheme.dimens.medium),

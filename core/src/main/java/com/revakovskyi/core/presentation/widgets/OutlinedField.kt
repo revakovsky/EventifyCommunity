@@ -24,7 +24,6 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.Dp
-import com.revakovskyi.core.presentation.ui.theme.AppShapes
 import com.revakovskyi.core.presentation.ui.theme.AppTypography
 import com.revakovskyi.core.presentation.ui.theme.dimens
 import kotlinx.coroutines.launch
@@ -33,13 +32,14 @@ import kotlinx.coroutines.launch
     ExperimentalComposeUiApi::class, ExperimentalFoundationApi::class,
 )
 @Composable
-fun AppOutlinedEditTextField(
+fun OutlinedField(
     modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
     label: @Composable (() -> Unit)? = null,
     placeholder: @Composable (() -> Unit)? = null,
     maxWidth: Dp = MaterialTheme.dimens.fieldMaxWidth,
+    horizontalPadding: Dp = MaterialTheme.dimens.medium,
     enabled: Boolean = true,
     readOnly: Boolean = false,
     textStyle: TextStyle = AppTypography.bodySmall.copy(color = MaterialTheme.colorScheme.onBackground),
@@ -53,7 +53,7 @@ fun AppOutlinedEditTextField(
     autoCorrect: Boolean = true,
     singleLine: Boolean = true,
     maxLines: Int = if (singleLine) 1 else Int.MAX_VALUE,
-    shape: Shape = AppShapes.medium,
+    shape: Shape = MaterialTheme.shapes.medium,
 ) {
     val controller = LocalSoftwareKeyboardController.current
     val bringIntoViewRequester = remember { BringIntoViewRequester() }
@@ -66,7 +66,7 @@ fun AppOutlinedEditTextField(
         placeholder = placeholder,
         modifier = modifier
             .widthIn(maxWidth)
-            .padding(horizontal = MaterialTheme.dimens.medium)
+            .padding(horizontal = horizontalPadding)
             .bringIntoViewRequester(bringIntoViewRequester)
             .onFocusEvent { focusState ->
                 if (focusState.isFocused) {
@@ -89,7 +89,10 @@ fun AppOutlinedEditTextField(
             autoCorrect = autoCorrect,
             capitalization = KeyboardCapitalization.None
         ),
-        keyboardActions = KeyboardActions(onDone = { controller?.hide() }),
+        keyboardActions = KeyboardActions(
+            onDone = { controller?.hide() },
+            onNext = { controller?.show() }
+        ),
         singleLine = singleLine,
         maxLines = maxLines,
         shape = shape,

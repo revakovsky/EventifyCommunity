@@ -15,7 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import com.revakovskyi.core.presentation.widgets.AppOutlinedEditTextField
+import com.revakovskyi.core.presentation.widgets.OutlinedField
 import com.revakovskyi.core.presentation.widgets.OutlinedHintText
 import com.revakovskyi.featureauth.R
 
@@ -29,7 +29,7 @@ fun PasswordInputField(
     var isPasswordInvisible by remember { mutableStateOf(true) }
 
     // TODO: create verification and put it into the domain
-    AppOutlinedEditTextField(
+    OutlinedField(
         modifier = modifier,
         value = password,
         onValueChange = { password = it },

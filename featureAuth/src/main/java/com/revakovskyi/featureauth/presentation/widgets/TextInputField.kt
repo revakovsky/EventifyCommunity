@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import com.revakovskyi.core.presentation.widgets.AppOutlinedEditTextField
+import com.revakovskyi.core.presentation.widgets.OutlinedField
 import com.revakovskyi.core.presentation.widgets.OutlinedHintText
 import com.revakovskyi.featureauth.R
 
@@ -24,7 +24,7 @@ fun TextInputField(
     var nameTipVisibility by remember { mutableStateOf(false) }
     var isNameCorrect by remember { mutableStateOf(true) }
 
-    AppOutlinedEditTextField(
+    OutlinedField(
         modifier = Modifier,
         value = name,
         onValueChange = { inputText ->

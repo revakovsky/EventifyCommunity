@@ -8,7 +8,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import com.revakovskyi.core.presentation.widgets.AppOutlinedEditTextField
+import com.revakovskyi.core.presentation.widgets.OutlinedField
 import com.revakovskyi.core.presentation.widgets.OutlinedHintText
 import com.revakovskyi.featureauth.R
 
@@ -21,7 +21,7 @@ fun LoginInputField(
     var loginTipVisibility by remember { mutableStateOf(false) }
     var isLoginCorrect by remember { mutableStateOf(true) }
 
-    AppOutlinedEditTextField(
+    OutlinedField(
         value = login,
         onValueChange = { inputText ->
             login = inputText

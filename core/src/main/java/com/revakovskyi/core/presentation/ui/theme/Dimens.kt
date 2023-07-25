@@ -18,6 +18,7 @@ data class Dimens(
 
     val fieldMaxWidth: Dp = 400.dp,
     val buttonWidth: Dp = 200.dp,
+    val iconSize: Dp = 150.dp,
 )
 
 val LocalDimens = compositionLocalOf { Dimens() }

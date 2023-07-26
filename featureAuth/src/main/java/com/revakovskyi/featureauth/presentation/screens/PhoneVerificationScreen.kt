@@ -10,16 +10,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -36,18 +33,14 @@ import com.revakovskyi.core.presentation.widgets.TextTitle
 import com.revakovskyi.featureauth.R
 import com.revakovskyi.featureauth.presentation.widgets.OtpTextFields
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun PhoneVerificationScreen(
     modifier: Modifier = Modifier,
     navController: NavController,
     phoneNumber: String?,
 ) {
-    val keyboardController = LocalSoftwareKeyboardController.current
     var otpText by remember { mutableStateOf("") }
     var isLoadingAnimationVisible by remember { mutableStateOf(false) }
-
-    LaunchedEffect(Unit) { keyboardController?.hide() }
 
     Box(
         modifier = modifier

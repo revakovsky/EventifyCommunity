@@ -15,8 +15,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.focus.onFocusEvent
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
@@ -56,6 +58,8 @@ fun OutlinedField(
     shape: Shape = MaterialTheme.shapes.medium,
 ) {
     val controller = LocalSoftwareKeyboardController.current
+    val focusManager = LocalFocusManager.current
+
     val bringIntoViewRequester = remember { BringIntoViewRequester() }
     val coroutineScope = rememberCoroutineScope()
 
@@ -91,7 +95,7 @@ fun OutlinedField(
         ),
         keyboardActions = KeyboardActions(
             onDone = { controller?.hide() },
-            onNext = { controller?.show() }
+            onNext = { focusManager.moveFocus(focusDirection = FocusDirection.Next) }
         ),
         singleLine = singleLine,
         maxLines = maxLines,

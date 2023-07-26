@@ -9,14 +9,18 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -33,12 +37,8 @@ fun OtpTextFields(
     otpCount: Int = 6,
     onOtpTextChange: (String, Boolean) -> Unit,
 ) {
-    val keyboardController = LocalSoftwareKeyboardController.current
-
-    LaunchedEffect(key1 = otpText.length == otpCount) {
-        keyboardController?.hide()
-        if (otpText.length < otpCount) keyboardController?.show()
-    }
+    val focusManager = LocalFocusManager.current
+    var isOtpFull by remember { mutableStateOf(false) }
 
     BasicTextField(
         modifier = modifier,
@@ -48,15 +48,21 @@ fun OtpTextFields(
         ),
         onValueChange = { textFieldValue ->
             if (textFieldValue.text.length <= otpCount) {
+                isOtpFull = textFieldValue.text.length == otpCount
+                if (isOtpFull) focusManager.clearFocus()
+
                 onOtpTextChange.invoke(
                     textFieldValue.text,
-                    textFieldValue.text.length == otpCount
+                    isOtpFull
                 )
             }
         },
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.NumberPassword,
             imeAction = if (otpText.length < otpCount) ImeAction.Next else ImeAction.Done
+        ),
+        keyboardActions = KeyboardActions(
+            onDone = { focusManager.clearFocus() },
         ),
         decorationBox = {
             Row(

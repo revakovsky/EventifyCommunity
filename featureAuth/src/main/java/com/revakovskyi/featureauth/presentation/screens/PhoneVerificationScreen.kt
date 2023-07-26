@@ -22,12 +22,15 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.revakovskyi.core.presentation.ui.DivicePreviews
 import com.revakovskyi.core.presentation.ui.theme.dimens
 import com.revakovskyi.core.presentation.widgets.BackButton
+import com.revakovskyi.core.presentation.widgets.LoadingAnimation
+import com.revakovskyi.core.presentation.widgets.TextClickable
 import com.revakovskyi.core.presentation.widgets.TextRegular
 import com.revakovskyi.core.presentation.widgets.TextTitle
 import com.revakovskyi.featureauth.R
@@ -42,6 +45,7 @@ fun PhoneVerificationScreen(
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
     var otpText by remember { mutableStateOf("") }
+    var isLoadingAnimationVisible by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) { keyboardController?.hide() }
 
@@ -100,7 +104,24 @@ fun PhoneVerificationScreen(
                 otpText = otpText,
                 onOtpTextChange = { enteredCode, isOtpFull ->
                     otpText = enteredCode
+                    isLoadingAnimationVisible = isOtpFull
                 }
+            )
+
+            TextRegular(
+                text = stringResource(R.string.didn_t_receive_the_code),
+                modifier = Modifier.padding(top = MaterialTheme.dimens.large)
+            )
+
+            TextClickable(
+                text = stringResource(R.string.resend_code),
+                onClick = { /*TODO: create an action for the resend the code*/ },
+                fontWeight = FontWeight.Bold,
+            )
+
+            LoadingAnimation(
+                modifier = Modifier.padding(top = MaterialTheme.dimens.largest),
+                isVisible = isLoadingAnimationVisible
             )
 
         }

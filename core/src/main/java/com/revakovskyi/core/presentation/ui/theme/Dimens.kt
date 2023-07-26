@@ -15,6 +15,7 @@ data class Dimens(
     val medium: Dp = 16.dp,
     val large: Dp = 32.dp,
     val extraLarge: Dp = 64.dp,
+    val largest: Dp = 128.dp,
 
     val fieldMaxWidth: Dp = 400.dp,
     val buttonWidth: Dp = 200.dp,

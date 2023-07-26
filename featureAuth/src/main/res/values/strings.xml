@@ -32,5 +32,7 @@
     <string name="already_have_an_account">Already have an account?</string>
     <string name="verify_phone_number">Verify phone number</string>
     <string name="the_code_was_sent_to_the_number">The code was sent to the number</string>
+    <string name="didn_t_receive_the_code">Didn\'t receive the code?</string>
+    <string name="resend_code">Resend code</string>
 
 </resources>

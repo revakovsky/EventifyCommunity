@@ -57,6 +57,7 @@ fun SignUpScreen(
 ) {
     val scrollState = rememberScrollState()
     var emailOrPhone by remember { mutableStateOf("") }
+    var isEmailOrPhoneCorrect by remember { mutableStateOf(true) }
 
     LaunchedEffect(Unit) { scrollState.scrollTo(0) }
 
@@ -113,7 +114,8 @@ fun SignUpScreen(
 
                 LoginInputField(
                     icon = R.drawable.email,
-                    enteredText = { text -> emailOrPhone = text }
+                    isLoginCorrect = { isEmailOrPhoneCorrect },
+                    loginOrPhoneNumber = { text -> emailOrPhone = text }
                 )
 
                 PasswordInputField(imeAction = ImeAction.Next)

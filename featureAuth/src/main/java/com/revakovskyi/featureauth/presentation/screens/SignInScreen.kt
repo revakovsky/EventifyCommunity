@@ -28,8 +28,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
-import com.revakovskyi.core.presentation.ui.DivicePreviews
 import com.revakovskyi.core.presentation.ui.theme.dimens
 import com.revakovskyi.core.presentation.widgets.ButtonRegular
 import com.revakovskyi.core.presentation.widgets.TextClickable
@@ -40,13 +38,15 @@ import com.revakovskyi.featureauth.R
 import com.revakovskyi.featureauth.navigation.Screens
 import com.revakovskyi.featureauth.presentation.widgets.LoginInputField
 import com.revakovskyi.featureauth.presentation.widgets.PasswordInputField
+import com.revakovskyi.featureauth.viewModel.AuthViewModel
 
 @Composable
 fun SignInScreen(
     modifier: Modifier = Modifier,
     navController: NavController,
+    viewModel: AuthViewModel,
 ) {
-    var emailOrPhone by remember { mutableStateOf("") }
+    var loginOrPhoneNumber by remember { mutableStateOf("") }
 
     Box(
         modifier = modifier
@@ -90,7 +90,16 @@ fun SignInScreen(
             ) {
 
                 LoginInputField(
-                    enteredText = { text -> emailOrPhone = text }
+                    isLoginCorrect = { viewModel.isLoginValid },
+                    isError = viewModel.isLoginInvalid,
+                    loginOrPhoneNumber = { inputText ->
+                        viewModel.apply {
+                            verifyInputText(inputText)
+                            if (isLoginValid) {
+                                loginOrPhoneNumber = inputText
+                            }
+                        }
+                    }
                 )
 
                 PasswordInputField()
@@ -140,10 +149,4 @@ fun SignInScreen(
 
     }
 
-}
-
-@Composable
-@DivicePreviews
-fun ShowSignInScreen() {
-    SignInScreen(navController = rememberNavController())
 }

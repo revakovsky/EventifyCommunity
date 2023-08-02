@@ -1,5 +1,6 @@
 package com.revakovskyi.featureauth.navigation
 
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -13,6 +14,7 @@ import com.revakovskyi.featureauth.presentation.AuthScreen2
 import com.revakovskyi.featureauth.presentation.screens.PhoneVerificationScreen
 import com.revakovskyi.featureauth.presentation.screens.SignInScreen
 import com.revakovskyi.featureauth.presentation.screens.SignUpScreen
+import com.revakovskyi.featureauth.viewModel.AuthViewModel
 import javax.inject.Inject
 
 interface AuthNavigationRoute : NavigationRoute
@@ -37,15 +39,16 @@ internal class AuthNavigationRouteImpl @Inject constructor() : AuthNavigationRou
         ) {
 
             composable(route = firstsScreenRoute) {
-                SignInScreen(navController = navHostController)
+                val viewModel: AuthViewModel = hiltViewModel()
+
+                SignInScreen(
+                    navController = navHostController,
+                    viewModel = viewModel
+                )
             }
 
             composable(route = Screens.SingUpScreen.route) {
                 SignUpScreen(navController = navHostController)
-            }
-
-            composable(route = Screens.AuthScreen.route) {
-                AuthScreen(navController = navHostController)
             }
 
             composable(
@@ -58,6 +61,10 @@ internal class AuthNavigationRouteImpl @Inject constructor() : AuthNavigationRou
                     navController = navHostController,
                     phoneNumber = it.arguments?.getString(PHONE_NUMBER_ARGUMENT_KEY)
                 )
+            }
+
+            composable(route = Screens.AuthScreen.route) {
+                AuthScreen(navController = navHostController)
             }
 
             composable(

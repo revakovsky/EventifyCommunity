@@ -31,7 +31,7 @@ fun LoadingAnimation(
     modifier: Modifier = Modifier,
     isVisible: Boolean,
     circleSize: Dp = 25.dp,
-    circleColor: Color = MaterialTheme.colorScheme.tertiary,
+    circleColor: Color = MaterialTheme.colorScheme.tertiaryContainer,
     spaceBetween: Dp = MaterialTheme.dimens.small,
     travelDistance: Dp = 20.dp,
     oneRepeatAnimationDuration: Int = 1200,

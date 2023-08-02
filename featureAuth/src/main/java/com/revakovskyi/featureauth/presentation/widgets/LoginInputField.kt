@@ -15,32 +15,27 @@ import com.revakovskyi.featureauth.R
 @Composable
 fun LoginInputField(
     icon: Int = R.drawable.login,
-    enteredText: (String) -> Unit,
+    isLoginCorrect: () -> Boolean,
+    isError: Boolean = false,
+    loginOrPhoneNumber: (String) -> Unit,
 ) {
     var login by remember { mutableStateOf("") }
     var loginTipVisibility by remember { mutableStateOf(false) }
-    var isLoginCorrect by remember { mutableStateOf(true) }
+
+    val painterResourceId = when {
+        isLoginCorrect() -> R.drawable.tip
+        isError -> R.drawable.incorrect
+        else -> null
+    }
 
     OutlinedField(
         value = login,
         onValueChange = { inputText ->
             login = inputText
-            enteredText(login)
-
-            // TODO: create verification and put it into the domain
-            if (login.startsWith('0')) {
-                isLoginCorrect = false
-                loginTipVisibility = true
-            }
-
-            if (login.isNotEmpty() && (login.contains('@') || login.contains("+380"))) {
-                loginTipVisibility = true
-            }
-
-            if (inputText.isEmpty()) {
-                isLoginCorrect = true
-                loginTipVisibility = false
-            }
+            loginOrPhoneNumber(login)
+            loginTipVisibility =
+                if (inputText.isEmpty()) false
+                else isLoginCorrect()
         },
         label = { OutlinedHintText(text = stringResource(R.string.phone_or_email)) },
         placeholder = { OutlinedHintText(text = stringResource(R.string.login_example)) },
@@ -51,19 +46,22 @@ fun LoginInputField(
             )
         },
         trailingIcon = {
-            if (loginTipVisibility) {
-                Icon(
-                    painter = if (isLoginCorrect) painterResource(id = R.drawable.tip)
-                    else painterResource(id = R.drawable.incorrect),
-
-                    contentDescription = if (isLoginCorrect) stringResource(R.string.correct)
-                    else stringResource(R.string.incorrect),
-                )
+            if (login.isNotEmpty()) {
+                painterResourceId?.let {
+                    painterResource(id = it)
+                }?.let {
+                    Icon(
+                        painter = it,
+                        contentDescription = if (isLoginCorrect()) {
+                            stringResource(R.string.correct)
+                        } else stringResource(R.string.incorrect),
+                    )
+                }
             }
         },
-        isError = !isLoginCorrect,
+        isError = isError,
         supportingText = {
-            if (!isLoginCorrect) {
+            if (isError) {
                 OutlinedHintText(text = stringResource(R.string.login_is_incorrect))
             }
         },

@@ -94,7 +94,10 @@ fun OutlinedField(
             capitalization = KeyboardCapitalization.None
         ),
         keyboardActions = KeyboardActions(
-            onDone = { controller?.hide() },
+            onDone = {
+                controller?.hide()
+                focusManager.clearFocus()
+            },
             onNext = { focusManager.moveFocus(focusDirection = FocusDirection.Next) }
         ),
         singleLine = singleLine,
@@ -110,7 +113,7 @@ fun OutlinedField(
             unfocusedPlaceholderColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.7f),
 
             focusedLeadingIconColor = MaterialTheme.colorScheme.primary,
-            unfocusedLeadingIconColor = MaterialTheme.colorScheme.outline,
+            unfocusedLeadingIconColor = MaterialTheme.colorScheme.primary,
 
             focusedTrailingIconColor = MaterialTheme.colorScheme.tertiary,
         ),

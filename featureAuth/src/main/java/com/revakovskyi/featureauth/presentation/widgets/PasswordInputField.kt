@@ -3,6 +3,7 @@ package com.revakovskyi.featureauth.presentation.widgets
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -20,19 +21,25 @@ import com.revakovskyi.core.presentation.widgets.OutlinedHintText
 import com.revakovskyi.featureauth.R
 
 @Composable
-fun PasswordInputField(
+internal fun PasswordInputField(
     modifier: Modifier = Modifier,
+    isPasswordCorrect: () -> Boolean,
+    enteredPassword: (String) -> Unit,
     label: String = stringResource(R.string.password),
     imeAction: ImeAction = ImeAction.Done,
 ) {
     var password by remember { mutableStateOf("") }
     var isPasswordInvisible by remember { mutableStateOf(true) }
+    var passwordHintVisibility by remember { mutableStateOf(false) }
 
-    // TODO: create verification and put it into the domain
     OutlinedField(
         modifier = modifier,
         value = password,
-        onValueChange = { password = it },
+        onValueChange = { inputPassword ->
+            password = inputPassword
+            enteredPassword(password)
+            passwordHintVisibility = if (inputPassword.isEmpty()) false else !isPasswordCorrect()
+        },
         label = { OutlinedHintText(text = label) },
         placeholder = { OutlinedHintText(text = stringResource(R.string.password_example)) },
         leadingIcon = {
@@ -60,5 +67,13 @@ fun PasswordInputField(
         },
         imeAction = imeAction,
         autoCorrect = false,
+        supportingText = {
+            if (passwordHintVisibility) {
+                OutlinedHintText(
+                    text = stringResource(R.string.password_should_contain),
+                    style = MaterialTheme.typography.labelLarge
+                )
+            }
+        },
     )
 }

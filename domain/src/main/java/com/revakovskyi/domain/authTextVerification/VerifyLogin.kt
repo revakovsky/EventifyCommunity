@@ -1,4 +1,6 @@
-package com.revakovskyi.domain.textVerification
+package com.revakovskyi.domain.authTextVerification
+
+import com.revakovskyi.domain.models.Status
 
 internal class VerifyLogin {
 

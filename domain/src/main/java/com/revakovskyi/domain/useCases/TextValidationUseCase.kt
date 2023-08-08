@@ -1,10 +1,10 @@
 package com.revakovskyi.domain.useCases
 
-import com.revakovskyi.domain.textVerification.InputTextType
-import com.revakovskyi.domain.textVerification.Status
-import com.revakovskyi.domain.textVerification.VerifyLogin
-import com.revakovskyi.domain.textVerification.VerifyName
-import com.revakovskyi.domain.textVerification.VerifyPassword
+import com.revakovskyi.domain.authTextVerification.VerifyLogin
+import com.revakovskyi.domain.authTextVerification.VerifyName
+import com.revakovskyi.domain.authTextVerification.VerifyPassword
+import com.revakovskyi.domain.models.InputTextType
+import com.revakovskyi.domain.models.Status
 import javax.inject.Inject
 
 class TextValidationUseCase @Inject constructor() {

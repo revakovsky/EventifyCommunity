@@ -1,12 +1,12 @@
 package com.revakovskyi.featureauth.navigation
 
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
+import com.revakovskyi.core.extensions.sharedViewModel
 import com.revakovskyi.core.navigation.MainRoutes
 import com.revakovskyi.core.navigation.NavigationRoute
 import com.revakovskyi.featureauth.presentation.AuthScreen
@@ -39,7 +39,7 @@ internal class AuthNavigationRouteImpl @Inject constructor() : AuthNavigationRou
         ) {
 
             composable(route = firstsScreenRoute) {
-                val viewModel: AuthViewModel = hiltViewModel()
+                val viewModel: AuthViewModel = it.sharedViewModel(navController = navHostController)
 
                 SignInScreen(
                     navController = navHostController,
@@ -48,7 +48,12 @@ internal class AuthNavigationRouteImpl @Inject constructor() : AuthNavigationRou
             }
 
             composable(route = Screens.SingUpScreen.route) {
-                SignUpScreen(navController = navHostController)
+                val viewModel: AuthViewModel = it.sharedViewModel(navController = navHostController)
+
+                SignUpScreen(
+                    navController = navHostController,
+                    viewModel = viewModel
+                )
             }
 
             composable(

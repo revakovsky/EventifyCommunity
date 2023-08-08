@@ -1,4 +1,4 @@
-package com.revakovskyi.domain.textVerification
+package com.revakovskyi.domain.models
 
 enum class Status {
     Correct, Incorrect, Neutral

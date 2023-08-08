@@ -36,17 +36,19 @@ import com.revakovskyi.core.presentation.widgets.TextTitle
 import com.revakovskyi.core.presentation.widgets.TextWithHorizontalBar
 import com.revakovskyi.featureauth.R
 import com.revakovskyi.featureauth.navigation.Screens
+import com.revakovskyi.featureauth.presentation.models.AuthInputTextType
 import com.revakovskyi.featureauth.presentation.widgets.LoginInputField
 import com.revakovskyi.featureauth.presentation.widgets.PasswordInputField
 import com.revakovskyi.featureauth.viewModel.AuthViewModel
 
 @Composable
-fun SignInScreen(
+internal fun SignInScreen(
     modifier: Modifier = Modifier,
     navController: NavController,
     viewModel: AuthViewModel,
 ) {
-    var loginOrPhoneNumber by remember { mutableStateOf("") }
+    var login by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
 
     Box(
         modifier = modifier
@@ -86,7 +88,9 @@ fun SignInScreen(
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = MaterialTheme.dimens.medium)
             ) {
 
                 LoginInputField(
@@ -94,15 +98,21 @@ fun SignInScreen(
                     isError = viewModel.isLoginInvalid,
                     loginOrPhoneNumber = { inputText ->
                         viewModel.apply {
-                            verifyInputText(inputText)
-                            if (isLoginValid) {
-                                loginOrPhoneNumber = inputText
-                            }
+                            verifyInputText(inputText, AuthInputTextType.Login)
+                            if (isLoginValid) login = inputText
                         }
                     }
                 )
 
-                PasswordInputField()
+                PasswordInputField(
+                    isPasswordCorrect = { viewModel.isPasswordValid },
+                    enteredPassword = { enteredPassword ->
+                        viewModel.apply {
+                            verifyInputText(enteredPassword, AuthInputTextType.Password)
+                            if (isPasswordValid) password = enteredPassword
+                        }
+                    }
+                )
 
                 TextClickable(
                     text = stringResource(R.string.forgot_password),

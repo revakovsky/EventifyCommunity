@@ -13,7 +13,7 @@ import com.revakovskyi.core.presentation.widgets.OutlinedHintText
 import com.revakovskyi.featureauth.R
 
 @Composable
-fun LoginInputField(
+internal fun LoginInputField(
     icon: Int = R.drawable.login,
     isLoginCorrect: () -> Boolean,
     isError: Boolean = false,

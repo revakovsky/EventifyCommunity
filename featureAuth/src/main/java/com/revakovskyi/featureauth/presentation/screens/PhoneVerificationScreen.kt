@@ -34,7 +34,7 @@ import com.revakovskyi.featureauth.R
 import com.revakovskyi.featureauth.presentation.widgets.OtpTextFields
 
 @Composable
-fun PhoneVerificationScreen(
+internal fun PhoneVerificationScreen(
     modifier: Modifier = Modifier,
     navController: NavController,
     phoneNumber: String?,

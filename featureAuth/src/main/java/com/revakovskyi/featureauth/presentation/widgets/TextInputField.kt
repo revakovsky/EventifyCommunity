@@ -15,7 +15,7 @@ import com.revakovskyi.core.presentation.widgets.OutlinedHintText
 import com.revakovskyi.featureauth.R
 
 @Composable
-fun TextInputField(
+internal fun TextInputField(
     label: String = stringResource(R.string.name),
     placeholder: String = stringResource(R.string.enter_your_name),
     icon: Painter = painterResource(id = R.drawable.person),
@@ -29,17 +29,6 @@ fun TextInputField(
         value = name,
         onValueChange = { inputText ->
             name = inputText
-
-            if (name.startsWith('0')) {
-                isNameCorrect = false
-            }
-
-            if (name.isNotEmpty()) nameTipVisibility = true
-
-            if (inputText.isEmpty()) {
-                isNameCorrect = true
-                nameTipVisibility = false
-            }
         },
         label = { OutlinedHintText(text = label) },
         placeholder = { OutlinedHintText(text = placeholder) },

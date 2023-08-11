@@ -5,7 +5,6 @@ import com.revakovskyi.domain.models.Status
 internal class VerifyLogin {
 
     fun verify(login: String): Status {
-        login.trim()
         return if (login.isNotEmpty()) {
             if (isPhoneNumberValid(login) || isEmailValid(login)) Status.Correct
             else if (isIncorrectPhoneNumberLength(login) || isIncorrectStartOfLogin(login)) Status.Incorrect

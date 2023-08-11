@@ -37,6 +37,7 @@ import com.revakovskyi.core.presentation.widgets.TextWithHorizontalBar
 import com.revakovskyi.featureauth.R
 import com.revakovskyi.featureauth.navigation.Screens
 import com.revakovskyi.featureauth.presentation.models.AuthInputTextType
+import com.revakovskyi.featureauth.presentation.models.ValidationStatus
 import com.revakovskyi.featureauth.presentation.widgets.LoginInputField
 import com.revakovskyi.featureauth.presentation.widgets.PasswordInputField
 import com.revakovskyi.featureauth.viewModel.AuthViewModel
@@ -94,22 +95,27 @@ internal fun SignInScreen(
             ) {
 
                 LoginInputField(
-                    isLoginCorrect = { viewModel.isLoginValid },
-                    isError = viewModel.isLoginInvalid,
-                    loginOrPhoneNumber = { inputText ->
+                    status = viewModel.loginValidationStatus,
+                    inputLogin = { inputLogin ->
+                        if (inputLogin.isEmpty()) login = ""
                         viewModel.apply {
-                            verifyInputText(inputText, AuthInputTextType.Login)
-                            if (isLoginValid) login = inputText
+                            verifyInputText(inputLogin, AuthInputTextType.Login)
+                            if (loginValidationStatus == ValidationStatus.Correct) {
+                                login = inputLogin
+                            }
                         }
                     }
                 )
 
                 PasswordInputField(
-                    isPasswordCorrect = { viewModel.isPasswordValid },
-                    enteredPassword = { enteredPassword ->
+                    status = viewModel.passwordValidationStatus,
+                    inputPassword = { inputPassword ->
+                        if (inputPassword.isEmpty()) password = ""
                         viewModel.apply {
-                            verifyInputText(enteredPassword, AuthInputTextType.Password)
-                            if (isPasswordValid) password = enteredPassword
+                            verifyInputText(inputPassword, AuthInputTextType.Password)
+                            if (passwordValidationStatus == ValidationStatus.Correct) {
+                                password = inputPassword
+                            }
                         }
                     }
                 )

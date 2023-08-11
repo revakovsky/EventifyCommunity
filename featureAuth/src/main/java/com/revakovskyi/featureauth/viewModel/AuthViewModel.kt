@@ -17,52 +17,54 @@ internal class AuthViewModel @Inject constructor(
     private val textValidationUseCase: TextValidationUseCase,
 ) : ViewModel() {
 
-    var isLoginValid by mutableStateOf(true)
-    var isLoginInvalid by mutableStateOf(false)
-    var isPasswordValid by mutableStateOf(true)
+    var loginValidationStatus by mutableStateOf(ValidationStatus.Neutral)
+    var passwordValidationStatus by mutableStateOf(ValidationStatus.Neutral)
+    var nameValidationStatus by mutableStateOf(ValidationStatus.Neutral)
+    var surnameValidationStatus by mutableStateOf(ValidationStatus.Neutral)
+    var doubleCheckPasswordValidationStatus by mutableStateOf(ValidationStatus.Neutral)
 
     fun verifyInputText(inputText: String, inputTextType: AuthInputTextType) {
         when (inputTextType) {
-            AuthInputTextType.Login -> validateLogin(inputText)
-            AuthInputTextType.Password -> validatePassword(inputText)
-            AuthInputTextType.Name -> Unit  // TODO: create validation method
+            AuthInputTextType.Login -> validateLogin(inputLogin = inputText)
+            AuthInputTextType.Password -> validatePassword(inputPassword = inputText)
+            AuthInputTextType.Name -> validateNameAndSurname(inputName = inputText)
+            AuthInputTextType.Surname -> validateNameAndSurname(inputSurname = inputText)
         }
     }
 
-    private fun validateLogin(inputText: String) {
-        isLoginInvalid = false
-        textValidationUseCase(
-            inputText,
-            AuthInputTextType.Login.toInputText()
-        ).also { status ->
+    fun verifyDoubleCheckPassword(doubleCheckPassword: String, password: String) {
+        doubleCheckPasswordValidationStatus = ValidationStatus.Neutral
+        if (doubleCheckPassword.isNotEmpty()) {
+            doubleCheckPasswordValidationStatus =
+                if (doubleCheckPassword == password) ValidationStatus.Correct
+                else ValidationStatus.Incorrect
+        }
+    }
 
-            when (status.toValidationStatus()) {
-                ValidationStatus.Correct -> {
-                    isLoginValid = true
-                    isLoginInvalid = false
-                }
+    private fun validateLogin(inputLogin: String) {
+        textValidationUseCase(inputLogin, AuthInputTextType.Login.toInputText()).also { status ->
+            loginValidationStatus = status.toValidationStatus()
+        }
+    }
 
-                ValidationStatus.Incorrect -> {
-                    isLoginValid = false
-                    isLoginInvalid = true
-                }
+    private fun validatePassword(inputPassword: String) {
+        textValidationUseCase(inputPassword, AuthInputTextType.Password.toInputText()).also { status ->
+            passwordValidationStatus = status.toValidationStatus()
+        }
+    }
 
-                ValidationStatus.Neutral -> {
-                    isLoginValid = false
-                    isLoginInvalid = false
-                }
+    private fun validateNameAndSurname(inputName: String = "", inputSurname: String = "") {
+        nameValidationStatus = ValidationStatus.Neutral
+        surnameValidationStatus = ValidationStatus.Neutral
+
+        if (inputName.isNotEmpty()) {
+            textValidationUseCase(inputName, AuthInputTextType.Name.toInputText()).also { status ->
+                nameValidationStatus = status.toValidationStatus()
             }
         }
-    }
-
-    private fun validatePassword(inputText: String) {
-        textValidationUseCase(
-            inputText,
-            AuthInputTextType.Password.toInputText()
-        ).also { status ->
-            isPasswordValid = when (status.toValidationStatus()) {
-                ValidationStatus.Correct -> true
-                else -> false
+        if (inputSurname.isNotEmpty()) {
+            textValidationUseCase(inputSurname, AuthInputTextType.Name.toInputText()).also { status ->
+                surnameValidationStatus = status.toValidationStatus()
             }
         }
     }

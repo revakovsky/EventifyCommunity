@@ -13,22 +13,30 @@ import androidx.compose.ui.res.stringResource
 import com.revakovskyi.core.presentation.widgets.OutlinedField
 import com.revakovskyi.core.presentation.widgets.OutlinedHintText
 import com.revakovskyi.featureauth.R
+import com.revakovskyi.featureauth.presentation.models.ValidationStatus
 
 @Composable
-internal fun TextInputField(
+internal fun NameInputField(
     label: String = stringResource(R.string.name),
     placeholder: String = stringResource(R.string.enter_your_name),
     icon: Painter = painterResource(id = R.drawable.person),
+    status: ValidationStatus,
+    inputName: (String) -> Unit,
 ) {
     var name by remember { mutableStateOf("") }
-    var nameTipVisibility by remember { mutableStateOf(false) }
-    var isNameCorrect by remember { mutableStateOf(true) }
+
+    val painterResourceId = when (status) {
+        ValidationStatus.Correct -> R.drawable.tip
+        ValidationStatus.Incorrect -> R.drawable.incorrect
+        ValidationStatus.Neutral -> null
+    }
 
     OutlinedField(
         modifier = Modifier,
         value = name,
         onValueChange = { inputText ->
-            name = inputText
+            name = inputText.replaceFirstChar { it.uppercase() }
+            inputName(name)
         },
         label = { OutlinedHintText(text = label) },
         placeholder = { OutlinedHintText(text = placeholder) },
@@ -39,20 +47,22 @@ internal fun TextInputField(
             )
         },
         trailingIcon = {
-            if (nameTipVisibility) {
-                Icon(
-                    painter = if (isNameCorrect) painterResource(id = R.drawable.tip)
-                    else painterResource(id = R.drawable.incorrect),
-
-                    contentDescription = if (isNameCorrect) stringResource(R.string.correct)
-                    else stringResource(R.string.incorrect),
-                )
+            if (name.isNotEmpty()) {
+                painterResourceId?.let { resourceId -> painterResource(id = resourceId) }
+                    ?.let { painter ->
+                        Icon(
+                            painter = painter,
+                            contentDescription =
+                            if (status == ValidationStatus.Correct) stringResource(R.string.correct)
+                            else stringResource(R.string.incorrect),
+                        )
+                    }
             }
         },
-        isError = !isNameCorrect,
+        isError = status == ValidationStatus.Incorrect,
         supportingText = {
-            if (!isNameCorrect) {
-                OutlinedHintText(text = stringResource(R.string.the_input_text_is_incorrect))
+            if (status == ValidationStatus.Incorrect) {
+                OutlinedHintText(text = stringResource(R.string.text_is_incorrect))
             }
         },
     )

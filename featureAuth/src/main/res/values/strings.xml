@@ -35,5 +35,7 @@
     <string name="didn_t_receive_the_code">Didn\'t receive the code?</string>
     <string name="resend_code">Resend code</string>
     <string name="password_should_contain">Password should contain at least 8 symbols and have at least one digit, one uppercase letter, and one special symbol</string>
+    <string name="text_is_incorrect">The entered text is incorrect!</string>
+    <string name="passwords_mismatch">Passwords mismatch!</string>
 
 </resources>

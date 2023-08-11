@@ -43,9 +43,10 @@ import com.revakovskyi.core.presentation.widgets.TextWithHorizontalBar
 import com.revakovskyi.featureauth.R
 import com.revakovskyi.featureauth.navigation.Screens
 import com.revakovskyi.featureauth.presentation.models.AuthInputTextType
+import com.revakovskyi.featureauth.presentation.models.ValidationStatus
 import com.revakovskyi.featureauth.presentation.widgets.LoginInputField
+import com.revakovskyi.featureauth.presentation.widgets.NameInputField
 import com.revakovskyi.featureauth.presentation.widgets.PasswordInputField
-import com.revakovskyi.featureauth.presentation.widgets.TextInputField
 import com.revakovskyi.featureauth.viewModel.AuthViewModel
 
 @Composable
@@ -56,8 +57,11 @@ internal fun SignUpScreen(
 ) {
     val scrollState = rememberScrollState()
 
+    var name by remember { mutableStateOf("") }
+    var surname by remember { mutableStateOf("") }
     var emailOrPhoneNumber by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var doubleCheckPassword by remember { mutableStateOf("") }
 
     LaunchedEffect(Unit) { scrollState.scrollTo(0) }
 
@@ -104,47 +108,71 @@ internal fun SignUpScreen(
                 modifier = Modifier.fillMaxWidth()
             ) {
 
-                TextInputField()
+                NameInputField(
+                    status = viewModel.nameValidationStatus,
+                    inputName = { inputName ->
+                        if (inputName.isEmpty()) name = ""
+                        viewModel.apply {
+                            verifyInputText(inputName, AuthInputTextType.Name)
+                            if (nameValidationStatus == ValidationStatus.Correct) {
+                                name = inputName
+                            }
+                        }
+                    }
+                )
 
-                TextInputField(
-                    label = stringResource(R.string.surname),
-                    placeholder = stringResource(R.string.enter_your_surname),
-                    icon = painterResource(id = R.drawable.double_person)
+                NameInputField(
+                    status = viewModel.surnameValidationStatus,
+                    inputName = { inputSurname ->
+                        if (inputSurname.isEmpty()) surname = ""
+                        viewModel.apply {
+                            verifyInputText(inputSurname, AuthInputTextType.Surname)
+                            if (surnameValidationStatus == ValidationStatus.Correct) {
+                                surname = inputSurname
+                            }
+                        }
+                    }
                 )
 
                 LoginInputField(
-                    icon = R.drawable.email,
-                    isLoginCorrect = { viewModel.isLoginValid },
-                    isError = viewModel.isLoginInvalid,
-                    loginOrPhoneNumber = { inputText ->
+                    status = viewModel.loginValidationStatus,
+                    inputLogin = { inputLogin ->
                         viewModel.apply {
-                            verifyInputText(inputText, AuthInputTextType.Login)
-                            if (isLoginValid) emailOrPhoneNumber = inputText
+                            if (inputLogin.isEmpty()) emailOrPhoneNumber = ""
+                            verifyInputText(inputLogin, AuthInputTextType.Login)
+                            if (loginValidationStatus == ValidationStatus.Correct) {
+                                emailOrPhoneNumber = inputLogin
+                            }
                         }
                     }
                 )
 
                 PasswordInputField(
-                    isPasswordCorrect = { viewModel.isPasswordValid },
-                    enteredPassword = { enteredPassword ->
+                    status = viewModel.passwordValidationStatus,
+                    inputPassword = { inputPassword ->
+                        if (inputPassword.isEmpty()) password = ""
                         viewModel.apply {
-                            verifyInputText(enteredPassword, AuthInputTextType.Password)
-                            if (isPasswordValid) password = enteredPassword
+                            verifyInputText(inputPassword, AuthInputTextType.Password)
+                            if (passwordValidationStatus == ValidationStatus.Correct) {
+                                password = inputPassword
+                            }
                         }
                     },
                     imeAction = ImeAction.Next
                 )
 
                 PasswordInputField(
-                    isPasswordCorrect = { viewModel.isPasswordValid },
-                    enteredPassword = { enteredPassword ->
+                    status = viewModel.doubleCheckPasswordValidationStatus,
+                    inputPassword = { inputPassword ->
+                        if (inputPassword.isEmpty()) doubleCheckPassword = ""
                         viewModel.apply {
-                            verifyInputText(enteredPassword, AuthInputTextType.Password)
-                            if (isPasswordValid) password = enteredPassword
+                            verifyDoubleCheckPassword(inputPassword, password)
+                            if (doubleCheckPasswordValidationStatus == ValidationStatus.Correct) {
+                                doubleCheckPassword = inputPassword
+                            }
                         }
                     },
-                    label = stringResource(R.string.confirm_password),
-                    modifier = Modifier.padding(top = MaterialTheme.dimens.medium)
+                    supportingText = stringResource(id = R.string.passwords_mismatch)
                 )
 
                 TextLabel(

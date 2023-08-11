@@ -19,26 +19,24 @@ import androidx.compose.ui.text.input.VisualTransformation
 import com.revakovskyi.core.presentation.widgets.OutlinedField
 import com.revakovskyi.core.presentation.widgets.OutlinedHintText
 import com.revakovskyi.featureauth.R
+import com.revakovskyi.featureauth.presentation.models.ValidationStatus
 
 @Composable
 internal fun PasswordInputField(
-    modifier: Modifier = Modifier,
-    isPasswordCorrect: () -> Boolean,
-    enteredPassword: (String) -> Unit,
+    status: ValidationStatus,
+    inputPassword: (String) -> Unit,
     label: String = stringResource(R.string.password),
     imeAction: ImeAction = ImeAction.Done,
+    supportingText: String = stringResource(R.string.password_should_contain),
 ) {
     var password by remember { mutableStateOf("") }
     var isPasswordInvisible by remember { mutableStateOf(true) }
-    var passwordHintVisibility by remember { mutableStateOf(false) }
 
     OutlinedField(
-        modifier = modifier,
         value = password,
-        onValueChange = { inputPassword ->
-            password = inputPassword
-            enteredPassword(password)
-            passwordHintVisibility = if (inputPassword.isEmpty()) false else !isPasswordCorrect()
+        onValueChange = { inputText ->
+            password = inputText.trim()
+            inputPassword(password)
         },
         label = { OutlinedHintText(text = label) },
         placeholder = { OutlinedHintText(text = stringResource(R.string.password_example)) },
@@ -68,9 +66,9 @@ internal fun PasswordInputField(
         imeAction = imeAction,
         autoCorrect = false,
         supportingText = {
-            if (passwordHintVisibility) {
+            if (status == ValidationStatus.Incorrect) {
                 OutlinedHintText(
-                    text = stringResource(R.string.password_should_contain),
+                    text = supportingText,
                     style = MaterialTheme.typography.labelLarge
                 )
             }

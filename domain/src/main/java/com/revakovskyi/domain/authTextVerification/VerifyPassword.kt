@@ -5,11 +5,10 @@ import com.revakovskyi.domain.models.Status
 internal class VerifyPassword {
 
     fun verify(password: String): Status {
-        password.trim()
         return if (password.isNotEmpty()) {
             if (isPasswordValid(password)) Status.Correct
             else Status.Incorrect
-        } else Status.Correct
+        } else Status.Neutral
     }
 
     private fun isPasswordValid(password: String): Boolean {

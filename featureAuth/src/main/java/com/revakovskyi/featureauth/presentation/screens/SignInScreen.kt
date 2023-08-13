@@ -97,12 +97,11 @@ internal fun SignInScreen(
                 LoginInputField(
                     status = viewModel.loginValidationStatus,
                     inputLogin = { inputLogin ->
-                        if (inputLogin.isEmpty()) login = ""
                         viewModel.apply {
                             verifyInputText(inputLogin, AuthInputTextType.Login)
-                            if (loginValidationStatus == ValidationStatus.Correct) {
-                                login = inputLogin
-                            }
+                            login =
+                                if (loginValidationStatus == ValidationStatus.Correct) inputLogin
+                                else ""
                         }
                     }
                 )
@@ -110,12 +109,11 @@ internal fun SignInScreen(
                 PasswordInputField(
                     status = viewModel.passwordValidationStatus,
                     inputPassword = { inputPassword ->
-                        if (inputPassword.isEmpty()) password = ""
                         viewModel.apply {
                             verifyInputText(inputPassword, AuthInputTextType.Password)
-                            if (passwordValidationStatus == ValidationStatus.Correct) {
-                                password = inputPassword
-                            }
+                            password =
+                                if (passwordValidationStatus == ValidationStatus.Correct) inputPassword
+                                else ""
                         }
                     }
                 )
@@ -124,12 +122,14 @@ internal fun SignInScreen(
                     text = stringResource(R.string.forgot_password),
                     onClick = { /*TODO: open the appropriate screen*/ },
                     textStyle = MaterialTheme.typography.labelLarge,
-                    textAlign = TextAlign.End
+                    textAlign = TextAlign.End,
+                    modifier = Modifier.padding(end = MaterialTheme.dimens.medium)
                 )
 
                 ButtonRegular(
                     buttonText = stringResource(R.string.sign_in),
-                    onClick = { /*TODO: process click*/ }
+                    enabled = areFieldsNotEmpty(login, password),
+                    onClick = { /*TODO: make sign in*/ }
                 )
 
                 TextWithHorizontalBar(
@@ -149,7 +149,8 @@ internal fun SignInScreen(
 
                 TextRegular(
                     text = stringResource(R.string.don_t_have_an_account),
-                    modifier = Modifier.padding(top = MaterialTheme.dimens.large)
+                    modifier = Modifier.padding(top = MaterialTheme.dimens.large),
+                    textAlign = TextAlign.Center
                 )
 
                 TextClickable(
@@ -166,3 +167,7 @@ internal fun SignInScreen(
     }
 
 }
+
+@Composable
+private fun areFieldsNotEmpty(login: String, password: String) =
+    login.isNotEmpty() && password.isNotEmpty()

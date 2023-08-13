@@ -64,7 +64,6 @@ fun TextClickable(
             .fillMaxWidth()
             .padding(
                 top = MaterialTheme.dimens.small,
-                end = MaterialTheme.dimens.medium
             ),
         style = textStyle.copy(
             fontWeight = fontWeight,

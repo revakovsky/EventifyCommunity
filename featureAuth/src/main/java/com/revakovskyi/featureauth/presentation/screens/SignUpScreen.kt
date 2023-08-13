@@ -111,12 +111,11 @@ internal fun SignUpScreen(
                 NameInputField(
                     status = viewModel.nameValidationStatus,
                     inputName = { inputName ->
-                        if (inputName.isEmpty()) name = ""
                         viewModel.apply {
                             verifyInputText(inputName, AuthInputTextType.Name)
-                            if (nameValidationStatus == ValidationStatus.Correct) {
-                                name = inputName
-                            }
+                            name =
+                                if (nameValidationStatus == ValidationStatus.Correct) inputName
+                                else ""
                         }
                     }
                 )
@@ -124,38 +123,39 @@ internal fun SignUpScreen(
                 NameInputField(
                     status = viewModel.surnameValidationStatus,
                     inputName = { inputSurname ->
-                        if (inputSurname.isEmpty()) surname = ""
                         viewModel.apply {
                             verifyInputText(inputSurname, AuthInputTextType.Surname)
-                            if (surnameValidationStatus == ValidationStatus.Correct) {
-                                surname = inputSurname
-                            }
+                            surname =
+                                if (surnameValidationStatus == ValidationStatus.Correct) inputSurname
+                                else ""
                         }
-                    }
+                    },
+                    label = stringResource(id = R.string.surname),
+                    placeholder = stringResource(id = R.string.enter_your_surname),
+                    icon = painterResource(id = R.drawable.double_person)
                 )
 
                 LoginInputField(
                     status = viewModel.loginValidationStatus,
                     inputLogin = { inputLogin ->
                         viewModel.apply {
-                            if (inputLogin.isEmpty()) emailOrPhoneNumber = ""
                             verifyInputText(inputLogin, AuthInputTextType.Login)
-                            if (loginValidationStatus == ValidationStatus.Correct) {
-                                emailOrPhoneNumber = inputLogin
-                            }
+                            emailOrPhoneNumber =
+                                if (nameValidationStatus == ValidationStatus.Correct) inputLogin
+                                else ""
                         }
-                    }
+                    },
+                    icon = R.drawable.email
                 )
 
                 PasswordInputField(
                     status = viewModel.passwordValidationStatus,
                     inputPassword = { inputPassword ->
-                        if (inputPassword.isEmpty()) password = ""
                         viewModel.apply {
                             verifyInputText(inputPassword, AuthInputTextType.Password)
-                            if (passwordValidationStatus == ValidationStatus.Correct) {
-                                password = inputPassword
-                            }
+                            password =
+                                if (nameValidationStatus == ValidationStatus.Correct) inputPassword
+                                else ""
                         }
                     },
                     imeAction = ImeAction.Next
@@ -164,14 +164,14 @@ internal fun SignUpScreen(
                 PasswordInputField(
                     status = viewModel.doubleCheckPasswordValidationStatus,
                     inputPassword = { inputPassword ->
-                        if (inputPassword.isEmpty()) doubleCheckPassword = ""
                         viewModel.apply {
                             verifyDoubleCheckPassword(inputPassword, password)
-                            if (doubleCheckPasswordValidationStatus == ValidationStatus.Correct) {
-                                doubleCheckPassword = inputPassword
-                            }
+                            doubleCheckPassword =
+                                if (nameValidationStatus == ValidationStatus.Correct) inputPassword
+                                else ""
                         }
                     },
+                    label = stringResource(id = R.string.confirm_password),
                     supportingText = stringResource(id = R.string.passwords_mismatch)
                 )
 
@@ -186,6 +186,7 @@ internal fun SignUpScreen(
 
                 ButtonRegular(
                     buttonText = stringResource(R.string.sign_up),
+                    enabled = areFieldsNotEmpty(name, surname, emailOrPhoneNumber, password, doubleCheckPassword),
                     onClick = {
                         navController.navigate(
                             Screens.PhoneVerificationScreen.arguments(emailOrPhoneNumber)
@@ -227,3 +228,17 @@ internal fun SignUpScreen(
     }
 
 }
+
+@Composable
+private fun areFieldsNotEmpty(
+    name: String,
+    surname: String,
+    emailOrPhoneNumber: String,
+    password: String,
+    doubleCheckPassword: String,
+) =
+    name.isNotEmpty() &&
+    surname.isNotEmpty() &&
+    emailOrPhoneNumber.isNotEmpty() &&
+    password.isNotEmpty() &&
+    doubleCheckPassword.isNotEmpty()

@@ -7,6 +7,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import com.revakovskyi.core.presentation.ui.theme.dimens
 
@@ -27,6 +28,7 @@ fun ButtonRegular(
         colors = ButtonDefaults.textButtonColors(
             containerColor = MaterialTheme.colorScheme.tertiaryContainer,
             contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
+            disabledContainerColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.2f),
         ),
         elevation = ButtonDefaults.buttonElevation(
             defaultElevation = MaterialTheme.dimens.zero,
@@ -41,5 +43,4 @@ fun ButtonRegular(
             )
         )
     }
-
 }

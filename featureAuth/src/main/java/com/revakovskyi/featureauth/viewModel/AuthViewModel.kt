@@ -25,10 +25,10 @@ internal class AuthViewModel @Inject constructor(
 
     fun verifyInputText(inputText: String, inputTextType: AuthInputTextType) {
         when (inputTextType) {
-            AuthInputTextType.Login -> validateLogin(inputLogin = inputText)
-            AuthInputTextType.Password -> validatePassword(inputPassword = inputText)
-            AuthInputTextType.Name -> validateNameAndSurname(inputName = inputText)
-            AuthInputTextType.Surname -> validateNameAndSurname(inputSurname = inputText)
+            AuthInputTextType.Login     ->  validateLogin(inputLogin = inputText)
+            AuthInputTextType.Password  ->  validatePassword(inputPassword = inputText)
+            AuthInputTextType.Name      ->  validateName(inputName = inputText)
+            AuthInputTextType.Surname   ->  validateSurname(inputSurname = inputText)
         }
     }
 
@@ -53,15 +53,17 @@ internal class AuthViewModel @Inject constructor(
         }
     }
 
-    private fun validateNameAndSurname(inputName: String = "", inputSurname: String = "") {
+    private fun validateName(inputName: String) {
         nameValidationStatus = ValidationStatus.Neutral
-        surnameValidationStatus = ValidationStatus.Neutral
-
         if (inputName.isNotEmpty()) {
             textValidationUseCase(inputName, AuthInputTextType.Name.toInputText()).also { status ->
                 nameValidationStatus = status.toValidationStatus()
             }
         }
+    }
+
+    private fun validateSurname(inputSurname: String) {
+        surnameValidationStatus = ValidationStatus.Neutral
         if (inputSurname.isNotEmpty()) {
             textValidationUseCase(inputSurname, AuthInputTextType.Name.toInputText()).also { status ->
                 surnameValidationStatus = status.toValidationStatus()

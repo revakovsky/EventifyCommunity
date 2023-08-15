@@ -34,11 +34,12 @@ import com.revakovskyi.featureauth.R
 import com.revakovskyi.featureauth.presentation.widgets.OtpTextFields
 
 @Composable
-internal fun PhoneVerificationScreen(
+internal fun EmailAndPhoneVerificationScreen(
     modifier: Modifier = Modifier,
     navController: NavController,
-    phoneNumber: String?,
+    emailOrPhoneNumber: String?,
 ) {
+    val isEmailWasPassed = emailOrPhoneNumber?.contains("@") == true
     var otpText by remember { mutableStateOf("") }
     var isLoadingAnimationVisible by remember { mutableStateOf(false) }
 
@@ -71,7 +72,10 @@ internal fun PhoneVerificationScreen(
                 modifier = Modifier
                     .padding(horizontal = MaterialTheme.dimens.medium)
                     .padding(top = MaterialTheme.dimens.medium),
-                text = stringResource(R.string.verify_phone_number),
+                text = stringResource(
+                    id = if (isEmailWasPassed) R.string.verify_email
+                    else R.string.verify_phone_number
+                ),
                 style = MaterialTheme.typography.titleSmall
             )
 
@@ -79,7 +83,14 @@ internal fun PhoneVerificationScreen(
                 modifier = Modifier
                     .padding(top = MaterialTheme.dimens.large)
                     .padding(horizontal = MaterialTheme.dimens.large),
-                text = stringResource(R.string.the_code_was_sent_to_the_number),
+                text = if (isEmailWasPassed) stringResource(
+                    R.string.the_code_was_sent_to_the,
+                    stringResource(id = R.string.email)
+                )
+                else stringResource(
+                    R.string.the_code_was_sent_to_the,
+                    stringResource(id = R.string.phone_number)
+                ),
                 textAlign = TextAlign.Center
             )
 
@@ -87,7 +98,7 @@ internal fun PhoneVerificationScreen(
                 modifier = Modifier
                     .padding(top = MaterialTheme.dimens.medium)
                     .padding(horizontal = MaterialTheme.dimens.large),
-                text = phoneNumber.toString(),
+                text = emailOrPhoneNumber.toString(),
                 style = MaterialTheme.typography.bodyLarge,
                 textAlign = TextAlign.Center
             )
@@ -125,7 +136,7 @@ internal fun PhoneVerificationScreen(
 @Composable
 @DivicePreviews
 fun ShowPhoneVerificationScreen() {
-    PhoneVerificationScreen(
-        navController = rememberNavController(), phoneNumber = "+38 050 111 222 33"
+    EmailAndPhoneVerificationScreen(
+        navController = rememberNavController(), emailOrPhoneNumber = "+38 050 111 222 33"
     )
 }

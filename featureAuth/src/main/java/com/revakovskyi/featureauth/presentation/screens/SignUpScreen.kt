@@ -186,10 +186,16 @@ internal fun SignUpScreen(
 
                 ButtonRegular(
                     buttonText = stringResource(R.string.sign_up),
-                    enabled = areFieldsNotEmpty(name, surname, emailOrPhoneNumber, password, doubleCheckPassword),
+                    enabled = areFieldsNotEmpty(
+                        name,
+                        surname,
+                        emailOrPhoneNumber,
+                        password,
+                        doubleCheckPassword
+                    ),
                     onClick = {
                         navController.navigate(
-                            Screens.PhoneVerificationScreen.arguments(emailOrPhoneNumber)
+                            Screens.EmailAndPhoneVerificationScreen.arguments(emailOrPhoneNumber)
                         )
                     }
                 )
@@ -238,7 +244,7 @@ private fun areFieldsNotEmpty(
     doubleCheckPassword: String,
 ) =
     name.isNotEmpty() &&
-    surname.isNotEmpty() &&
-    emailOrPhoneNumber.isNotEmpty() &&
-    password.isNotEmpty() &&
-    doubleCheckPassword.isNotEmpty()
+            surname.isNotEmpty() &&
+            emailOrPhoneNumber.isNotEmpty() &&
+            password.isNotEmpty() &&
+            doubleCheckPassword.isNotEmpty()

@@ -5,6 +5,7 @@
     <string name="welcome">Welcome</string>
     <string name="please_sign_in_to_continue">Please, Sign In to continue</string>
     <string name="phone_or_email">Email or Phone number</string>
+    <string name="phone_number">phone number</string>
     <string name="email">Email</string>
     <string name="login_example">mailbox@mail.com or +380..</string>
     <string name="email_example">mailbox@mail.com</string>
@@ -33,8 +34,9 @@
     <string name="confirm_password">Confirm password</string>
     <string name="confirm_terms_of_use">By registering, you are agreeing to our Terms of Use and Privacy Policy</string>
     <string name="already_have_an_account">Already have an account?</string>
+    <string name="verify_email">Verify email</string>
     <string name="verify_phone_number">Verify phone number</string>
-    <string name="the_code_was_sent_to_the_number">The code was sent to the number</string>
+    <string name="the_code_was_sent_to_the">The code was sent to the %1$s</string>
     <string name="didn_t_receive_the_code">Didn\'t receive the code?</string>
     <string name="resend_code">Resend code</string>
     <string name="password_should_contain">Password should contain at least 8 symbols and have at least one digit, one uppercase letter, and one special symbol</string>

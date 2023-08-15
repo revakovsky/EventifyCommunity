@@ -11,8 +11,8 @@ import com.revakovskyi.core.navigation.MainRoutes
 import com.revakovskyi.core.navigation.NavigationRoute
 import com.revakovskyi.featureauth.presentation.AuthScreen
 import com.revakovskyi.featureauth.presentation.AuthScreen2
+import com.revakovskyi.featureauth.presentation.screens.EmailAndPhoneVerificationScreen
 import com.revakovskyi.featureauth.presentation.screens.ForgotPasswordScreen
-import com.revakovskyi.featureauth.presentation.screens.PhoneVerificationScreen
 import com.revakovskyi.featureauth.presentation.screens.SignInScreen
 import com.revakovskyi.featureauth.presentation.screens.SignUpScreen
 import com.revakovskyi.featureauth.viewModel.AuthViewModel
@@ -64,14 +64,14 @@ internal class AuthNavigationRouteImpl @Inject constructor() : AuthNavigationRou
             }
 
             composable(
-                route = Screens.PhoneVerificationScreen.route,
+                route = Screens.EmailAndPhoneVerificationScreen.route,
                 arguments = listOf(
-                    navArgument(PHONE_NUMBER_ARGUMENT_KEY) { type = NavType.StringType }
+                    navArgument(VERIFICATION_ARGUMENT_KEY) { type = NavType.StringType }
                 )
             ) {
-                PhoneVerificationScreen(
+                EmailAndPhoneVerificationScreen(
                     navController = navHostController,
-                    phoneNumber = it.arguments?.getString(PHONE_NUMBER_ARGUMENT_KEY)
+                    emailOrPhoneNumber = it.arguments?.getString(VERIFICATION_ARGUMENT_KEY)
                 )
             }
 

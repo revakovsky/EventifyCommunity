@@ -19,6 +19,7 @@ internal class AuthViewModel @Inject constructor(
 
     var loginValidationStatus by mutableStateOf(ValidationStatus.Neutral)
     var passwordValidationStatus by mutableStateOf(ValidationStatus.Neutral)
+    var emailValidationStatus by mutableStateOf(ValidationStatus.Neutral)
     var nameValidationStatus by mutableStateOf(ValidationStatus.Neutral)
     var surnameValidationStatus by mutableStateOf(ValidationStatus.Neutral)
     var doubleCheckPasswordValidationStatus by mutableStateOf(ValidationStatus.Neutral)
@@ -27,6 +28,7 @@ internal class AuthViewModel @Inject constructor(
         when (inputTextType) {
             AuthInputTextType.Login     ->  validateLogin(inputLogin = inputText)
             AuthInputTextType.Password  ->  validatePassword(inputPassword = inputText)
+            AuthInputTextType.Email     ->  validateEmail(inputEmail = inputText)
             AuthInputTextType.Name      ->  validateName(inputName = inputText)
             AuthInputTextType.Surname   ->  validateSurname(inputSurname = inputText)
         }
@@ -50,6 +52,12 @@ internal class AuthViewModel @Inject constructor(
     private fun validatePassword(inputPassword: String) {
         textValidationUseCase(inputPassword, AuthInputTextType.Password.toInputText()).also { status ->
             passwordValidationStatus = status.toValidationStatus()
+        }
+    }
+
+    private fun validateEmail(inputEmail: String) {
+        textValidationUseCase(inputEmail, AuthInputTextType.Email.toInputText()).also { status ->
+            emailValidationStatus = status.toValidationStatus()
         }
     }
 

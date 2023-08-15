@@ -120,7 +120,7 @@ internal fun SignInScreen(
 
                 TextClickable(
                     text = stringResource(R.string.forgot_password),
-                    onClick = { /*TODO: open the appropriate screen*/ },
+                    onClick = { navController.navigate(Screens.ForgotPasswordScreen.route) },
                     textStyle = MaterialTheme.typography.labelLarge,
                     textAlign = TextAlign.End,
                     modifier = Modifier.padding(end = MaterialTheme.dimens.medium)

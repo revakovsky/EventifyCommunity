@@ -8,6 +8,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
 import com.revakovskyi.core.presentation.widgets.OutlinedField
 import com.revakovskyi.core.presentation.widgets.OutlinedHintText
 import com.revakovskyi.featureauth.R
@@ -18,6 +19,10 @@ internal fun LoginInputField(
     icon: Int = R.drawable.login,
     status: ValidationStatus,
     inputLogin: (String) -> Unit,
+    label: String = stringResource(R.string.phone_or_email),
+    placeholder: String = stringResource(R.string.login_example),
+    supportingText: String = stringResource(R.string.login_is_incorrect),
+    imeAction: ImeAction = ImeAction.Next,
 ) {
     var login by remember { mutableStateOf("") }
 
@@ -33,8 +38,8 @@ internal fun LoginInputField(
             login = inputText.trim()
             inputLogin(login)
         },
-        label = { OutlinedHintText(text = stringResource(R.string.phone_or_email)) },
-        placeholder = { OutlinedHintText(text = stringResource(R.string.login_example)) },
+        label = { OutlinedHintText(text = label) },
+        placeholder = { OutlinedHintText(text = placeholder) },
         leadingIcon = {
             Icon(
                 painter = painterResource(id = icon),
@@ -57,8 +62,9 @@ internal fun LoginInputField(
         isError = status == ValidationStatus.Incorrect,
         supportingText = {
             if (status == ValidationStatus.Incorrect) {
-                OutlinedHintText(text = stringResource(R.string.login_is_incorrect))
+                OutlinedHintText(text = supportingText)
             }
         },
+        imeAction = imeAction,
     )
 }

@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.revakovskyi.core.R
@@ -22,6 +23,7 @@ import com.revakovskyi.core.presentation.ui.theme.dimens
 fun BackButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    icon: ImageVector = Icons.Default.KeyboardArrowLeft,
 ) {
 
     Box(
@@ -33,7 +35,7 @@ fun BackButton(
             .clickable { onClick() }
     ) {
         Icon(
-            imageVector = Icons.Default.KeyboardArrowLeft,
+            imageVector = icon,
             contentDescription = stringResource(R.string.back),
             tint = MaterialTheme.colorScheme.secondary,
             modifier = modifier

@@ -3,14 +3,15 @@ package com.revakovskyi.featureauth.presentation.models
 import com.revakovskyi.domain.models.InputTextType
 
 internal enum class AuthInputTextType {
-    Login, Password, Name, Surname
+    Login, Password, Email, Name, Surname
 }
 
 
 internal fun AuthInputTextType.toInputText(): InputTextType {
     return when (this) {
-        AuthInputTextType.Login -> InputTextType.Login
-        AuthInputTextType.Password -> InputTextType.Password
-        else -> InputTextType.Name
+        AuthInputTextType.Login     ->  InputTextType.Login
+        AuthInputTextType.Password  ->  InputTextType.Password
+        AuthInputTextType.Email     ->  InputTextType.Email
+        else                        ->  InputTextType.Name
     }
 }

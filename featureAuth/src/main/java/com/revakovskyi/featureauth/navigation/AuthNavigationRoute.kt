@@ -11,6 +11,7 @@ import com.revakovskyi.core.navigation.MainRoutes
 import com.revakovskyi.core.navigation.NavigationRoute
 import com.revakovskyi.featureauth.presentation.AuthScreen
 import com.revakovskyi.featureauth.presentation.AuthScreen2
+import com.revakovskyi.featureauth.presentation.screens.ForgotPasswordScreen
 import com.revakovskyi.featureauth.presentation.screens.PhoneVerificationScreen
 import com.revakovskyi.featureauth.presentation.screens.SignInScreen
 import com.revakovskyi.featureauth.presentation.screens.SignUpScreen
@@ -40,8 +41,15 @@ internal class AuthNavigationRouteImpl @Inject constructor() : AuthNavigationRou
 
             composable(route = firstsScreenRoute) {
                 val viewModel: AuthViewModel = it.sharedViewModel(navController = navHostController)
-
                 SignInScreen(
+                    navController = navHostController,
+                    viewModel = viewModel
+                )
+            }
+
+            composable(route = Screens.ForgotPasswordScreen.route) {
+                val viewModel: AuthViewModel = it.sharedViewModel(navController = navHostController)
+                ForgotPasswordScreen(
                     navController = navHostController,
                     viewModel = viewModel
                 )
@@ -49,7 +57,6 @@ internal class AuthNavigationRouteImpl @Inject constructor() : AuthNavigationRou
 
             composable(route = Screens.SingUpScreen.route) {
                 val viewModel: AuthViewModel = it.sharedViewModel(navController = navHostController)
-
                 SignUpScreen(
                     navController = navHostController,
                     viewModel = viewModel
@@ -67,6 +74,10 @@ internal class AuthNavigationRouteImpl @Inject constructor() : AuthNavigationRou
                     phoneNumber = it.arguments?.getString(PHONE_NUMBER_ARGUMENT_KEY)
                 )
             }
+
+
+
+
 
             composable(route = Screens.AuthScreen.route) {
                 AuthScreen(navController = navHostController)

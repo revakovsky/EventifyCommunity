@@ -11,6 +11,7 @@ internal sealed class Screens(
 ) {
 
     object SingInScreen : Screens("sing_in_screen")
+    object ForgotPasswordScreen : Screens("forgot_password_screen")
     object SingUpScreen : Screens("sing_up_screen")
     object PhoneVerificationScreen : Screens(
         route = "phone_verification_screen/{$PHONE_NUMBER_ARGUMENT_KEY}",

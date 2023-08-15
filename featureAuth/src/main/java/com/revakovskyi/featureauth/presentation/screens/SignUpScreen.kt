@@ -141,7 +141,7 @@ internal fun SignUpScreen(
                         viewModel.apply {
                             verifyInputText(inputLogin, AuthInputTextType.Login)
                             emailOrPhoneNumber =
-                                if (nameValidationStatus == ValidationStatus.Correct) inputLogin
+                                if (loginValidationStatus == ValidationStatus.Correct) inputLogin
                                 else ""
                         }
                     },
@@ -154,7 +154,7 @@ internal fun SignUpScreen(
                         viewModel.apply {
                             verifyInputText(inputPassword, AuthInputTextType.Password)
                             password =
-                                if (nameValidationStatus == ValidationStatus.Correct) inputPassword
+                                if (passwordValidationStatus == ValidationStatus.Correct) inputPassword
                                 else ""
                         }
                     },
@@ -167,7 +167,7 @@ internal fun SignUpScreen(
                         viewModel.apply {
                             verifyDoubleCheckPassword(inputPassword, password)
                             doubleCheckPassword =
-                                if (nameValidationStatus == ValidationStatus.Correct) inputPassword
+                                if (doubleCheckPasswordValidationStatus == ValidationStatus.Correct) inputPassword
                                 else ""
                         }
                     },

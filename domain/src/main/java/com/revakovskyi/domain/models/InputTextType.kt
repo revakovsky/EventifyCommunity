@@ -1,5 +1,5 @@
 package com.revakovskyi.domain.models
 
 enum class InputTextType {
-    Login, Password, Name
+    Login, Password, Email, Name
 }

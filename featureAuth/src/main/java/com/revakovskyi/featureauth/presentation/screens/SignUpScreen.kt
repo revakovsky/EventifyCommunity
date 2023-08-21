@@ -223,7 +223,6 @@ internal fun SignUpScreen(
                 TextClickable(
                     text = stringResource(R.string.sign_in),
                     onClick = { navController.popBackStack() },
-                    fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(bottom = MaterialTheme.dimens.medium)
                 )
 
@@ -244,7 +243,7 @@ private fun areFieldsNotEmpty(
     doubleCheckPassword: String,
 ) =
     name.isNotEmpty() &&
-            surname.isNotEmpty() &&
-            emailOrPhoneNumber.isNotEmpty() &&
-            password.isNotEmpty() &&
-            doubleCheckPassword.isNotEmpty()
+    surname.isNotEmpty() &&
+    emailOrPhoneNumber.isNotEmpty() &&
+    password.isNotEmpty() &&
+    doubleCheckPassword.isNotEmpty()

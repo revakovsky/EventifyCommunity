@@ -19,11 +19,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
-import com.revakovskyi.core.presentation.ui.DivicePreviews
 import com.revakovskyi.core.presentation.ui.theme.dimens
 import com.revakovskyi.core.presentation.widgets.BackButton
 import com.revakovskyi.core.presentation.widgets.LoadingAnimation
@@ -120,7 +117,6 @@ internal fun EmailAndPhoneVerificationScreen(
             TextClickable(
                 text = stringResource(R.string.resend_code),
                 onClick = { /*TODO: create an action for the resend the code*/ },
-                fontWeight = FontWeight.Bold,
             )
 
             LoadingAnimation(
@@ -130,13 +126,4 @@ internal fun EmailAndPhoneVerificationScreen(
 
         }
     }
-}
-
-
-@Composable
-@DivicePreviews
-fun ShowPhoneVerificationScreen() {
-    EmailAndPhoneVerificationScreen(
-        navController = rememberNavController(), emailOrPhoneNumber = "+38 050 111 222 33"
-    )
 }

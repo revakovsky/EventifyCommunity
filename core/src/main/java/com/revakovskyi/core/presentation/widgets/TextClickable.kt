@@ -33,7 +33,7 @@ fun TextClickable(
     textStyle: TextStyle = MaterialTheme.typography.bodySmall,
     textAlign: TextAlign = TextAlign.Center,
     textColor: Color = MaterialTheme.colorScheme.onBackground,
-    fontWeight: FontWeight = FontWeight.Normal,
+    fontWeight: FontWeight = FontWeight.Bold,
 ) {
 
     val delayTime = 100L

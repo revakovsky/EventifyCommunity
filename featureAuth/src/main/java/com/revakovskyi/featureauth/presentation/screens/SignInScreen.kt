@@ -123,6 +123,7 @@ internal fun SignInScreen(
                     onClick = { navController.navigate(Screens.ForgotPasswordScreen.route) },
                     textStyle = MaterialTheme.typography.labelLarge,
                     textAlign = TextAlign.End,
+                    fontWeight = FontWeight.Normal,
                     modifier = Modifier.padding(end = MaterialTheme.dimens.medium)
                 )
 
@@ -156,7 +157,6 @@ internal fun SignInScreen(
                 TextClickable(
                     text = stringResource(R.string.sign_up),
                     onClick = { navController.navigate(Screens.SingUpScreen.route) },
-                    fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(bottom = MaterialTheme.dimens.medium)
                 )
 

@@ -44,5 +44,16 @@
     <string name="passwords_mismatch">Passwords mismatch!</string>
     <string name="send_message">Send</string>
     <string name="enter_your_email">Enter your email address and we will help you reset your current password and set a new one</string>
+    <string name="we_have_sent_you_instructions">
+        We have sent you instructions on how to reset your current password and set a new one at the email address
+        \n%1$s
+        \nIf you didn\'t see the message you received from us, please check your \"Spam\" folder, it might have ended up there
+    </string>
+    <string name="check_your_email">Check your email</string>
+    <string name="check_email_logo">Check Email logo</string>
+    <string name="ok">OK</string>
+    <string name="didn_t_receive_instructions">Didn\'t receive instructions?</string>
+    <string name="resend_message">Resend message</string>
+    <string name="we_have_resend_instructions">We have resent instructions to your email</string>
 
 </resources>

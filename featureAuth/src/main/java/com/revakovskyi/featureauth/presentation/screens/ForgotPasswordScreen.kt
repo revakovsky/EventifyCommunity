@@ -1,11 +1,15 @@
 package com.revakovskyi.featureauth.presentation.screens
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.relocation.BringIntoViewRequester
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.MaterialTheme
@@ -24,6 +28,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavController
+import com.revakovskyi.core.presentation.ui.BringIntoView
 import com.revakovskyi.core.presentation.ui.theme.dimens
 import com.revakovskyi.core.presentation.widgets.BackButton
 import com.revakovskyi.core.presentation.widgets.ButtonRegular
@@ -37,6 +42,7 @@ import com.revakovskyi.featureauth.presentation.widgets.SendInstructionsDialog
 import com.revakovskyi.featureauth.viewModel.AuthViewModel
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun ForgotPasswordScreen(
     modifier: Modifier = Modifier,
@@ -50,6 +56,10 @@ internal fun ForgotPasswordScreen(
     val snackbarHostState = remember { SnackbarHostState() }
     val snackbarMessage = stringResource(id = R.string.we_have_resend_instructions)
 
+    val scrollState = rememberScrollState()
+    val bringIntoViewRequester = remember { BringIntoViewRequester() }
+    BringIntoView(bringIntoViewRequester)
+
     Scaffold(
         snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { contentPadding ->
@@ -59,6 +69,7 @@ internal fun ForgotPasswordScreen(
                 .fillMaxSize()
                 .padding(contentPadding)
                 .background(MaterialTheme.colorScheme.background)
+                .verticalScroll(scrollState)
         ) {
 
             BackButton(
@@ -109,7 +120,8 @@ internal fun ForgotPasswordScreen(
                 ButtonRegular(
                     buttonText = stringResource(R.string.send_message),
                     enabled = email.isNotEmpty(),
-                    onClick = { isDialogShown = true }
+                    onClick = { isDialogShown = true },
+                    bringIntoViewRequester = bringIntoViewRequester
                 )
 
             }
@@ -124,6 +136,7 @@ internal fun ForgotPasswordScreen(
             onConfirm = { navController.popBackStack() },
             onDismiss = { isDialogShown = false },
             onResendMessageClicked = {
+                isDialogShown = false
                 coroutineScope.launch {
                     snackbarHostState.showSnackbar(snackbarMessage)
                 }

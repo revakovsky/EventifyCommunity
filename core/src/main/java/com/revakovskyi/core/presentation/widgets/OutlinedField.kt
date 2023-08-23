@@ -11,7 +11,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -56,11 +55,10 @@ fun OutlinedField(
     singleLine: Boolean = true,
     maxLines: Int = if (singleLine) 1 else Int.MAX_VALUE,
     shape: Shape = MaterialTheme.shapes.medium,
+    bringIntoViewRequester: BringIntoViewRequester = BringIntoViewRequester(),
 ) {
     val controller = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current
-
-    val bringIntoViewRequester = remember { BringIntoViewRequester() }
     val coroutineScope = rememberCoroutineScope()
 
     OutlinedTextField(

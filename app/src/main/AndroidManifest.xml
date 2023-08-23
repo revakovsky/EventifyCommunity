@@ -19,6 +19,7 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.EventifyCommunity"
+            android:windowSoftInputMode="adjustResize"
             tools:ignore="LockedOrientationActivity">
 
             <intent-filter>

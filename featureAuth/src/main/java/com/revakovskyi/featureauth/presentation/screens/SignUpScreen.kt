@@ -1,5 +1,6 @@
 package com.revakovskyi.featureauth.presentation.screens
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.relocation.BringIntoViewRequester
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
@@ -28,10 +30,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.revakovskyi.core.presentation.ui.BringIntoView
 import com.revakovskyi.core.presentation.ui.theme.dimens
 import com.revakovskyi.core.presentation.widgets.BackButton
 import com.revakovskyi.core.presentation.widgets.ButtonRegular
@@ -49,6 +51,7 @@ import com.revakovskyi.featureauth.presentation.widgets.NameInputField
 import com.revakovskyi.featureauth.presentation.widgets.PasswordInputField
 import com.revakovskyi.featureauth.viewModel.AuthViewModel
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun SignUpScreen(
     modifier: Modifier = Modifier,
@@ -64,6 +67,9 @@ internal fun SignUpScreen(
     var doubleCheckPassword by remember { mutableStateOf("") }
 
     LaunchedEffect(Unit) { scrollState.scrollTo(0) }
+
+    val bringIntoViewRequester = remember { BringIntoViewRequester() }
+    BringIntoView(bringIntoViewRequester)
 
     Box(
         modifier = modifier
@@ -172,7 +178,8 @@ internal fun SignUpScreen(
                         }
                     },
                     label = stringResource(id = R.string.confirm_password),
-                    supportingText = stringResource(id = R.string.passwords_mismatch)
+                    supportingText = stringResource(id = R.string.passwords_mismatch),
+                    bringIntoViewRequester = bringIntoViewRequester
                 )
 
                 TextLabel(

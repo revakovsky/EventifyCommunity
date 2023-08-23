@@ -1,5 +1,6 @@
 package com.revakovskyi.featureauth.presentation.widgets
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -31,6 +32,7 @@ import com.revakovskyi.core.presentation.widgets.TextRegular
 import com.revakovskyi.core.presentation.widgets.TextTitle
 import com.revakovskyi.featureauth.R
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun SendInstructionsDialog(
     modifier: Modifier = Modifier,

@@ -1,17 +1,21 @@
 package com.revakovskyi.featureauth.presentation.screens
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.relocation.BringIntoViewRequester
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -21,6 +25,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -28,6 +33,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.revakovskyi.core.presentation.ui.BringIntoView
 import com.revakovskyi.core.presentation.ui.theme.dimens
 import com.revakovskyi.core.presentation.widgets.ButtonRegular
 import com.revakovskyi.core.presentation.widgets.TextClickable
@@ -42,6 +48,7 @@ import com.revakovskyi.featureauth.presentation.widgets.LoginInputField
 import com.revakovskyi.featureauth.presentation.widgets.PasswordInputField
 import com.revakovskyi.featureauth.viewModel.AuthViewModel
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun SignInScreen(
     modifier: Modifier = Modifier,
@@ -51,10 +58,16 @@ internal fun SignInScreen(
     var login by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
+    val scrollState = rememberScrollState()
+    val bringIntoViewRequester = remember { BringIntoViewRequester() }
+    BringIntoView(bringIntoViewRequester)
+
     Box(
+        contentAlignment = Alignment.Center,
         modifier = modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
+            .verticalScroll(state = scrollState)
     ) {
 
         Column(
@@ -70,8 +83,8 @@ internal fun SignInScreen(
                 contentDescription = stringResource(id = R.string.logo_icon),
                 contentScale = ContentScale.Inside,
                 modifier = Modifier
-                    .weight(1f, fill = false)
-                    .aspectRatio(1.1f)
+                    .height(IntrinsicSize.Min)
+                    .clipToBounds()
                     .padding(top = MaterialTheme.dimens.medium)
             )
 
@@ -103,7 +116,7 @@ internal fun SignInScreen(
                                 if (loginValidationStatus == ValidationStatus.Correct) inputLogin
                                 else ""
                         }
-                    }
+                    },
                 )
 
                 PasswordInputField(
@@ -130,37 +143,37 @@ internal fun SignInScreen(
                 ButtonRegular(
                     buttonText = stringResource(R.string.sign_in),
                     enabled = areFieldsNotEmpty(login, password),
-                    onClick = { /*TODO: make sign in*/ }
+                    onClick = { /*TODO: make sign in*/ },
+                    bringIntoViewRequester = bringIntoViewRequester
                 )
-
-                TextWithHorizontalBar(
-                    text = stringResource(R.string.or_sign_in_using),
-                    modifier = Modifier.padding(top = MaterialTheme.dimens.large)
-                )
-
-                Image(
-                    painter = painterResource(id = R.drawable.google_icon),
-                    contentDescription = stringResource(R.string.google),
-                    modifier = Modifier
-                        .height(64.dp)
-                        .padding(top = MaterialTheme.dimens.large)
-                        .clip(shape = CircleShape)
-                        .clickable { /*TODO: open Google Sign In*/ }
-                )
-
-                TextRegular(
-                    text = stringResource(R.string.don_t_have_an_account),
-                    modifier = Modifier.padding(top = MaterialTheme.dimens.large),
-                    textAlign = TextAlign.Center
-                )
-
-                TextClickable(
-                    text = stringResource(R.string.sign_up),
-                    onClick = { navController.navigate(Screens.SingUpScreen.route) },
-                    modifier = Modifier.padding(bottom = MaterialTheme.dimens.medium)
-                )
-
             }
+
+            TextWithHorizontalBar(
+                text = stringResource(R.string.or_sign_in_using),
+                modifier = Modifier.padding(top = MaterialTheme.dimens.large)
+            )
+
+            Image(
+                painter = painterResource(id = R.drawable.google_icon),
+                contentDescription = stringResource(R.string.google),
+                modifier = Modifier
+                    .height(64.dp)
+                    .padding(top = MaterialTheme.dimens.large)
+                    .clip(shape = CircleShape)
+                    .clickable { /*TODO: open Google Sign In*/ }
+            )
+
+            TextRegular(
+                text = stringResource(R.string.don_t_have_an_account),
+                modifier = Modifier.padding(top = MaterialTheme.dimens.large),
+                textAlign = TextAlign.Center
+            )
+
+            TextClickable(
+                text = stringResource(R.string.sign_up),
+                onClick = { navController.navigate(Screens.SingUpScreen.route) },
+                modifier = Modifier.padding(bottom = MaterialTheme.dimens.medium)
+            )
 
         }
 

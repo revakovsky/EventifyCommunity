@@ -1,5 +1,7 @@
 package com.revakovskyi.featureauth.presentation.widgets
 
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.relocation.BringIntoViewRequester
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -15,6 +17,7 @@ import com.revakovskyi.core.presentation.widgets.OutlinedHintText
 import com.revakovskyi.featureauth.R
 import com.revakovskyi.featureauth.presentation.models.ValidationStatus
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun LoginInputField(
     modifier: Modifier = Modifier,
@@ -25,6 +28,7 @@ internal fun LoginInputField(
     placeholder: String = stringResource(R.string.login_example),
     supportingText: String = stringResource(R.string.login_is_incorrect),
     imeAction: ImeAction = ImeAction.Next,
+    bringIntoViewRequester: BringIntoViewRequester = BringIntoViewRequester(),
 ) {
     var login by remember { mutableStateOf("") }
 
@@ -69,5 +73,6 @@ internal fun LoginInputField(
             }
         },
         imeAction = imeAction,
+        bringIntoViewRequester = bringIntoViewRequester,
     )
 }

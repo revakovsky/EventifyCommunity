@@ -55,5 +55,6 @@
     <string name="didn_t_receive_instructions">Didn\'t receive instructions?</string>
     <string name="resend_message">Resend message</string>
     <string name="we_have_resend_instructions">We have resent instructions to your email</string>
+    <string name="we_have_resend_code">We have resent you a new code </string>
 
 </resources>

@@ -1,5 +1,6 @@
 package com.revakovskyi.featureauth.presentation.widgets
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -8,6 +9,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.relocation.BringIntoViewRequester
+import androidx.compose.foundation.relocation.bringIntoViewRequester
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -28,18 +31,21 @@ import androidx.compose.ui.unit.dp
 import com.revakovskyi.core.presentation.ui.theme.dimens
 import com.revakovskyi.core.presentation.widgets.TextRegular
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun OtpTextFields(
     modifier: Modifier = Modifier,
     otpText: String,
     otpCount: Int = 6,
     onOtpTextChange: (String, Boolean) -> Unit,
+    enabled: Boolean = true,
+    bringIntoViewRequester: BringIntoViewRequester = BringIntoViewRequester(),
 ) {
     val focusManager = LocalFocusManager.current
     var isOtpFull by remember { mutableStateOf(false) }
 
     BasicTextField(
-        modifier = modifier,
+        modifier = modifier.bringIntoViewRequester(bringIntoViewRequester),
         value = TextFieldValue(
             text = otpText,
             selection = TextRange(otpText.length)
@@ -78,7 +84,8 @@ internal fun OtpTextFields(
 
                 }
             }
-        }
+        },
+        enabled = enabled,
     )
 }
 

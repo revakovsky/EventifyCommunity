@@ -1,6 +1,8 @@
 package com.revakovskyi.featureauth.presentation.widgets
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.relocation.BringIntoViewRequester
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -21,6 +23,7 @@ import com.revakovskyi.core.presentation.widgets.OutlinedHintText
 import com.revakovskyi.featureauth.R
 import com.revakovskyi.featureauth.presentation.models.ValidationStatus
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun PasswordInputField(
     status: ValidationStatus,
@@ -28,6 +31,7 @@ internal fun PasswordInputField(
     label: String = stringResource(R.string.password),
     imeAction: ImeAction = ImeAction.Done,
     supportingText: String = stringResource(R.string.password_should_contain),
+    bringIntoViewRequester: BringIntoViewRequester = BringIntoViewRequester(),
 ) {
     var password by remember { mutableStateOf("") }
     var isPasswordInvisible by remember { mutableStateOf(true) }
@@ -73,5 +77,6 @@ internal fun PasswordInputField(
                 )
             }
         },
+        bringIntoViewRequester = bringIntoViewRequester,
     )
 }

@@ -1,5 +1,6 @@
 package com.revakovskyi.featureauth.presentation.widgets
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -15,6 +16,7 @@ import com.revakovskyi.core.presentation.widgets.OutlinedHintText
 import com.revakovskyi.featureauth.R
 import com.revakovskyi.featureauth.presentation.models.ValidationStatus
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun NameInputField(
     label: String = stringResource(R.string.name),

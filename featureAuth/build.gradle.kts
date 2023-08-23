@@ -54,9 +54,7 @@ dependencies {
     implementation(project(path = ":core"))
 
     // Android
-    implementation(libs.android.coreKtx)
-    implementation(libs.android.appcompat)
-    implementation(libs.android.material)
+    implementation(libs.bundles.androidCore)
 
     // Compose
     implementation(platform(libs.compose.bom))

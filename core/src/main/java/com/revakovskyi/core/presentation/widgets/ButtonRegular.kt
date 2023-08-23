@@ -1,7 +1,10 @@
 package com.revakovskyi.core.presentation.widgets
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.relocation.BringIntoViewRequester
+import androidx.compose.foundation.relocation.bringIntoViewRequester
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
@@ -10,18 +13,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import com.revakovskyi.core.presentation.ui.theme.dimens
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ButtonRegular(
     buttonText: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    bringIntoViewRequester: BringIntoViewRequester = BringIntoViewRequester(),
 ) {
 
     Button(
         onClick = { onClick() },
         modifier = modifier
             .width(MaterialTheme.dimens.buttonWidth)
+            .bringIntoViewRequester(bringIntoViewRequester)
             .padding(top = MaterialTheme.dimens.large),
         shape = MaterialTheme.shapes.large,
         colors = ButtonDefaults.textButtonColors(

@@ -148,6 +148,12 @@ google-services            = { module = "com.google.gms:google-services", versio
 
 [bundles]
 
+androidCore = [
+    "android-coreKtx",
+    "android-appcompat",
+    "android-material",
+]
+
 composeUi = [
     "compose-ui",
     "compose-uiGraphics",

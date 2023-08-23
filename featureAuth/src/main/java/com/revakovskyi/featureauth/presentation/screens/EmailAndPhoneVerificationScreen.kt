@@ -130,11 +130,9 @@ internal fun EmailAndPhoneVerificationScreen(
                     modifier = Modifier.padding(top = MaterialTheme.dimens.large),
                     otpText = otpText,
                     onOtpTextChange = { enteredCode, isOtpFull ->
+                        otpText = enteredCode
                         isLoadingAnimationVisible = isOtpFull
-                        if (isOtpFull) {
-                            isOtpTextEnabled = false
-                            otpText = enteredCode
-                        }
+                        if (isOtpFull) isOtpTextEnabled = false
                     },
                     enabled = isOtpTextEnabled,
                     bringIntoViewRequester = bringIntoViewRequester

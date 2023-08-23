@@ -1,7 +1,7 @@
 [versions]
 
 # Config
-compileSdk                  = "33"
+compileSdk                  = "34"
 minSdk                      = "26"
 targetSdk                   = "33"
 versionCode                 = "1"
@@ -36,7 +36,7 @@ ver_Material                = "1.9.0"
 # Compose
 ver_ActivityCompose         = "1.7.2"
 ver_ComposeBom              = "2023.06.01"
-ver_NavigationCompose       = "2.6.0"
+ver_NavigationCompose       = "2.7.0"
 ver_Coil                    = "2.4.0"
 
 # Tests
@@ -65,7 +65,7 @@ ver_Retrofit2               = "2.9.0"
 ver_Gson                    = "2.10.1"
 
 # Firebase
-ver_FrebaseAuth             = "22.1.0"
+ver_FrebaseAuth             = "22.1.1"
 
 # --------------------------------------------------------------------------------------------------
 

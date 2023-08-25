@@ -41,11 +41,13 @@ fun ButtonRegular(
         ),
         enabled = enabled
     ) {
+
         TextRegular(
             text = buttonText,
             style = MaterialTheme.typography.bodyMedium.copy(
                 fontWeight = FontWeight.Bold
             )
         )
+
     }
 }

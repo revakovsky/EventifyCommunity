@@ -9,8 +9,8 @@ enum class ValidationStatus {
 
 internal fun Status.toValidationStatus(): ValidationStatus {
     return when (this) {
-        Status.Correct -> ValidationStatus.Correct
+        Status.Correct   -> ValidationStatus.Correct
         Status.Incorrect -> ValidationStatus.Incorrect
-        Status.Neutral -> ValidationStatus.Neutral
+        Status.Neutral   -> ValidationStatus.Neutral
     }
 }

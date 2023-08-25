@@ -12,8 +12,6 @@ import com.revakovskyi.core.extensions.slideInFromBottomToTop
 import com.revakovskyi.core.extensions.slideOutFromTopToBottom
 import com.revakovskyi.core.navigation.MainRoutes
 import com.revakovskyi.core.navigation.NavigationRoute
-import com.revakovskyi.featureauth.presentation.AuthScreen
-import com.revakovskyi.featureauth.presentation.AuthScreen2
 import com.revakovskyi.featureauth.presentation.screens.EmailAndPhoneVerificationScreen
 import com.revakovskyi.featureauth.presentation.screens.ForgotPasswordScreen
 import com.revakovskyi.featureauth.presentation.screens.SignInScreen
@@ -42,9 +40,8 @@ internal class AuthNavigationRouteImpl @Inject constructor() : AuthNavigationRou
             route = navigationRouteName
         ) {
 
-            openAnimatedComposable(route = firstsScreenRoute) { animatedContentScope, navBackStackEntry ->
-                val viewModel: AuthViewModel =
-                    navBackStackEntry.sharedViewModel(navController = navHostController)
+            openAnimatedComposable(route = firstsScreenRoute) { _, navBackStackEntry ->
+                val viewModel: AuthViewModel = navBackStackEntry.sharedViewModel(navController = navHostController)
                 SignInScreen(
                     navController = navHostController,
                     viewModel = viewModel
@@ -55,9 +52,8 @@ internal class AuthNavigationRouteImpl @Inject constructor() : AuthNavigationRou
                 route = Screens.ForgotPasswordScreen.route,
                 enterTransition = { slideInFromBottomToTop() },
                 popExitTransition = { slideOutFromTopToBottom() },
-            ) { animatedContentScope, navBackStackEntry ->
-                val viewModel: AuthViewModel =
-                    navBackStackEntry.sharedViewModel(navController = navHostController)
+            ) { _, navBackStackEntry ->
+                val viewModel: AuthViewModel = navBackStackEntry.sharedViewModel(navController = navHostController)
                 ForgotPasswordScreen(
                     navController = navHostController,
                     viewModel = viewModel
@@ -79,7 +75,7 @@ internal class AuthNavigationRouteImpl @Inject constructor() : AuthNavigationRou
                 arguments = listOf(
                     navArgument(VERIFICATION_ARGUMENT_KEY) { type = NavType.StringType }
                 )
-            ) { animatedContentScope, navBackStackEntry ->
+            ) { _, navBackStackEntry ->
                 EmailAndPhoneVerificationScreen(
                     navController = navHostController,
                     emailOrPhoneNumber = navBackStackEntry.arguments?.getString(
@@ -88,30 +84,8 @@ internal class AuthNavigationRouteImpl @Inject constructor() : AuthNavigationRou
                 )
             }
 
-
-
-
-
-            composable(route = Screens.AuthScreen.route) {
-                AuthScreen(navController = navHostController)
-            }
-
-            composable(
-                route = Screens.AuthScreen2.route,
-                arguments = listOf(
-                    navArgument(AUTH2_ARGUMENT_KEY) {
-                        type = NavType.StringType
-                        defaultValue = "Nothing was passed"
-                    }
-                )
-            ) { navBackStackEntry ->
-                AuthScreen2(
-                    navController = navHostController,
-                    text = navBackStackEntry.arguments?.getString(AUTH2_ARGUMENT_KEY)
-                )
-            }
-
         }
+
     }
 
 }

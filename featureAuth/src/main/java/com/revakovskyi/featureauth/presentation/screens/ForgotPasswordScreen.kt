@@ -17,6 +17,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -38,8 +39,10 @@ import com.revakovskyi.featureauth.R
 import com.revakovskyi.featureauth.presentation.models.AuthInputTextType
 import com.revakovskyi.featureauth.presentation.models.ValidationStatus
 import com.revakovskyi.featureauth.presentation.widgets.LoginInputField
-import com.revakovskyi.featureauth.presentation.widgets.SendInstructionsDialog
+import com.revakovskyi.featureauth.presentation.widgets.InstructionsDialog
 import com.revakovskyi.featureauth.viewModel.AuthViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -50,12 +53,9 @@ internal fun ForgotPasswordScreen(
     viewModel: AuthViewModel,
 ) {
     var email by remember { mutableStateOf("") }
-    var isDialogShown by remember { mutableStateOf(false) }
+    val isDialogShown = remember { mutableStateOf(false) }
 
-    val coroutineScope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
-    val snackbarMessage = stringResource(id = R.string.we_have_resend_instructions)
-
     val scrollState = rememberScrollState()
     val bringIntoViewRequester = remember { BringIntoViewRequester() }
     BringIntoView(bringIntoViewRequester)
@@ -120,7 +120,7 @@ internal fun ForgotPasswordScreen(
                 ButtonRegular(
                     buttonText = stringResource(R.string.send_message),
                     enabled = email.isNotEmpty(),
-                    onClick = { isDialogShown = true },
+                    onClick = { isDialogShown.value = true },
                     bringIntoViewRequester = bringIntoViewRequester
                 )
 
@@ -130,18 +130,55 @@ internal fun ForgotPasswordScreen(
 
     }
 
-    if (isDialogShown) {
-        SendInstructionsDialog(
+    ShowDialog(
+        isDialogShown,
+        email,
+        navController,
+        snackbarHostState,
+    )
+
+}
+
+@Composable
+private fun ShowDialog(
+    isDialogShown: MutableState<Boolean>,
+    email: String,
+    navController: NavController,
+    snackbarHostState: SnackbarHostState,
+) {
+    val coroutineScope = rememberCoroutineScope()
+    val snackbarMessage = stringResource(id = R.string.we_have_resend_instructions)
+
+    if (isDialogShown.value) {
+
+        InstructionsDialog(
             email = email,
-            onConfirm = { navController.popBackStack() },
-            onDismiss = { isDialogShown = false },
+            onConfirm = {
+                hideDialogAndMakeAction(
+                    coroutineScope,
+                    isDialogShown
+                ) { navController.popBackStack() }
+            },
+            onDismiss = { isDialogShown.value = false },
             onResendMessageClicked = {
-                isDialogShown = false
-                coroutineScope.launch {
-                    snackbarHostState.showSnackbar(snackbarMessage)
-                }
+                hideDialogAndMakeAction(
+                    coroutineScope,
+                    isDialogShown
+                ) { snackbarHostState.showSnackbar(snackbarMessage) }
             }
         )
-    }
 
+    }
+}
+
+private fun hideDialogAndMakeAction(
+    coroutineScope: CoroutineScope,
+    isDialogShown: MutableState<Boolean>,
+    action: suspend () -> Unit,
+) {
+    coroutineScope.launch {
+        delay(50L)
+        isDialogShown.value = false
+        action()
+    }
 }

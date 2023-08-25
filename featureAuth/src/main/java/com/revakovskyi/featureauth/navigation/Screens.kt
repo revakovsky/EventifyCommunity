@@ -2,7 +2,6 @@ package com.revakovskyi.featureauth.navigation
 
 import com.revakovskyi.featureauth.navigation.Screens.EmailAndPhoneVerificationScreen.route
 
-internal const val AUTH2_ARGUMENT_KEY = "text"
 internal const val VERIFICATION_ARGUMENT_KEY = "email_or_phone_number"
 
 internal sealed class Screens(
@@ -21,12 +20,6 @@ internal sealed class Screens(
                 newValue = phoneNumber
             )
         }
-    )
-
-    object AuthScreen : Screens("auth_screen")
-    object AuthScreen2 : Screens(
-        "auth_screen2?$AUTH2_ARGUMENT_KEY={${AUTH2_ARGUMENT_KEY}}",
-        arguments = { text -> "auth_screen2?$AUTH2_ARGUMENT_KEY=$text" }
     )
 
 }

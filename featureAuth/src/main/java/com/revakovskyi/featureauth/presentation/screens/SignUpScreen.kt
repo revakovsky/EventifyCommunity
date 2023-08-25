@@ -58,18 +58,17 @@ internal fun SignUpScreen(
     navController: NavController,
     viewModel: AuthViewModel,
 ) {
-    val scrollState = rememberScrollState()
-
     var name by remember { mutableStateOf("") }
     var surname by remember { mutableStateOf("") }
     var emailOrPhoneNumber by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var doubleCheckPassword by remember { mutableStateOf("") }
 
-    LaunchedEffect(Unit) { scrollState.scrollTo(0) }
-
+    val scrollState = rememberScrollState()
     val bringIntoViewRequester = remember { BringIntoViewRequester() }
     BringIntoView(bringIntoViewRequester)
+
+    LaunchedEffect(Unit) { scrollState.scrollTo(0) }
 
     Box(
         modifier = modifier

@@ -1,5 +1,9 @@
 package com.revakovskyi.featureauth.navigation
 
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -12,10 +16,12 @@ import com.revakovskyi.core.extensions.slideInFromBottomToTop
 import com.revakovskyi.core.extensions.slideOutFromTopToBottom
 import com.revakovskyi.core.navigation.MainRoutes
 import com.revakovskyi.core.navigation.NavigationRoute
+import com.revakovskyi.featureauth.R
 import com.revakovskyi.featureauth.presentation.screens.EmailAndPhoneVerificationScreen
 import com.revakovskyi.featureauth.presentation.screens.ForgotPasswordScreen
 import com.revakovskyi.featureauth.presentation.screens.SignInScreen
 import com.revakovskyi.featureauth.presentation.screens.SignUpScreen
+import com.revakovskyi.featureauth.presentation.signIn.SignInLauncher
 import com.revakovskyi.featureauth.viewModel.AuthViewModel
 import javax.inject.Inject
 
@@ -41,10 +47,25 @@ internal class AuthNavigationRouteImpl @Inject constructor() : AuthNavigationRou
         ) {
 
             openAnimatedComposable(route = firstsScreenRoute) { _, navBackStackEntry ->
-                val viewModel: AuthViewModel = navBackStackEntry.sharedViewModel(navController = navHostController)
+                val viewModel: AuthViewModel = navBackStackEntry.sharedViewModel(navHostController)
+
+                val shouldRunSignIn = remember { mutableStateOf(false) }
+                val shouldSignOut = MainRoutes.provideArgumentsForTheAuthRoute
+
+                if (shouldSignOut) viewModel.onSignOut(stringResource(R.string.your_were_signed_out))
+
+                SignInLauncher(viewModel, shouldRunSignIn)
+
+                LaunchedEffect(key1 = Unit) {
+                    if (viewModel.isUserAlreadySignedIn()) navHostController.navigate(
+                        MainRoutes.ProfileScreenRoute.route
+                    )
+                }
+
                 SignInScreen(
                     navController = navHostController,
-                    viewModel = viewModel
+                    viewModel = viewModel,
+                    onGoogleSingInClick = { shouldRunSignIn.value = true }
                 )
             }
 
@@ -53,7 +74,8 @@ internal class AuthNavigationRouteImpl @Inject constructor() : AuthNavigationRou
                 enterTransition = { slideInFromBottomToTop() },
                 popExitTransition = { slideOutFromTopToBottom() },
             ) { _, navBackStackEntry ->
-                val viewModel: AuthViewModel = navBackStackEntry.sharedViewModel(navController = navHostController)
+                val viewModel: AuthViewModel =
+                    navBackStackEntry.sharedViewModel(navController = navHostController)
                 ForgotPasswordScreen(
                     navController = navHostController,
                     viewModel = viewModel

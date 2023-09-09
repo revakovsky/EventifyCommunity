@@ -153,7 +153,7 @@ internal fun EmailAndPhoneVerificationScreen(
                 )
 
                 LoadingAnimation(
-                    modifier = Modifier.padding(top = MaterialTheme.dimens.largest),
+                    modifier = Modifier.padding(top = MaterialTheme.dimens.extraLarge),
                     isVisible = isLoadingAnimationVisible
                 )
 

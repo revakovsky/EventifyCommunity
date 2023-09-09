@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="web_client_id">148082866006-8gv0pdi8mdmudb3qbn4knas39nbkulru.apps.googleusercontent.com</string>
+
     <string name="logo_icon">"Logo icon"</string>
     <string name="welcome">Welcome</string>
     <string name="please_sign_in_to_continue">Please, Sign In to continue</string>
@@ -56,5 +58,6 @@
     <string name="resend_message">Resend message</string>
     <string name="we_have_resend_instructions">We have resent instructions to your email</string>
     <string name="we_have_resend_code">We have resent you a new code </string>
+    <string name="your_were_signed_out">Your were signed out</string>
 
 </resources>

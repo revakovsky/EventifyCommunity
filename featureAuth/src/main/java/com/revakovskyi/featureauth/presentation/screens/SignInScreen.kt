@@ -17,7 +17,11 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -33,6 +37,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.revakovskyi.core.navigation.MainRoutes
 import com.revakovskyi.core.presentation.ui.BringIntoView
 import com.revakovskyi.core.presentation.ui.theme.dimens
 import com.revakovskyi.core.presentation.widgets.ButtonRegular
@@ -54,126 +59,148 @@ internal fun SignInScreen(
     modifier: Modifier = Modifier,
     navController: NavController,
     viewModel: AuthViewModel,
+    onGoogleSingInClick: () -> Unit,
 ) {
     var login by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
+    val snackbarHostState = remember { SnackbarHostState() }
     val scrollState = rememberScrollState()
     val bringIntoViewRequester = remember { BringIntoViewRequester() }
+
     BringIntoView(bringIntoViewRequester)
 
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-            .verticalScroll(state = scrollState)
-    ) {
+    LaunchedEffect(key1 = viewModel.signInState) {
+        viewModel.signInState.apply {
+            if (isSuccessful) {
+                navController.navigate(MainRoutes.ProfileScreenRoute.route)
+                viewModel.resetSignInState()
+            }
+            errorMessage?.let { error ->
+                snackbarHostState.showSnackbar(message = error)
+            }
+        }
+    }
 
-        Column(
-            verticalArrangement = Arrangement.SpaceEvenly,
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier
+    Scaffold(
+        snackbarHost = { SnackbarHost(snackbarHostState) }
+    ) { contentPadding ->
+
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = modifier
                 .fillMaxSize()
-                .padding(MaterialTheme.dimens.medium)
+                .background(MaterialTheme.colorScheme.background)
+                .verticalScroll(state = scrollState)
+                .padding(contentPadding)
         ) {
 
-            Image(
-                painter = painterResource(id = R.drawable.logo_icon_no_bg),
-                contentDescription = stringResource(id = R.string.logo_icon),
-                contentScale = ContentScale.Inside,
-                modifier = Modifier
-                    .height(IntrinsicSize.Min)
-                    .clipToBounds()
-                    .padding(top = MaterialTheme.dimens.medium)
-            )
-
-            TextTitle(
-                modifier = Modifier.padding(top = MaterialTheme.dimens.large),
-                text = stringResource(R.string.welcome)
-            )
-
-            TextRegular(
-                modifier = Modifier.padding(MaterialTheme.dimens.medium),
-                text = stringResource(R.string.please_sign_in_to_continue),
-                style = MaterialTheme.typography.bodyLarge
-            )
-
             Column(
+                verticalArrangement = Arrangement.SpaceEvenly,
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center,
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = MaterialTheme.dimens.medium)
+                    .fillMaxSize()
+                    .padding(MaterialTheme.dimens.medium)
             ) {
 
-                LoginInputField(
-                    status = viewModel.loginValidationStatus,
-                    inputLogin = { inputLogin ->
-                        viewModel.apply {
-                            verifyInputText(inputLogin, AuthInputTextType.Login)
-                            login =
-                                if (loginValidationStatus == ValidationStatus.Correct) inputLogin
-                                else ""
-                        }
-                    },
+                Image(
+                    painter = painterResource(id = R.drawable.logo_icon_no_bg),
+                    contentDescription = stringResource(id = R.string.logo_icon),
+                    contentScale = ContentScale.Inside,
+                    modifier = Modifier
+                        .height(IntrinsicSize.Min)
+                        .clipToBounds()
+                        .padding(top = MaterialTheme.dimens.medium)
                 )
 
-                PasswordInputField(
-                    status = viewModel.passwordValidationStatus,
-                    inputPassword = { inputPassword ->
-                        viewModel.apply {
-                            verifyInputText(inputPassword, AuthInputTextType.Password)
-                            password =
-                                if (passwordValidationStatus == ValidationStatus.Correct) inputPassword
-                                else ""
+                TextTitle(
+                    modifier = Modifier.padding(top = MaterialTheme.dimens.large),
+                    text = stringResource(R.string.welcome)
+                )
+
+                TextRegular(
+                    modifier = Modifier.padding(MaterialTheme.dimens.medium),
+                    text = stringResource(R.string.please_sign_in_to_continue),
+                    style = MaterialTheme.typography.bodyLarge
+                )
+
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = MaterialTheme.dimens.medium)
+                ) {
+
+                    LoginInputField(
+                        status = viewModel.loginValidationStatus,
+                        inputLogin = { inputLogin ->
+                            viewModel.apply {
+                                verifyInputText(inputLogin, AuthInputTextType.Login)
+                                login =
+                                    if (loginValidationStatus == ValidationStatus.Correct) inputLogin
+                                    else ""
+                            }
+                        },
+                    )
+
+                    PasswordInputField(
+                        status = viewModel.passwordValidationStatus,
+                        inputPassword = { inputPassword ->
+                            viewModel.apply {
+                                verifyInputText(inputPassword, AuthInputTextType.Password)
+                                password =
+                                    if (passwordValidationStatus == ValidationStatus.Correct) inputPassword
+                                    else ""
+                            }
                         }
-                    }
+                    )
+
+                    TextClickable(
+                        text = stringResource(R.string.forgot_password),
+                        onClick = { navController.navigate(Screens.ForgotPasswordScreen.route) },
+                        textStyle = MaterialTheme.typography.labelLarge,
+                        textAlign = TextAlign.End,
+                        fontWeight = FontWeight.Normal,
+                        modifier = Modifier.padding(end = MaterialTheme.dimens.medium)
+                    )
+
+                    ButtonRegular(
+                        buttonText = stringResource(R.string.sign_in),
+                        enabled = areFieldsNotEmpty(login, password),
+                        onClick = { /*TODO: make sign in*/ },
+                        bringIntoViewRequester = bringIntoViewRequester
+                    )
+                }
+
+                TextWithHorizontalBar(
+                    text = stringResource(R.string.or_sign_in_using),
+                    modifier = Modifier.padding(top = MaterialTheme.dimens.large)
+                )
+
+                Image(
+                    painter = painterResource(id = R.drawable.google_icon),
+                    contentDescription = stringResource(R.string.google),
+                    modifier = Modifier
+                        .height(64.dp)
+                        .padding(top = MaterialTheme.dimens.large)
+                        .clip(shape = CircleShape)
+                        .clickable { onGoogleSingInClick() }
+                )
+
+                TextRegular(
+                    text = stringResource(R.string.don_t_have_an_account),
+                    modifier = Modifier.padding(top = MaterialTheme.dimens.large),
+                    textAlign = TextAlign.Center
                 )
 
                 TextClickable(
-                    text = stringResource(R.string.forgot_password),
-                    onClick = { navController.navigate(Screens.ForgotPasswordScreen.route) },
-                    textStyle = MaterialTheme.typography.labelLarge,
-                    textAlign = TextAlign.End,
-                    fontWeight = FontWeight.Normal,
-                    modifier = Modifier.padding(end = MaterialTheme.dimens.medium)
+                    text = stringResource(R.string.sign_up),
+                    onClick = { navController.navigate(Screens.SingUpScreen.route) },
+                    modifier = Modifier.padding(bottom = MaterialTheme.dimens.medium)
                 )
 
-                ButtonRegular(
-                    buttonText = stringResource(R.string.sign_in),
-                    enabled = areFieldsNotEmpty(login, password),
-                    onClick = { /*TODO: make sign in*/ },
-                    bringIntoViewRequester = bringIntoViewRequester
-                )
             }
-
-            TextWithHorizontalBar(
-                text = stringResource(R.string.or_sign_in_using),
-                modifier = Modifier.padding(top = MaterialTheme.dimens.large)
-            )
-
-            Image(
-                painter = painterResource(id = R.drawable.google_icon),
-                contentDescription = stringResource(R.string.google),
-                modifier = Modifier
-                    .height(64.dp)
-                    .padding(top = MaterialTheme.dimens.large)
-                    .clip(shape = CircleShape)
-                    .clickable { /*TODO: open Google Sign In*/ }
-            )
-
-            TextRegular(
-                text = stringResource(R.string.don_t_have_an_account),
-                modifier = Modifier.padding(top = MaterialTheme.dimens.large),
-                textAlign = TextAlign.Center
-            )
-
-            TextClickable(
-                text = stringResource(R.string.sign_up),
-                onClick = { navController.navigate(Screens.SingUpScreen.route) },
-                modifier = Modifier.padding(bottom = MaterialTheme.dimens.medium)
-            )
 
         }
 

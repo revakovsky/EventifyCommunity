@@ -1,5 +1,6 @@
 package com.revakovskyi.featureprofile.presentation
 
+import android.app.Activity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -10,8 +11,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.app.ActivityCompat
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.revakovskyi.core.navigation.MainRoutes
@@ -20,8 +23,10 @@ import com.revakovskyi.core.navigation.MainRoutes
 internal fun ProfileScreen(
     modifier: Modifier = Modifier,
     navController: NavController,
-    text: String? = ""
+    text: String? = "",
 ) {
+    val context = LocalContext.current
+
     Column(
         modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -39,7 +44,7 @@ internal fun ProfileScreen(
         Spacer(modifier = Modifier.height(50.dp))
 
         Button(
-            onClick = { navController.popBackStack() },
+            onClick = { ActivityCompat.finishAffinity(context as Activity) },
         ) {
             Text(text = "Back")
         }

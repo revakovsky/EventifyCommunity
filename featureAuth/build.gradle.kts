@@ -59,6 +59,7 @@ dependencies {
     // Compose
     implementation(platform(libs.compose.bom))
     implementation(libs.bundles.composeUi)
+    implementation(libs.play.services.auth)
     debugImplementation(libs.tests.uiTooling)
     implementation(libs.compose.navigationCompose)
 
@@ -66,8 +67,8 @@ dependencies {
     implementation(libs.bundles.hilt)
     kapt(libs.hilt.compiler)
 
-    // Firebase Auth
-    implementation(libs.firebase.auth)
+    // Firebase
+    implementation(libs.bundles.firebase)
 
 }
 

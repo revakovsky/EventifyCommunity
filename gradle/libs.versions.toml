@@ -66,6 +66,7 @@ ver_Gson                    = "2.10.1"
 
 # Firebase
 ver_FrebaseAuth             = "22.1.1"
+ver_playServicesAuth        = "20.7.0"
 
 # --------------------------------------------------------------------------------------------------
 
@@ -142,6 +143,7 @@ network-gson               = { module = "com.google.code.gson:gson", version.ref
 # Firebase
 firebase-auth              = { group = "com.google.firebase", name = "firebase-auth-ktx", version.ref = "ver_FrebaseAuth" }
 google-services            = { module = "com.google.gms:google-services", version.ref = "ver_GoogleServices" }
+play-services-auth         = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "ver_playServicesAuth" }
 
 # --------------------------------------------------------------------------------------------------
 
@@ -193,4 +195,10 @@ retrofit2 = [
 room = [
     "room-runtime",
     "room-ktx"
+]
+
+firebase = [
+    "firebase-auth",
+    "google-services",
+    "play-services-auth",
 ]

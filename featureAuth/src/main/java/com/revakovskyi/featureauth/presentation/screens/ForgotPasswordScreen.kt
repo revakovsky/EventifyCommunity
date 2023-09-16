@@ -17,7 +17,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -41,8 +40,6 @@ import com.revakovskyi.featureauth.presentation.models.ValidationStatus
 import com.revakovskyi.featureauth.presentation.widgets.InstructionsDialog
 import com.revakovskyi.featureauth.presentation.widgets.LoginInputField
 import com.revakovskyi.featureauth.viewModel.AuthViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -53,10 +50,13 @@ internal fun ForgotPasswordScreen(
     viewModel: AuthViewModel,
 ) {
     var email by remember { mutableStateOf("") }
-    val isDialogShown = remember { mutableStateOf(false) }
+    var shouldShowInstructionsDialog by remember { mutableStateOf(false) }
 
+    val coroutineScope = rememberCoroutineScope()
+    val snackbarMessage = stringResource(id = R.string.we_have_resend_instructions)
     val snackbarHostState = remember { SnackbarHostState() }
     val scrollState = rememberScrollState()
+
     val bringIntoViewRequester = remember { BringIntoViewRequester() }
     BringIntoView(bringIntoViewRequester)
 
@@ -121,7 +121,7 @@ internal fun ForgotPasswordScreen(
                 ButtonRegular(
                     buttonText = stringResource(R.string.send_message),
                     enabled = email.isNotEmpty(),
-                    onClick = { isDialogShown.value = true },
+                    onClick = { shouldShowInstructionsDialog = true },
                     bringIntoViewRequester = bringIntoViewRequester
                 )
 
@@ -131,55 +131,24 @@ internal fun ForgotPasswordScreen(
 
     }
 
-    ShowDialog(
-        isDialogShown,
-        email,
-        navController,
-        snackbarHostState,
-        onDialogChangeVisibility = { isDialogShown.value = it }
-    )
-
-}
-
-@Composable
-private fun ShowDialog(
-    isDialogShown: MutableState<Boolean>,
-    email: String,
-    navController: NavController,
-    snackbarHostState: SnackbarHostState,
-    onDialogChangeVisibility: (Boolean) -> Unit,
-) {
-    val coroutineScope = rememberCoroutineScope()
-    val snackbarMessage = stringResource(id = R.string.we_have_resend_instructions)
-
-    if (isDialogShown.value) {
+    if (shouldShowInstructionsDialog) {
 
         InstructionsDialog(
             email = email,
             onConfirm = {
-                hideDialogAndMakeAction(coroutineScope) {
-                    onDialogChangeVisibility(false)
-                    navController.popBackStack()
-                }
+                shouldShowInstructionsDialog = false
+                navController.popBackStack()
             },
-            onDismiss = { onDialogChangeVisibility(false) },
+            onDismiss = { shouldShowInstructionsDialog = false },
             onResendMessageClicked = {
-                hideDialogAndMakeAction(coroutineScope) {
-                    onDialogChangeVisibility(false)
+                coroutineScope.launch {
+                    shouldShowInstructionsDialog = false
                     snackbarHostState.showSnackbar(snackbarMessage)
+                    // TODO: resend instructions
                 }
             }
         )
 
     }
-}
 
-private fun hideDialogAndMakeAction(
-    coroutineScope: CoroutineScope,
-    action: suspend () -> Unit,
-) {
-    coroutineScope.launch {
-        delay(50L)
-        action()
-    }
 }

@@ -19,10 +19,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -55,22 +56,21 @@ internal fun InstructionsDialog(
     onResendMessageClicked: () -> Unit = { },
 ) {
     val coroutineScope: CoroutineScope = rememberCoroutineScope()
-    val isDialogVisible = remember { mutableStateOf(false) }
+    var popUpAnimationVisibility by remember { mutableStateOf(false) }
 
-    LaunchedEffect(Unit) { isDialogVisible.value = true }
+    LaunchedEffect(Unit) { popUpAnimationVisibility = true }
 
     Dialog(
         onDismissRequest = {
-            launchActionAndHideDialog(
-                coroutineScope,
-                isDialogVisible,
-                action = onDismiss
-            )
+            coroutineScope.launch {
+                animateTheDialogHiding { popUpAnimationVisibility = false }
+                onDismiss()
+            }
         }
     ) {
 
         AnimatedVisibility(
-            visible = isDialogVisible.value,
+            visible = popUpAnimationVisibility,
             enter = createSlideInEnterAnimation(),
             exit = createSlideOutExitAnimation()
         ) {
@@ -117,11 +117,10 @@ internal fun InstructionsDialog(
                         buttonText = stringResource(R.string.ok),
                         enabled = email.isNotEmpty(),
                         onClick = {
-                            launchActionAndHideDialog(
-                                coroutineScope,
-                                isDialogVisible,
-                                action = onConfirm
-                            )
+                            coroutineScope.launch {
+                                animateTheDialogHiding { popUpAnimationVisibility = false }
+                                onConfirm()
+                            }
                         }
                     )
 
@@ -134,14 +133,10 @@ internal fun InstructionsDialog(
                     TextClickable(
                         text = stringResource(R.string.resend_message),
                         onClick = {
-
-                            /*TODO: send message again*/
-
-                            launchActionAndHideDialog(
-                                coroutineScope,
-                                isDialogVisible,
-                                action = onResendMessageClicked
-                            )
+                            coroutineScope.launch {
+                                animateTheDialogHiding { popUpAnimationVisibility = false }
+                                onResendMessageClicked()
+                            }
                         },
                         modifier = Modifier.padding(bottom = MaterialTheme.dimens.medium)
                     )
@@ -154,6 +149,11 @@ internal fun InstructionsDialog(
 
     }
 
+}
+
+private suspend fun animateTheDialogHiding(onHidingAction: () -> Unit) {
+    onHidingAction()
+    delay(DEFAULT_ANIMATION_DURATION.toLong())
 }
 
 @Composable
@@ -180,17 +180,5 @@ private fun makeTextBoldStyle(email: String): AnnotatedString {
             start = startIndex,
             end = endIndex
         )
-    }
-}
-
-private fun launchActionAndHideDialog(
-    coroutineScope: CoroutineScope,
-    isDialogVisible: MutableState<Boolean>,
-    action: () -> Unit,
-) {
-    coroutineScope.launch {
-        isDialogVisible.value = false
-        delay(DEFAULT_ANIMATION_DURATION.toLong())
-        action()
     }
 }

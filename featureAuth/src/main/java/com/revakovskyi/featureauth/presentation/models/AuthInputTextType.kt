@@ -1,6 +1,6 @@
 package com.revakovskyi.featureauth.presentation.models
 
-import com.revakovskyi.domain.models.InputTextType
+import com.revakovskyi.featureauth.domain.models.InputTextType
 
 internal enum class AuthInputTextType {
     Login, Password, Email, Name, Surname

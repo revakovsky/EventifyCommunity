@@ -41,7 +41,7 @@ import com.revakovskyi.core.presentation.widgets.TextClickable
 import com.revakovskyi.core.presentation.widgets.TextLabel
 import com.revakovskyi.core.presentation.widgets.TextRegular
 import com.revakovskyi.core.presentation.widgets.TextTitle
-import com.revakovskyi.core.presentation.widgets.TextWithHorizontalBar
+import com.revakovskyi.featureauth.presentation.widgets.TextWithHorizontalBar
 import com.revakovskyi.featureauth.R
 import com.revakovskyi.featureauth.navigation.Screens
 import com.revakovskyi.featureauth.presentation.models.AuthInputTextType
@@ -240,7 +240,6 @@ internal fun SignUpScreen(
 
 }
 
-@Composable
 private fun areFieldsNotEmpty(
     name: String,
     surname: String,

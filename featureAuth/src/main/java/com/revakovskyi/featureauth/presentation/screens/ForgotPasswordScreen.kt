@@ -38,8 +38,8 @@ import com.revakovskyi.core.presentation.widgets.TextTitle
 import com.revakovskyi.featureauth.R
 import com.revakovskyi.featureauth.presentation.models.AuthInputTextType
 import com.revakovskyi.featureauth.presentation.models.ValidationStatus
-import com.revakovskyi.featureauth.presentation.widgets.LoginInputField
 import com.revakovskyi.featureauth.presentation.widgets.InstructionsDialog
+import com.revakovskyi.featureauth.presentation.widgets.LoginInputField
 import com.revakovskyi.featureauth.viewModel.AuthViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
@@ -61,7 +61,8 @@ internal fun ForgotPasswordScreen(
     BringIntoView(bringIntoViewRequester)
 
     Scaffold(
-        snackbarHost = { SnackbarHost(snackbarHostState) }
+        snackbarHost = { SnackbarHost(snackbarHostState) },
+        topBar = { /*TODO: add toolbar*/ }
     ) { contentPadding ->
 
         Box(
@@ -135,6 +136,7 @@ internal fun ForgotPasswordScreen(
         email,
         navController,
         snackbarHostState,
+        onDialogChangeVisibility = { isDialogShown.value = it }
     )
 
 }
@@ -145,6 +147,7 @@ private fun ShowDialog(
     email: String,
     navController: NavController,
     snackbarHostState: SnackbarHostState,
+    onDialogChangeVisibility: (Boolean) -> Unit,
 ) {
     val coroutineScope = rememberCoroutineScope()
     val snackbarMessage = stringResource(id = R.string.we_have_resend_instructions)
@@ -154,17 +157,17 @@ private fun ShowDialog(
         InstructionsDialog(
             email = email,
             onConfirm = {
-                hideDialogAndMakeAction(
-                    coroutineScope,
-                    isDialogShown
-                ) { navController.popBackStack() }
+                hideDialogAndMakeAction(coroutineScope) {
+                    onDialogChangeVisibility(false)
+                    navController.popBackStack()
+                }
             },
-            onDismiss = { isDialogShown.value = false },
+            onDismiss = { onDialogChangeVisibility(false) },
             onResendMessageClicked = {
-                hideDialogAndMakeAction(
-                    coroutineScope,
-                    isDialogShown
-                ) { snackbarHostState.showSnackbar(snackbarMessage) }
+                hideDialogAndMakeAction(coroutineScope) {
+                    onDialogChangeVisibility(false)
+                    snackbarHostState.showSnackbar(snackbarMessage)
+                }
             }
         )
 
@@ -173,12 +176,10 @@ private fun ShowDialog(
 
 private fun hideDialogAndMakeAction(
     coroutineScope: CoroutineScope,
-    isDialogShown: MutableState<Boolean>,
     action: suspend () -> Unit,
 ) {
     coroutineScope.launch {
         delay(50L)
-        isDialogShown.value = false
         action()
     }
 }

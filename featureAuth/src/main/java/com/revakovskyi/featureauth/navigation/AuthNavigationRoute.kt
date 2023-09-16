@@ -52,15 +52,15 @@ internal class AuthNavigationRouteImpl @Inject constructor() : AuthNavigationRou
                 val shouldRunSignIn = remember { mutableStateOf(false) }
                 val shouldSignOut = MainRoutes.provideArgumentsForTheAuthRoute
 
-                if (shouldSignOut) viewModel.onSignOut(stringResource(R.string.your_were_signed_out))
+                if (shouldSignOut) viewModel.onSignOut()
 
                 SignInLauncher(viewModel, shouldRunSignIn)
 
-                LaunchedEffect(key1 = Unit) {
-                    if (viewModel.isUserAlreadySignedIn()) navHostController.navigate(
-                        MainRoutes.ProfileScreenRoute.route
-                    )
-                }
+//                LaunchedEffect(key1 = Unit) {
+//                    if (viewModel.isUserAlreadySignedIn()) navHostController.navigate(
+//                        MainRoutes.ProfileScreenRoute.route
+//                    )
+//                }
 
                 SignInScreen(
                     navController = navHostController,

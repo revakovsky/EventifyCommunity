@@ -1,8 +1,8 @@
-package com.revakovskyi.domain.authTextVerification
+package com.revakovskyi.featureauth.domain.authTextVerification
 
-import com.revakovskyi.domain.models.Status
+import com.revakovskyi.featureauth.domain.models.Status
 
-internal class VerifyPhoneNumber {
+internal object VerifyPhoneNumber {
 
     fun verify(phoneNumber: String): Status {
         return if (phoneNumber.isNotEmpty()) {

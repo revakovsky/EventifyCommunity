@@ -1,6 +1,6 @@
 package com.revakovskyi.featureauth.presentation.models
 
-import com.revakovskyi.domain.models.Status
+import com.revakovskyi.featureauth.domain.models.Status
 
 enum class ValidationStatus {
     Correct, Incorrect, Neutral

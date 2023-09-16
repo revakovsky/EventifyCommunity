@@ -1,8 +1,8 @@
-package com.revakovskyi.domain.authTextVerification
+package com.revakovskyi.featureauth.domain.authTextVerification
 
-import com.revakovskyi.domain.models.Status
+import com.revakovskyi.featureauth.domain.models.Status
 
-internal class VerifyName {
+internal object VerifyName {
 
     fun verify(name: String): Status {
         return if (name.isNotEmpty()) {
@@ -13,8 +13,8 @@ internal class VerifyName {
     }
 
     private fun isNameValid(name: String): Boolean {
-        val emailPattern = Regex("""^[a-zA-Z].*""")
-        return emailPattern.matches(name)
+        val namePattern = Regex("""^[a-zA-Z].*""")
+        return namePattern.matches(name)
     }
 
     private fun isIncorrectStartOfName(name: String): Boolean {

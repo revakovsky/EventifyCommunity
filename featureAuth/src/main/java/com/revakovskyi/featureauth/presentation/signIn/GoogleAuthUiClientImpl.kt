@@ -5,12 +5,13 @@ import android.content.Intent
 import android.content.IntentSender
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.BeginSignInRequest.GoogleIdTokenRequestOptions
-import com.google.android.gms.auth.api.identity.SignInClient
+import com.google.android.gms.auth.api.identity.Identity
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.revakovskyi.featureauth.R
-import com.revakovskyi.featureauth.presentation.models.UserData
+import com.revakovskyi.featureauth.presentation.signIn.models.SignInResult
+import com.revakovskyi.featureauth.presentation.signIn.models.UserData
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.tasks.await
 import java.util.concurrent.CancellationException
@@ -18,10 +19,10 @@ import javax.inject.Inject
 
 class GoogleAuthUiClientImpl @Inject constructor(
     @ApplicationContext private val context: Context,
-    private val oneTapClient: SignInClient,
 ) : GoogleAuthUiClient {
 
     private val auth = Firebase.auth
+    private val oneTapClient = Identity.getSignInClient(context)
 
     override suspend fun getIntentSender(): IntentSender? {
         val result = try {
@@ -85,7 +86,7 @@ class GoogleAuthUiClientImpl @Inject constructor(
 
     override suspend fun signOut() {
         try {
-            oneTapClient.signOut().await()
+            oneTapClient.signOut()
             auth.signOut()
         } catch (e: Exception) {
             processException(e)

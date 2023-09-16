@@ -1,9 +1,12 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.ksp)
     alias(libs.plugins.hilt)
     id("com.google.gms.google-services")
-    kotlin("kapt")
 }
 
 android {
@@ -14,6 +17,10 @@ android {
         minSdk = libs.versions.minSdk.get().toInt()
 
         testInstrumentationRunner = libs.versions.testInstrumentationRunner.get()
+
+//        val properties = Properties()
+//        val key = gradleLocalProperties(rootDir).getProperty("Web_client_id")
+//        buildConfigField("String", "CLIENT_WEB_ID", key)
     }
 
     buildTypes {
@@ -50,7 +57,6 @@ android {
 dependencies {
 
     // Modules
-    implementation(project(path = ":domain"))
     implementation(project(path = ":core"))
 
     // Android
@@ -65,13 +71,9 @@ dependencies {
 
     // Hilt
     implementation(libs.bundles.hilt)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 
     // Firebase
     implementation(libs.bundles.firebase)
 
-}
-
-kapt {
-    correctErrorTypes = true
 }

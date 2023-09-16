@@ -2,7 +2,8 @@ package com.revakovskyi.featureauth.presentation.signIn
 
 import android.content.Intent
 import android.content.IntentSender
-import com.revakovskyi.featureauth.presentation.models.UserData
+import com.revakovskyi.featureauth.presentation.signIn.models.SignInResult
+import com.revakovskyi.featureauth.presentation.signIn.models.UserData
 
 interface GoogleAuthUiClient {
 

@@ -44,11 +44,12 @@ import com.revakovskyi.core.presentation.widgets.ButtonRegular
 import com.revakovskyi.core.presentation.widgets.TextClickable
 import com.revakovskyi.core.presentation.widgets.TextRegular
 import com.revakovskyi.core.presentation.widgets.TextTitle
-import com.revakovskyi.core.presentation.widgets.TextWithHorizontalBar
+import com.revakovskyi.featureauth.presentation.widgets.TextWithHorizontalBar
 import com.revakovskyi.featureauth.R
 import com.revakovskyi.featureauth.navigation.Screens
 import com.revakovskyi.featureauth.presentation.models.AuthInputTextType
 import com.revakovskyi.featureauth.presentation.models.ValidationStatus
+import com.revakovskyi.featureauth.presentation.signIn.models.SignInState
 import com.revakovskyi.featureauth.presentation.widgets.LoginInputField
 import com.revakovskyi.featureauth.presentation.widgets.PasswordInputField
 import com.revakovskyi.featureauth.viewModel.AuthViewModel
@@ -71,14 +72,15 @@ internal fun SignInScreen(
     BringIntoView(bringIntoViewRequester)
 
     LaunchedEffect(key1 = viewModel.signInState) {
-        viewModel.signInState.apply {
-            if (isSuccessful) {
+        when (val state = viewModel.signInState) {
+            SignInState.Success -> {
                 navController.navigate(MainRoutes.ProfileScreenRoute.route)
                 viewModel.resetSignInState()
             }
-            errorMessage?.let { error ->
+            is SignInState.Error -> state.message?.let { error ->
                 snackbarHostState.showSnackbar(message = error)
             }
+            else -> Unit
         }
     }
 
@@ -208,6 +210,5 @@ internal fun SignInScreen(
 
 }
 
-@Composable
 private fun areFieldsNotEmpty(login: String, password: String) =
     login.isNotEmpty() && password.isNotEmpty()

@@ -1,4 +1,4 @@
-package com.revakovskyi.core.presentation.widgets
+package com.revakovskyi.featureauth.presentation.widgets
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -16,6 +16,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.revakovskyi.core.presentation.ui.theme.dimens
+import com.revakovskyi.core.presentation.widgets.TextRegular
 
 @Composable
 fun TextWithHorizontalBar(

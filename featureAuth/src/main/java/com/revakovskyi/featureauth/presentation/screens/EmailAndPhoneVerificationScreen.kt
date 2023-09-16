@@ -11,12 +11,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.relocation.BringIntoViewRequester
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -24,10 +26,14 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 import androidx.navigation.NavController
 import com.revakovskyi.core.presentation.ui.BringIntoView
 import com.revakovskyi.core.presentation.ui.theme.dimens
@@ -50,7 +56,7 @@ internal fun EmailAndPhoneVerificationScreen(
     val isEmailWasPassed = emailOrPhoneNumber?.contains("@") == true
     var otpText by remember { mutableStateOf("") }
     var isOtpTextEnabled by remember { mutableStateOf(true) }
-    var isLoadingAnimationVisible by remember { mutableStateOf(false) }
+    val isLoadingAnimationVisible = remember { mutableStateOf(false) }
 
     val coroutineScope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
@@ -131,7 +137,7 @@ internal fun EmailAndPhoneVerificationScreen(
                     otpText = otpText,
                     onOtpTextChange = { enteredCode, isOtpFull ->
                         otpText = enteredCode
-                        isLoadingAnimationVisible = isOtpFull
+                        isLoadingAnimationVisible.value = isOtpFull
                         if (isOtpFull) isOtpTextEnabled = false
                     },
                     enabled = isOtpTextEnabled,
@@ -152,11 +158,38 @@ internal fun EmailAndPhoneVerificationScreen(
                     },
                 )
 
+//                LoadingAnimation(
+//                    modifier = Modifier.padding(top = MaterialTheme.dimens.extraLarge),
+//                    isVisible = isLoadingAnimationVisible.value
+//                )
+                ProgressDialog(isLoadingAnimationVisible)
+
+            }
+        }
+    }
+
+}
+
+@Composable
+fun ProgressDialog(
+    isLoadingAnimationVisible: MutableState<Boolean>
+) {
+
+    if (isLoadingAnimationVisible.value) {
+        Dialog(
+            onDismissRequest = { },
+            DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false)
+        ) {
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier
+                    .size(120.dp)
+                    .background(Color.White, shape = RoundedCornerShape(8.dp))
+            ) {
                 LoadingAnimation(
                     modifier = Modifier.padding(top = MaterialTheme.dimens.extraLarge),
-                    isVisible = isLoadingAnimationVisible
+                    isVisible = isLoadingAnimationVisible.value
                 )
-
             }
         }
     }

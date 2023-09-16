@@ -22,9 +22,7 @@ include(":featureSplash")
 include(":featureAuth")
 include(":featureProfile")
 
-include(":domain")
 include(":core")
 
-include(":data")
 include(":network")
 include(":localDb")

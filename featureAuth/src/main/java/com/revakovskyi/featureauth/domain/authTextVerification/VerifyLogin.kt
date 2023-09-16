@@ -1,11 +1,11 @@
-package com.revakovskyi.domain.authTextVerification
+package com.revakovskyi.featureauth.domain.authTextVerification
 
-import com.revakovskyi.domain.models.Status
+import com.revakovskyi.featureauth.domain.models.Status
 
-internal class VerifyLogin {
+internal object VerifyLogin {
 
-    private val verifyEmail = VerifyEmail()
-    private val verifyPhoneNumber = VerifyPhoneNumber()
+    private val verifyEmail = VerifyEmail
+    private val verifyPhoneNumber = VerifyPhoneNumber
 
     fun verify(login: String): Status {
         return if (login.isNotEmpty()) {

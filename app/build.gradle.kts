@@ -3,7 +3,6 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.ksp)
     alias(libs.plugins.hilt)
-    kotlin("kapt")
 }
 
 android {
@@ -66,7 +65,6 @@ dependencies {
     implementation(project(path = ":featureAuth"))
     implementation(project(path = ":featureProfile"))
     implementation(project(path = ":core"))
-    implementation(project(path = ":data"))
     implementation(project(path = ":network"))
     implementation(project(path = ":localDb"))
 
@@ -94,10 +92,6 @@ dependencies {
 
     // Hilt
     implementation(libs.bundles.hilt)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 
-}
-
-kapt {
-    correctErrorTypes = true
 }

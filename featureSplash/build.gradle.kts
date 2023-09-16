@@ -1,8 +1,8 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.ksp)
     alias(libs.plugins.hilt)
-    kotlin("kapt")
 }
 
 android {
@@ -49,7 +49,6 @@ android {
 dependencies {
 
     // Modules
-    implementation(project(path = ":domain"))
     implementation(project(path = ":core"))
 
     // Android
@@ -65,10 +64,6 @@ dependencies {
 
     // Hilt
     implementation(libs.bundles.hilt)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 
-}
-
-kapt {
-    correctErrorTypes = true
 }

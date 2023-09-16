@@ -9,14 +9,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.revakovskyi.domain.useCases.TextValidationUseCase
+import com.revakovskyi.featureauth.domain.useCases.TextValidationUseCase
 import com.revakovskyi.featureauth.presentation.models.AuthInputTextType
 import com.revakovskyi.featureauth.presentation.models.ValidationStatus
 import com.revakovskyi.featureauth.presentation.models.toInputText
 import com.revakovskyi.featureauth.presentation.models.toValidationStatus
 import com.revakovskyi.featureauth.presentation.signIn.GoogleAuthUiClient
-import com.revakovskyi.featureauth.presentation.signIn.SignInResult
-import com.revakovskyi.featureauth.presentation.signIn.SignInState
+import com.revakovskyi.featureauth.presentation.signIn.models.SignInResult
+import com.revakovskyi.featureauth.presentation.signIn.models.SignInState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -41,7 +41,7 @@ internal class AuthViewModel @Inject constructor(
     var doubleCheckPasswordValidationStatus by mutableStateOf(ValidationStatus.Neutral)
         private set
 
-    var signInState by mutableStateOf(SignInState())
+    var signInState by mutableStateOf<SignInState>(SignInState.Default)
         private set
 
     fun verifyInputText(inputText: String, inputTextType: AuthInputTextType) {
@@ -128,22 +128,21 @@ internal class AuthViewModel @Inject constructor(
     }
 
     private fun onSignInResult(result: SignInResult) {
-        signInState = SignInState(
-            isSuccessful = result.userData != null,
-            errorMessage = result.errorMessage
-        )
+        signInState = if (result.userData != null) SignInState.Success
+        else SignInState.Error(result.errorMessage)
+//            SignInState(
+//            isSuccessful = result.userData != null,
+//            errorMessage = result.errorMessage
+//        )
     }
 
     fun resetSignInState() {
-        signInState = SignInState()
+        signInState = SignInState.Default
     }
 
-    fun onSignOut(message: String) {
+    fun onSignOut() {
         viewModelScope.launch(Dispatchers.IO) {
             googleAuthUiClient.signOut()
-            signInState = SignInState(
-                errorMessage = message
-            )
         }
     }
 

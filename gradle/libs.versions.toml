@@ -52,7 +52,7 @@ ver_LifecycleViewmodel      = "2.6.1"
 var_CoroutinesAndroid       = "1.7.1"
 
 # Hilt
-ver_Hilt                    = "2.46.1"
+ver_Hilt                    = "2.48"
 ver_HiltComposeNavigation   = "1.1.0-alpha01"
 ver_Inject                  = "1"
 

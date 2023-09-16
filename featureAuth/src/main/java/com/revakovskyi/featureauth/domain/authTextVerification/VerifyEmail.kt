@@ -1,8 +1,8 @@
-package com.revakovskyi.domain.authTextVerification
+package com.revakovskyi.featureauth.domain.authTextVerification
 
-import com.revakovskyi.domain.models.Status
+import com.revakovskyi.featureauth.domain.models.Status
 
-internal class VerifyEmail {
+internal object VerifyEmail {
 
     fun verify(email: String): Status {
         return if (email.isNotEmpty()) {

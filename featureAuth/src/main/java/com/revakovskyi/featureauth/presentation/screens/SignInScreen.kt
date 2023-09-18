@@ -33,7 +33,6 @@ import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -44,7 +43,6 @@ import com.revakovskyi.core.presentation.widgets.ButtonRegular
 import com.revakovskyi.core.presentation.widgets.TextClickable
 import com.revakovskyi.core.presentation.widgets.TextRegular
 import com.revakovskyi.core.presentation.widgets.TextTitle
-import com.revakovskyi.featureauth.presentation.widgets.TextWithHorizontalBar
 import com.revakovskyi.featureauth.R
 import com.revakovskyi.featureauth.navigation.Screens
 import com.revakovskyi.featureauth.presentation.models.AuthInputTextType
@@ -52,6 +50,7 @@ import com.revakovskyi.featureauth.presentation.models.ValidationStatus
 import com.revakovskyi.featureauth.presentation.signIn.models.SignInState
 import com.revakovskyi.featureauth.presentation.widgets.LoginInputField
 import com.revakovskyi.featureauth.presentation.widgets.PasswordInputField
+import com.revakovskyi.featureauth.presentation.widgets.TextWithHorizontalBar
 import com.revakovskyi.featureauth.viewModel.AuthViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -163,7 +162,6 @@ internal fun SignInScreen(
                         onClick = { navController.navigate(Screens.ForgotPasswordScreen.route) },
                         textStyle = MaterialTheme.typography.labelLarge,
                         textAlign = TextAlign.End,
-                        fontWeight = FontWeight.Normal,
                         modifier = Modifier.padding(end = MaterialTheme.dimens.medium)
                     )
 

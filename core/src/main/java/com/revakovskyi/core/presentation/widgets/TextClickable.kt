@@ -17,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import com.revakovskyi.core.presentation.ui.theme.dimens
@@ -29,10 +28,9 @@ fun TextClickable(
     modifier: Modifier = Modifier,
     text: String,
     onClick: () -> Unit,
-    textStyle: TextStyle = MaterialTheme.typography.bodySmall,
+    textStyle: TextStyle = MaterialTheme.typography.displayMedium,
     textAlign: TextAlign = TextAlign.Center,
     textColor: Color = MaterialTheme.colorScheme.onBackground,
-    fontWeight: FontWeight = FontWeight.Bold,
 ) {
 
     val delayTime = 100L
@@ -65,7 +63,6 @@ fun TextClickable(
                 top = MaterialTheme.dimens.small,
             ),
         style = textStyle.copy(
-            fontWeight = fontWeight,
             textAlign = textAlign,
             color = textColorState.value,
             textDecoration = TextDecoration.Underline

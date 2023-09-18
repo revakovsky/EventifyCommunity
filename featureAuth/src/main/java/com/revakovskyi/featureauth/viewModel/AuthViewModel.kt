@@ -130,10 +130,6 @@ internal class AuthViewModel @Inject constructor(
     private fun onSignInResult(result: SignInResult) {
         signInState = if (result.userData != null) SignInState.Success
         else SignInState.Error(result.errorMessage)
-//            SignInState(
-//            isSuccessful = result.userData != null,
-//            errorMessage = result.errorMessage
-//        )
     }
 
     fun resetSignInState() {

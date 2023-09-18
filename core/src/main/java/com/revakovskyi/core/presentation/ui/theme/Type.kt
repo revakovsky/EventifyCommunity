@@ -91,6 +91,14 @@ val AppTypography = Typography(
         fontSize = 8.sp,
         lineHeight = 16.sp,
         letterSpacing = 0.5.sp
+    ),
+
+    displayMedium = TextStyle(
+        fontFamily = Nunito,
+        fontWeight = FontWeight.Bold,
+        fontSize = 16.sp,
+        lineHeight = 24.sp,
+        letterSpacing = 0.5.sp
     )
 
 )

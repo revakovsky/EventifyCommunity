@@ -17,10 +17,11 @@ data class Dimens(
     val extraLarge: Dp = 64.dp,
     val largest: Dp = 128.dp,
 
-    val fieldMaxWidth: Dp = 400.dp,
+    val inputFieldsMaxWidth: Dp = 400.dp,
     val buttonWidth: Dp = 200.dp,
-    val iconSize: Dp = 150.dp,
-)
+    val screenHeaderImagesSize: Dp = 150.dp,
+
+    )
 
 val LocalDimens = compositionLocalOf { Dimens() }
 

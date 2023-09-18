@@ -39,7 +39,7 @@ fun OutlinedField(
     onValueChange: (String) -> Unit,
     label: @Composable (() -> Unit)? = null,
     placeholder: @Composable (() -> Unit)? = null,
-    maxWidth: Dp = MaterialTheme.dimens.fieldMaxWidth,
+    maxWidth: Dp = MaterialTheme.dimens.inputFieldsMaxWidth,
     horizontalPadding: Dp = MaterialTheme.dimens.medium,
     enabled: Boolean = true,
     readOnly: Boolean = false,

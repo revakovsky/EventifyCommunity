@@ -3,13 +3,13 @@ package com.revakovskyi.featureauth.presentation.signIn
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import com.revakovskyi.featureauth.viewModel.AuthViewModel
 
 @Composable
 internal fun SignInLauncher(
     viewModel: AuthViewModel,
-    shouldRunSignIn: MutableState<Boolean>,
+    shouldRunGoogleSignIn: Boolean,
+    onDismissSignInRequest: () -> Unit,
 ) {
 
     val launcher = rememberLauncherForActivityResult(
@@ -19,9 +19,9 @@ internal fun SignInLauncher(
         }
     )
 
-    if (shouldRunSignIn.value) {
+    if (shouldRunGoogleSignIn) {
         viewModel.launchIntentForSignIn(launcher)
-        shouldRunSignIn.value = false
+        onDismissSignInRequest()
     }
 
 }

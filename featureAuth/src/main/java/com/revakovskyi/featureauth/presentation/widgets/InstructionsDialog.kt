@@ -102,7 +102,7 @@ internal fun InstructionsDialog(
                         painter = painterResource(id = R.drawable.check_email),
                         contentDescription = stringResource(R.string.check_email_logo),
                         contentScale = ContentScale.Inside,
-                        modifier = Modifier.size(MaterialTheme.dimens.iconSize)
+                        modifier = Modifier.size(MaterialTheme.dimens.screenHeaderImagesSize)
                     )
 
                     Text(

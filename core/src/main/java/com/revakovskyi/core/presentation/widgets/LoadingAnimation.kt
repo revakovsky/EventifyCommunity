@@ -9,7 +9,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
@@ -29,11 +28,10 @@ import kotlinx.coroutines.delay
 @Composable
 fun LoadingAnimation(
     modifier: Modifier = Modifier,
-    isVisible: Boolean,
     circleSize: Dp = 25.dp,
     circleColor: Color = MaterialTheme.colorScheme.tertiaryContainer,
     spaceBetween: Dp = MaterialTheme.dimens.small,
-    travelDistance: Dp = 20.dp,
+    travelDistance: Dp = 32.dp,
     oneRepeatAnimationDuration: Int = 1200,
 ) {
     val circles = listOf(
@@ -68,24 +66,19 @@ fun LoadingAnimation(
     val distance = with(LocalDensity.current) { travelDistance.toPx() }
     val lastCircle = circleValues.size - 1
 
+    Row(modifier = modifier) {
+        circleValues.forEachIndexed { index, value ->
 
-    if (isVisible) {
+            Box(
+                modifier = Modifier
+                    .size(circleSize)
+                    .graphicsLayer { translationY = -value * distance }
+                    .background(color = circleColor, shape = CircleShape)
+            )
 
-        Row(modifier = modifier.padding(end = spaceBetween)) {
-            circleValues.forEachIndexed { index, value ->
+            if (index != lastCircle) Spacer(modifier = Modifier.width(spaceBetween))
 
-                Box(
-                    modifier = Modifier
-                        .size(circleSize)
-                        .graphicsLayer { translationY = -value * distance }
-                        .background(color = circleColor, shape = CircleShape)
-                )
-
-                if (index != lastCircle) Spacer(modifier = Modifier.width(spaceBetween))
-
-            }
         }
-
     }
 
 }

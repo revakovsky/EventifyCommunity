@@ -40,6 +40,7 @@ import com.revakovskyi.core.navigation.MainRoutes
 import com.revakovskyi.core.presentation.ui.BringIntoView
 import com.revakovskyi.core.presentation.ui.theme.dimens
 import com.revakovskyi.core.presentation.widgets.ButtonRegular
+import com.revakovskyi.core.presentation.widgets.ProgressDialog
 import com.revakovskyi.core.presentation.widgets.TextClickable
 import com.revakovskyi.core.presentation.widgets.TextRegular
 import com.revakovskyi.core.presentation.widgets.TextTitle
@@ -63,6 +64,7 @@ internal fun SignInScreen(
 ) {
     var login by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var isProgressDialogVisible by remember { mutableStateOf(false) }
 
     val snackbarHostState = remember { SnackbarHostState() }
     val scrollState = rememberScrollState()
@@ -168,7 +170,10 @@ internal fun SignInScreen(
                     ButtonRegular(
                         buttonText = stringResource(R.string.sign_in),
                         enabled = areFieldsNotEmpty(login, password),
-                        onClick = { /*TODO: make sign in*/ },
+                        onClick = {
+                            isProgressDialogVisible = true
+                            /*TODO: make sign in and hide the dialog*/
+                        },
                         bringIntoViewRequester = bringIntoViewRequester
                     )
                 }
@@ -205,6 +210,8 @@ internal fun SignInScreen(
         }
 
     }
+
+    if (isProgressDialogVisible) ProgressDialog()
 
 }
 

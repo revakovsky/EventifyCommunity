@@ -1,9 +1,9 @@
 package com.revakovskyi.featureauth.navigation
 
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.res.stringResource
+import androidx.compose.runtime.setValue
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -16,7 +16,6 @@ import com.revakovskyi.core.extensions.slideInFromBottomToTop
 import com.revakovskyi.core.extensions.slideOutFromTopToBottom
 import com.revakovskyi.core.navigation.MainRoutes
 import com.revakovskyi.core.navigation.NavigationRoute
-import com.revakovskyi.featureauth.R
 import com.revakovskyi.featureauth.presentation.screens.EmailAndPhoneVerificationScreen
 import com.revakovskyi.featureauth.presentation.screens.ForgotPasswordScreen
 import com.revakovskyi.featureauth.presentation.screens.SignInScreen
@@ -49,12 +48,16 @@ internal class AuthNavigationRouteImpl @Inject constructor() : AuthNavigationRou
             openAnimatedComposable(route = firstsScreenRoute) { _, navBackStackEntry ->
                 val viewModel: AuthViewModel = navBackStackEntry.sharedViewModel(navHostController)
 
-                val shouldRunSignIn = remember { mutableStateOf(false) }
+                var shouldRunGoogleSignIn by remember { mutableStateOf(false) }
                 val shouldSignOut = MainRoutes.provideArgumentsForTheAuthRoute
 
                 if (shouldSignOut) viewModel.onSignOut()
 
-                SignInLauncher(viewModel, shouldRunSignIn)
+                SignInLauncher(
+                    viewModel,
+                    shouldRunGoogleSignIn,
+                    onDismissSignInRequest = { shouldRunGoogleSignIn = false }
+                )
 
 //                LaunchedEffect(key1 = Unit) {
 //                    if (viewModel.isUserAlreadySignedIn()) navHostController.navigate(
@@ -65,7 +68,7 @@ internal class AuthNavigationRouteImpl @Inject constructor() : AuthNavigationRou
                 SignInScreen(
                     navController = navHostController,
                     viewModel = viewModel,
-                    onGoogleSingInClick = { shouldRunSignIn.value = true }
+                    onGoogleSingInClick = { shouldRunGoogleSignIn = true }
                 )
             }
 

@@ -92,7 +92,7 @@ internal fun SignUpScreen(
                 contentDescription = stringResource(id = R.string.logo_icon),
                 contentScale = ContentScale.Inside,
                 modifier = Modifier
-                    .size(MaterialTheme.dimens.iconSize)
+                    .size(MaterialTheme.dimens.screenHeaderImagesSize)
                     .padding(top = MaterialTheme.dimens.medium)
             )
 
@@ -185,7 +185,7 @@ internal fun SignUpScreen(
                     text = stringResource(R.string.confirm_terms_of_use),
                     textColor = MaterialTheme.colorScheme.outline,
                     modifier = Modifier
-                        .widthIn(MaterialTheme.dimens.fieldMaxWidth)
+                        .widthIn(MaterialTheme.dimens.inputFieldsMaxWidth)
                         .padding(horizontal = MaterialTheme.dimens.medium)
                         .padding(top = MaterialTheme.dimens.small)
                 )

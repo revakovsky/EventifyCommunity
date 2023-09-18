@@ -57,7 +57,7 @@ fun TextClickable(
             }
         },
         modifier = modifier
-            .widthIn(max = MaterialTheme.dimens.fieldMaxWidth)
+            .widthIn(max = MaterialTheme.dimens.inputFieldsMaxWidth)
             .fillMaxWidth()
             .padding(
                 top = MaterialTheme.dimens.small,

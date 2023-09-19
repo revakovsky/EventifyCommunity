@@ -19,7 +19,7 @@ import com.revakovskyi.core.presentation.ui.theme.dimens
 import com.revakovskyi.core.presentation.widgets.TextRegular
 
 @Composable
-fun TextWithHorizontalBar(
+internal fun TextWithHorizontalBar(
     modifier: Modifier = Modifier,
     text: String,
     style: TextStyle = MaterialTheme.typography.bodySmall,

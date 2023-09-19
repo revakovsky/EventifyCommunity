@@ -9,7 +9,7 @@ import dagger.hilt.android.components.ViewModelComponent
 
 @Module
 @InstallIn(ViewModelComponent::class)
-abstract class AuthBindModule {
+internal abstract class AuthBindModule {
 
     @Binds
     abstract fun bindGoogleAuthUiClient(googleAuthUiClientImpl: GoogleAuthUiClientImpl): GoogleAuthUiClient

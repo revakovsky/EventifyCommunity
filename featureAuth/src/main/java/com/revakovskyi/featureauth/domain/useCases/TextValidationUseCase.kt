@@ -8,7 +8,7 @@ import com.revakovskyi.featureauth.domain.models.InputTextType
 import com.revakovskyi.featureauth.domain.models.Status
 import javax.inject.Inject
 
-class TextValidationUseCase @Inject constructor() {
+internal class TextValidationUseCase @Inject constructor() {
 
     operator fun invoke(inputText: String, inputTextType: InputTextType): Status {
         return when (inputTextType) {

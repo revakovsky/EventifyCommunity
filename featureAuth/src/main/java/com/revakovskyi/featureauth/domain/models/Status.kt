@@ -1,5 +1,5 @@
 package com.revakovskyi.featureauth.domain.models
 
-enum class Status {
+internal enum class Status {
     Correct, Incorrect, Neutral
 }

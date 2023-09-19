@@ -17,7 +17,7 @@ import kotlinx.coroutines.tasks.await
 import java.util.concurrent.CancellationException
 import javax.inject.Inject
 
-class GoogleAuthUiClientImpl @Inject constructor(
+internal class GoogleAuthUiClientImpl @Inject constructor(
     @ApplicationContext private val context: Context,
 ) : GoogleAuthUiClient {
 

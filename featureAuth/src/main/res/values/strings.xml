@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="web_client_id">148082866006-8gv0pdi8mdmudb3qbn4knas39nbkulru.apps.googleusercontent.com</string>
-
     <string name="logo_icon">"Logo icon"</string>
     <string name="welcome">Welcome</string>
     <string name="please_sign_in_to_continue">Please, Sign In to continue</string>

@@ -11,9 +11,7 @@ import androidx.compose.ui.window.DialogProperties
 
 
 @Composable
-fun ProgressDialog(
-    modifier: Modifier = Modifier,
-) {
+fun ProgressDialog() {
 
     Dialog(
         onDismissRequest = { },

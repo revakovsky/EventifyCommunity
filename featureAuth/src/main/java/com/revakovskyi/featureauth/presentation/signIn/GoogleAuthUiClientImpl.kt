@@ -42,7 +42,7 @@ internal class GoogleAuthUiClientImpl @Inject constructor(
                 GoogleIdTokenRequestOptions.Builder()
                     .setSupported(true)
                     .setFilterByAuthorizedAccounts(false)
-                    .setServerClientId(context.getString(R.string.web_client_id))
+                    .setServerClientId(context.getString(R.string.CLIENT_WEB_ID))
                     .build()
             )
             .setAutoSelectEnabled(true)

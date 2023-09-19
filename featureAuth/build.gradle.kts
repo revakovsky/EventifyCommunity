@@ -1,4 +1,3 @@
-import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import java.util.Properties
 
 plugins {
@@ -18,9 +17,10 @@ android {
 
         testInstrumentationRunner = libs.versions.testInstrumentationRunner.get()
 
-//        val properties = Properties()
-//        val key = gradleLocalProperties(rootDir).getProperty("Web_client_id")
-//        buildConfigField("String", "CLIENT_WEB_ID", key)
+        Properties().apply {
+            load(rootProject.file("local.properties").reader())
+            resValue("string", "CLIENT_WEB_ID", getProperty("Web_client_id") as String)
+        }
     }
 
     buildTypes {

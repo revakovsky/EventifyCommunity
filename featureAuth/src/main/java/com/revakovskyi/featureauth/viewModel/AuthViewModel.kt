@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.revakovskyi.featureauth.domain.useCases.TextValidationUseCase
 import com.revakovskyi.featureauth.presentation.models.AuthInputTextType
+import com.revakovskyi.featureauth.presentation.models.ProgressDialogState
 import com.revakovskyi.featureauth.presentation.models.ValidationStatus
 import com.revakovskyi.featureauth.presentation.models.toInputText
 import com.revakovskyi.featureauth.presentation.models.toValidationStatus
@@ -33,6 +34,9 @@ internal class AuthViewModel @Inject constructor(
         private set
 
     var signInState by mutableStateOf<SignInState>(SignInState.Default)
+        private set
+
+    var progressDialogState by mutableStateOf(ProgressDialogState.Invisible)
         private set
 
     fun verifyInputText(inputText: String, inputTextType: AuthInputTextType) {
@@ -114,6 +118,7 @@ internal class AuthViewModel @Inject constructor(
 
     fun signInViaGoogleAccountData(result: ActivityResult) {
         if (result.resultCode == Activity.RESULT_OK) {
+            progressDialogState = ProgressDialogState.Visible
             viewModelScope.launch(Dispatchers.IO) {
                 val signInResult = googleAuthUiClient.signInWithGoogleData(
                     intent = result.data ?: return@launch
@@ -126,6 +131,8 @@ internal class AuthViewModel @Inject constructor(
     private fun onSignInResult(result: SignInResult) {
         signInState = if (result.userData != null) SignInState.Success
         else SignInState.Error(result.errorMessage)
+
+        progressDialogState = ProgressDialogState.Invisible
     }
 
     fun resetSignInState() {

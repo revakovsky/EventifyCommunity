@@ -47,6 +47,7 @@ import com.revakovskyi.core.presentation.widgets.TextTitle
 import com.revakovskyi.featureauth.R
 import com.revakovskyi.featureauth.navigation.Screens
 import com.revakovskyi.featureauth.presentation.models.AuthInputTextType
+import com.revakovskyi.featureauth.presentation.models.ProgressDialogState
 import com.revakovskyi.featureauth.presentation.models.ValidationStatus
 import com.revakovskyi.featureauth.presentation.signIn.models.SignInState
 import com.revakovskyi.featureauth.presentation.widgets.LoginInputField
@@ -64,7 +65,6 @@ internal fun SignInScreen(
 ) {
     var login by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    var isProgressDialogVisible by remember { mutableStateOf(false) }
 
     val snackbarHostState = remember { SnackbarHostState() }
     val scrollState = rememberScrollState()
@@ -171,7 +171,6 @@ internal fun SignInScreen(
                         buttonText = stringResource(R.string.sign_in),
                         enabled = areFieldsNotEmpty(login, password),
                         onClick = {
-                            isProgressDialogVisible = true
                             /*TODO: make sign in and hide the dialog*/
                         },
                         bringIntoViewRequester = bringIntoViewRequester
@@ -211,7 +210,7 @@ internal fun SignInScreen(
 
     }
 
-    if (isProgressDialogVisible) ProgressDialog()
+    if (viewModel.progressDialogState == ProgressDialogState.Visible) ProgressDialog()
 
 }
 

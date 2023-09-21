@@ -41,7 +41,6 @@ import com.revakovskyi.core.presentation.widgets.TextClickable
 import com.revakovskyi.core.presentation.widgets.TextLabel
 import com.revakovskyi.core.presentation.widgets.TextRegular
 import com.revakovskyi.core.presentation.widgets.TextTitle
-import com.revakovskyi.featureauth.presentation.widgets.TextWithHorizontalBar
 import com.revakovskyi.featureauth.R
 import com.revakovskyi.featureauth.navigation.Screens
 import com.revakovskyi.featureauth.presentation.models.AuthInputTextType
@@ -49,6 +48,7 @@ import com.revakovskyi.featureauth.presentation.models.ValidationStatus
 import com.revakovskyi.featureauth.presentation.widgets.LoginInputField
 import com.revakovskyi.featureauth.presentation.widgets.NameInputField
 import com.revakovskyi.featureauth.presentation.widgets.PasswordInputField
+import com.revakovskyi.featureauth.presentation.widgets.TextWithHorizontalBar
 import com.revakovskyi.featureauth.viewModel.AuthViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -62,7 +62,7 @@ internal fun SignUpScreen(
     var surname by remember { mutableStateOf("") }
     var emailOrPhoneNumber by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    var doubleCheckPassword by remember { mutableStateOf("") }
+    var verificationPassword by remember { mutableStateOf("") }
 
     val scrollState = rememberScrollState()
     val bringIntoViewRequester = remember { BringIntoViewRequester() }
@@ -114,24 +114,24 @@ internal fun SignUpScreen(
             ) {
 
                 NameInputField(
-                    status = viewModel.nameValidationStatus,
+                    status = viewModel.validation.nameStatus,
                     inputName = { inputName ->
                         viewModel.apply {
-                            verifyInputText(inputName, AuthInputTextType.Name)
+                            viewModel.verifyInputText(inputName, AuthInputTextType.Name)
                             name =
-                                if (nameValidationStatus == ValidationStatus.Correct) inputName
+                                if (validation.nameStatus == ValidationStatus.Correct) inputName
                                 else ""
                         }
                     }
                 )
 
                 NameInputField(
-                    status = viewModel.surnameValidationStatus,
+                    status = viewModel.validation.surnameStatus,
                     inputName = { inputSurname ->
                         viewModel.apply {
-                            verifyInputText(inputSurname, AuthInputTextType.Surname)
+                            viewModel.verifyInputText(inputSurname, AuthInputTextType.Surname)
                             surname =
-                                if (surnameValidationStatus == ValidationStatus.Correct) inputSurname
+                                if (validation.surnameStatus == ValidationStatus.Correct) inputSurname
                                 else ""
                         }
                     },
@@ -141,12 +141,12 @@ internal fun SignUpScreen(
                 )
 
                 LoginInputField(
-                    status = viewModel.loginValidationStatus,
+                    status = viewModel.validation.loginStatus,
                     inputLogin = { inputLogin ->
                         viewModel.apply {
-                            verifyInputText(inputLogin, AuthInputTextType.Login)
+                            viewModel.verifyInputText(inputLogin, AuthInputTextType.Login)
                             emailOrPhoneNumber =
-                                if (loginValidationStatus == ValidationStatus.Correct) inputLogin
+                                if (validation.loginStatus == ValidationStatus.Correct) inputLogin
                                 else ""
                         }
                     },
@@ -154,12 +154,12 @@ internal fun SignUpScreen(
                 )
 
                 PasswordInputField(
-                    status = viewModel.passwordValidationStatus,
+                    status = viewModel.validation.passwordStatus,
                     inputPassword = { inputPassword ->
                         viewModel.apply {
                             verifyInputText(inputPassword, AuthInputTextType.Password)
                             password =
-                                if (passwordValidationStatus == ValidationStatus.Correct) inputPassword
+                                if (validation.passwordStatus == ValidationStatus.Correct) inputPassword
                                 else ""
                         }
                     },
@@ -167,12 +167,12 @@ internal fun SignUpScreen(
                 )
 
                 PasswordInputField(
-                    status = viewModel.doubleCheckPasswordValidationStatus,
+                    status = viewModel.validation.verificationPasswordStatus,
                     inputPassword = { inputPassword ->
                         viewModel.apply {
-                            verifyDoubleCheckPassword(inputPassword, password)
-                            doubleCheckPassword =
-                                if (doubleCheckPasswordValidationStatus == ValidationStatus.Correct) inputPassword
+                            verifyVerificationPassword(inputPassword, password)
+                            verificationPassword =
+                                if (validation.verificationPasswordStatus == ValidationStatus.Correct) inputPassword
                                 else ""
                         }
                     },
@@ -197,7 +197,7 @@ internal fun SignUpScreen(
                         surname,
                         emailOrPhoneNumber,
                         password,
-                        doubleCheckPassword
+                        verificationPassword
                     ),
                     onClick = {
                         navController.navigate(

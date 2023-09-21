@@ -102,12 +102,12 @@ internal fun ForgotPasswordScreen(
                 )
 
                 LoginInputField(
-                    status = viewModel.emailValidationStatus,
+                    status = viewModel.validation.emailStatus,
                     inputLogin = { inputLogin ->
                         viewModel.apply {
                             verifyInputText(inputLogin, AuthInputTextType.Email)
                             email =
-                                if (emailValidationStatus == ValidationStatus.Correct) inputLogin
+                                if (validation.emailStatus == ValidationStatus.Correct) inputLogin
                                 else ""
                         }
                     },

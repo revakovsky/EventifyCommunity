@@ -136,24 +136,24 @@ internal fun SignInScreen(
                 ) {
 
                     LoginInputField(
-                        status = viewModel.loginValidationStatus,
+                        status = viewModel.validation.loginStatus,
                         inputLogin = { inputLogin ->
                             viewModel.apply {
                                 verifyInputText(inputLogin, AuthInputTextType.Login)
                                 login =
-                                    if (loginValidationStatus == ValidationStatus.Correct) inputLogin
+                                    if (validation.loginStatus == ValidationStatus.Correct) inputLogin
                                     else ""
                             }
                         },
                     )
 
                     PasswordInputField(
-                        status = viewModel.passwordValidationStatus,
+                        status = viewModel.validation.passwordStatus,
                         inputPassword = { inputPassword ->
                             viewModel.apply {
                                 verifyInputText(inputPassword, AuthInputTextType.Password)
                                 password =
-                                    if (passwordValidationStatus == ValidationStatus.Correct) inputPassword
+                                    if (validation.passwordStatus == ValidationStatus.Correct) inputPassword
                                     else ""
                             }
                         }

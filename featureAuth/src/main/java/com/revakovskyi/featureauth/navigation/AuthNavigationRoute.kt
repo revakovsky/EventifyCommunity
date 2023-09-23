@@ -10,10 +10,8 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
-import com.revakovskyi.core.extensions.openAnimatedComposable
+import com.revakovskyi.core.extensions.composableWithAnimatedTransition
 import com.revakovskyi.core.extensions.sharedViewModel
-import com.revakovskyi.core.extensions.slideInFromBottomToTop
-import com.revakovskyi.core.extensions.slideOutFromTopToBottom
 import com.revakovskyi.core.navigation.MainRoutes
 import com.revakovskyi.core.navigation.NavigationRoute
 import com.revakovskyi.featureauth.presentation.screens.EmailAndPhoneVerificationScreen
@@ -45,7 +43,7 @@ internal class AuthNavigationRouteImpl @Inject constructor() : AuthNavigationRou
             route = navigationRouteName
         ) {
 
-            openAnimatedComposable(route = firstsScreenRoute) { _, navBackStackEntry ->
+            composableWithAnimatedTransition(route = firstsScreenRoute) { _, navBackStackEntry ->
                 val viewModel: AuthViewModel = navBackStackEntry.sharedViewModel(navHostController)
 
                 var shouldRunGoogleSignIn by remember { mutableStateOf(false) }
@@ -59,12 +57,6 @@ internal class AuthNavigationRouteImpl @Inject constructor() : AuthNavigationRou
                     onDismissSignInRequest = { shouldRunGoogleSignIn = false }
                 )
 
-//                LaunchedEffect(key1 = Unit) {
-//                    if (viewModel.isUserAlreadySignedIn()) navHostController.navigate(
-//                        MainRoutes.ProfileScreenRoute.route
-//                    )
-//                }
-
                 SignInScreen(
                     navController = navHostController,
                     viewModel = viewModel,
@@ -72,10 +64,9 @@ internal class AuthNavigationRouteImpl @Inject constructor() : AuthNavigationRou
                 )
             }
 
-            openAnimatedComposable(
+            composableWithAnimatedTransition(
                 route = Screens.ForgotPasswordScreen.route,
-                enterTransition = { slideInFromBottomToTop() },
-                popExitTransition = { slideOutFromTopToBottom() },
+                enterAndExitVertically = true,
             ) { _, navBackStackEntry ->
                 val viewModel: AuthViewModel =
                     navBackStackEntry.sharedViewModel(navController = navHostController)
@@ -93,10 +84,9 @@ internal class AuthNavigationRouteImpl @Inject constructor() : AuthNavigationRou
                 )
             }
 
-            openAnimatedComposable(
+            composableWithAnimatedTransition(
                 route = Screens.EmailAndPhoneVerificationScreen.route,
-                enterTransition = { slideInFromBottomToTop() },
-                popExitTransition = { slideOutFromTopToBottom() },
+                enterAndExitVertically = true,
                 arguments = listOf(
                     navArgument(VERIFICATION_ARGUMENT_KEY) { type = NavType.StringType }
                 )

@@ -1,6 +1,8 @@
 package com.revakovskyi.featureauth.presentation.widgets
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.FastOutLinearInEasing
+import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -40,7 +42,7 @@ import com.revakovskyi.core.presentation.widgets.ButtonRegular
 import com.revakovskyi.core.presentation.widgets.TextClickable
 import com.revakovskyi.core.presentation.widgets.TextRegular
 import com.revakovskyi.core.presentation.widgets.TextTitle
-import com.revakovskyi.core.util.Constants.DEFAULT_ANIMATION_DURATION
+import com.revakovskyi.core.utils.Constants.DEFAULT_ANIMATION_DURATION
 import com.revakovskyi.featureauth.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
@@ -158,15 +160,28 @@ private suspend fun animateTheDialogHiding(onHidingAction: () -> Unit) {
 
 @Composable
 private fun createSlideInEnterAnimation() =
-    (slideInVertically(animationSpec = tween(durationMillis = DEFAULT_ANIMATION_DURATION))
-            + fadeIn(animationSpec = tween(durationMillis = DEFAULT_ANIMATION_DURATION * 2)))
+    slideInVertically(
+        animationSpec = tween(
+            durationMillis = DEFAULT_ANIMATION_DURATION,
+            easing = FastOutSlowInEasing
+        )
+    ) + fadeIn(
+        animationSpec = tween(
+            durationMillis = DEFAULT_ANIMATION_DURATION * 2
+        )
+    )
 
 @Composable
 private fun createSlideOutExitAnimation() =
     slideOutVertically(
-        animationSpec = tween(durationMillis = DEFAULT_ANIMATION_DURATION),
+        animationSpec = tween(
+            durationMillis = DEFAULT_ANIMATION_DURATION,
+            easing = FastOutLinearInEasing
+        ),
         targetOffsetY = { it / 6 }
-    ) + fadeOut(animationSpec = tween(durationMillis = DEFAULT_ANIMATION_DURATION))
+    ) + fadeOut(
+        animationSpec = tween(durationMillis = DEFAULT_ANIMATION_DURATION)
+    )
 
 @Composable
 private fun makeTextBoldStyle(email: String): AnnotatedString {

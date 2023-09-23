@@ -61,8 +61,8 @@ internal fun ForgotPasswordScreen(
     BringIntoView(bringIntoViewRequester)
 
     Scaffold(
+        modifier = Modifier.fillMaxSize(),
         snackbarHost = { SnackbarHost(snackbarHostState) },
-        topBar = { /*TODO: add toolbar*/ }
     ) { contentPadding ->
 
         Box(
